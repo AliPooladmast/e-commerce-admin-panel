@@ -1,6 +1,7 @@
 import { Language, NotificationsNone, Settings } from "@material-ui/icons";
 import React from "react";
 import style from "./ToBar.module.scss";
+import profileAvatar from "../../assets/images/profile-picture.jpg";
 
 const TopBar = () => {
   return (
@@ -20,6 +21,11 @@ const TopBar = () => {
           <div className={style.IconContainer}>
             <Settings />
           </div>
+          <img
+            className={style.Avatar}
+            src={profileAvatar}
+            alt="profile image"
+          />
         </div>
       </div>
     </div>
