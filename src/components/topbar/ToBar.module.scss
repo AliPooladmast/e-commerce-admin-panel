@@ -17,8 +17,16 @@
   cursor: pointer;
 }
 
-.TopBarIconContainer {
+.Icons {
+  display: flex;
+  align-items: center;
+}
+
+.IconContainer {
   position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #555;
 }
 
 .IconBadge {
