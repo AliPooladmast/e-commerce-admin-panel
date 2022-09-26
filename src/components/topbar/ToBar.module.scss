@@ -1,5 +1,4 @@
 .TopBar {
-  background-color: teal;
   height: 50px;
 }
 
@@ -9,4 +8,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+}
+
+.Logo {
+  font-weight: bold;
+  font-size: 30px;
+  color: darkblue;
+  cursor: pointer;
 }
