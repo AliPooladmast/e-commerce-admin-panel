@@ -16,3 +16,22 @@
   color: darkblue;
   cursor: pointer;
 }
+
+.TopBarIconContainer {
+  position: relative;
+}
+
+.IconBadge {
+  background-color: red;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -3px;
+  right: -3px;
+  font-size: 10px;
+  color: white;
+}
