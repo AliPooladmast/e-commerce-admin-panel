@@ -23,10 +23,23 @@
     list-style: none;
     padding: 5px;
 
+    .Active {
+      background-color: rgb(206, 211, 211);
+    }
+
     li {
       display: flex;
       padding: 5px;
       align-items: center;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: rgb(227, 233, 233);
+      }
+
+      &:active {
+        background-color: rgb(206, 211, 211);
+      }
     }
   }
 }
