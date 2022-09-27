@@ -22,5 +22,11 @@
   ul {
     list-style: none;
     padding: 5px;
+
+    li {
+      display: flex;
+      padding: 5px;
+      align-items: center;
+    }
   }
 }
