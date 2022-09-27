@@ -20,9 +20,13 @@
 .Icons {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .IconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   cursor: pointer;
   margin-right: 10px;
