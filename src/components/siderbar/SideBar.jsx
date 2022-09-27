@@ -8,16 +8,16 @@ const SideBar = () => {
         <div className={style.Menu}>
           <h1>Dashboard</h1>
           <ul>
-            <li>
-              <LineStyle />
+            <li className={style.Active}>
+              <LineStyle className={style.Icons} />
               Home
             </li>
             <li>
-              <Timeline />
+              <Timeline className={style.Icons} />
               Analytics
             </li>
             <li>
-              <TrendingUp />
+              <TrendingUp className={style.Icons} />
               Sales
             </li>
           </ul>
