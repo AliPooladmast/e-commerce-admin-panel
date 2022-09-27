@@ -1,3 +1,7 @@
 .SideBar {
   flex: 1;
+  background-color: rgb(240, 247, 247);
+  height: calc(100vh - 50px);
+  position: sticky;
+  top: 50px;
 }
