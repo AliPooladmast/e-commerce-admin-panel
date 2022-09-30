@@ -2,4 +2,15 @@
   flex: 4;
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
+  height: 100%;
+}
+
+.Item {
+  flex: 1;
+  margin: 0 20px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
 }
