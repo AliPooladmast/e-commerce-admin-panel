@@ -35,3 +35,14 @@
   align-items: center;
   margin-left: 20px;
 }
+
+.Icon {
+  font-size: 14px;
+  margin-left: 5px;
+  color: rgb(12, 141, 12);
+
+  &--Negetive {
+    @extend .Icon;
+    color: rgb(235, 19, 19);
+  }
+}
