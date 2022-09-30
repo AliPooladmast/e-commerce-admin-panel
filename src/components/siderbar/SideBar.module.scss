@@ -1,0 +1,51 @@
+.SideBar {
+  flex: 1;
+  background-color: rgb(240, 247, 247);
+  min-height: calc(100vh - 50px);
+  position: sticky;
+  top: 50px;
+}
+
+.Wrapper {
+  padding: 20px;
+  color: #555;
+}
+
+.Menu {
+  margin-bottom: 10px;
+
+  h1 {
+    font-size: 16px;
+    color: rgb(146, 141, 141);
+  }
+
+  ul {
+    list-style: none;
+    padding: 5px;
+
+    .Active {
+      background-color: rgb(206, 211, 211);
+    }
+
+    li {
+      display: flex;
+      padding: 5px;
+      align-items: center;
+      border-radius: 10px;
+      font-size: 14px;
+
+      &:hover {
+        background-color: rgb(227, 233, 233);
+      }
+
+      &:active {
+        background-color: rgb(206, 211, 211);
+      }
+    }
+  }
+}
+
+.Icons {
+  margin-right: 5px;
+  font-size: 20px !important;
+}

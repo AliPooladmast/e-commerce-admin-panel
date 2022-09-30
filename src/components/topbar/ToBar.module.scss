@@ -1,0 +1,60 @@
+.TopBar {
+  background-color: #fff;
+  height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.Wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.Logo {
+  font-weight: bold;
+  font-size: 30px;
+  color: darkblue;
+  cursor: pointer;
+}
+
+.Icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.IconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #555;
+}
+
+.IconBadge {
+  background-color: red;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -3px;
+  right: -3px;
+  font-size: 10px;
+  color: white;
+}
+
+.Avatar {
+  height: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
