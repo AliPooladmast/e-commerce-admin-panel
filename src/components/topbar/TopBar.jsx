@@ -24,7 +24,7 @@ const TopBar = () => {
           <img
             className={style.Avatar}
             src={profileAvatar}
-            alt="profile image"
+            alt="profile"
           />
         </div>
       </div>
