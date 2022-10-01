@@ -2,10 +2,8 @@ import {
   LineChart,
   Line,
   XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import style from "./chart.module.scss";
@@ -70,6 +68,7 @@ const Chart = () => {
           <XAxis dataKey={"name"} stroke="#5550bd" />
           <Line dataKey={"active user"} type={"monotone"} stroke="#5550bd" />
           <Tooltip />
+          <CartesianGrid stroke="#e7e5e5" strokeDasharray="5 5" />
         </LineChart>
       </ResponsiveContainer>
     </div>
