@@ -3,6 +3,7 @@ import Chart from "../../components/chart/Chart";
 import SideBar from "../../components/siderbar/SideBar";
 import TopBar from "../../components/topbar/TopBar";
 import style from "./home.module.scss";
+import { userData } from "../../DummyData";
 
 const home = () => {
   return (
@@ -12,7 +13,12 @@ const home = () => {
         <SideBar />
         <div className={style.Body}>
           <FeaturedInfo />
-          <Chart />
+          <Chart
+            title="User Analytics"
+            data={userData}
+            dataKey="active user"
+            grid
+          />
         </div>
       </div>
     </>
