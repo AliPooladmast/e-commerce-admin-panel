@@ -16,7 +16,7 @@ const WidgetSmall = () => {
             <span className={style.UserTitle}>Web Developer</span>
           </div>
           <button>
-            <Visibility /> Display
+            <Visibility className={style.Icon} /> Display
           </button>
         </li>
         <li className={style.ListItem}>
@@ -29,7 +29,7 @@ const WidgetSmall = () => {
             <span className={style.UserTitle}>Web Developer</span>
           </div>
           <button>
-            <Visibility /> Display
+            <Visibility className={style.Icon} /> Display
           </button>
         </li>
         <li className={style.ListItem}>
@@ -42,7 +42,7 @@ const WidgetSmall = () => {
             <span className={style.UserTitle}>Web Developer</span>
           </div>
           <button>
-            <Visibility /> Display
+            <Visibility className={style.Icon} /> Display
           </button>
         </li>
         <li className={style.ListItem}>
@@ -55,7 +55,7 @@ const WidgetSmall = () => {
             <span className={style.UserTitle}>Web Developer</span>
           </div>
           <button>
-            <Visibility /> Display
+            <Visibility className={style.Icon} /> Display
           </button>
         </li>
         <li className={style.ListItem}>
@@ -68,7 +68,7 @@ const WidgetSmall = () => {
             <span className={style.UserTitle}>Web Developer</span>
           </div>
           <button>
-            <Visibility /> Display
+            <Visibility className={style.Icon} /> Display
           </button>
         </li>
       </ul>
