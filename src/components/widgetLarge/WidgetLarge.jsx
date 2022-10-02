@@ -1,7 +1,7 @@
-import React from "react";
+import style from "./widgetLarge.module.scss";
 
 const WidgetLarge = () => {
-  return <div>WidgetLarge</div>;
+  return <div className={style.WidgetLarge}>WidgetLarge</div>;
 };
 
 export default WidgetLarge;

@@ -1,7 +1,7 @@
-import React from "react";
+import style from "./widgetSmall.module.scss";
 
 const WidgetSmall = () => {
-  return <div>WidgetSmall</div>;
+  return <div className={style.WidgetSmall}>WidgetSmall</div>;
 };
 
 export default WidgetSmall;
