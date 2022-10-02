@@ -10,3 +10,12 @@
   font-size: 32px;
   font-weight: 600;
 }
+
+.ListItem {
+  img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
