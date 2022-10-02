@@ -4,6 +4,8 @@ import SideBar from "../../components/siderbar/SideBar";
 import TopBar from "../../components/topbar/TopBar";
 import style from "./home.module.scss";
 import { userData } from "../../DummyData";
+import WidgetLarge from "../../components/widgetLarge/WidgetLarge";
+import WidgetSmall from "../../components/widgetSmall/WidgetSmall";
 
 const home = () => {
   return (
@@ -19,6 +21,10 @@ const home = () => {
             dataKey="active user"
             grid
           />
+          <div className={style.Widgets}>
+            <WidgetLarge />
+            <WidgetSmall />
+          </div>
         </div>
       </div>
     </>
