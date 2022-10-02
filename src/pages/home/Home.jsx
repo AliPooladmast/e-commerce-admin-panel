@@ -22,8 +22,8 @@ const home = () => {
             grid
           />
           <div className={style.Widgets}>
-            <WidgetLarge />
             <WidgetSmall />
+            <WidgetLarge />
           </div>
         </div>
       </div>
