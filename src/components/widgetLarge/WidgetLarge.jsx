@@ -16,7 +16,6 @@ const WidgetLarge = () => {
             <img
               src="https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg"
               alt=""
-              className={style.Image}
             />
             <span>Mat Walmer</span>
           </td>
@@ -31,7 +30,6 @@ const WidgetLarge = () => {
             <img
               src="https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg"
               alt=""
-              className={style.Image}
             />
             <span>Mat Walmer</span>
           </td>
@@ -46,7 +44,6 @@ const WidgetLarge = () => {
             <img
               src="https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg"
               alt=""
-              className={style.Image}
             />
             <span>Mat Walmer</span>
           </td>
@@ -61,7 +58,6 @@ const WidgetLarge = () => {
             <img
               src="https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg"
               alt=""
-              className={style.Image}
             />
             <span>Mat Walmer</span>
           </td>
