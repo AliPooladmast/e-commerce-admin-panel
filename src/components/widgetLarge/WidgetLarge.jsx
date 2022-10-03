@@ -21,8 +21,8 @@ const WidgetLarge = () => {
           </td>
           <td className={style.Date}>4 May 2022</td>
           <td className={style.Amount}>$452</td>
-          <td className={style.Status}>
-            <button className={style["Button--Approved"]}>Approved</button>
+          <td className={style["Status"]}>
+            <button>Approved</button>
           </td>
         </tr>
         <tr className={style.Row}>
@@ -35,8 +35,8 @@ const WidgetLarge = () => {
           </td>
           <td className={style.Date}>4 May 2022</td>
           <td className={style.Amount}>$452</td>
-          <td className={style.Status}>
-            <button className={style["Button--Declined"]}>Declined</button>
+          <td className={style["Status--Declined"]}>
+            <button>Declined</button>
           </td>
         </tr>
         <tr className={style.Row}>
@@ -49,8 +49,8 @@ const WidgetLarge = () => {
           </td>
           <td className={style.Date}>4 May 2022</td>
           <td className={style.Amount}>$452</td>
-          <td className={style.Status}>
-            <button className={style["Button--Pending"]}>Pending</button>
+          <td className={style["Status--Pending"]}>
+            <button>Pending</button>
           </td>
         </tr>
         <tr className={style.Row}>
@@ -63,8 +63,8 @@ const WidgetLarge = () => {
           </td>
           <td className={style.Date}>4 May 2022</td>
           <td className={style.Amount}>$452</td>
-          <td className={style.Status}>
-            <button className={style["Button--Approved"]}>Approved</button>
+          <td className={style["Status"]}>
+            <button>Approved</button>
           </td>
         </tr>
       </table>
