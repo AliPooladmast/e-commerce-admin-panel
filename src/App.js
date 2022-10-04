@@ -1,9 +1,10 @@
-import Home from "./pages/home/Home";
+// import Home from "./pages/home/Home";
+import Users from "./pages/users/Users";
 
 function App() {
   return (
     <div>
-      <Home />
+      <Users />
     </div>
   );
 }
