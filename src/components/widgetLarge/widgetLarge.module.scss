@@ -3,4 +3,61 @@
   border-radius: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 20px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+}
+
+.Table {
+  width: 100%;
+  border-spacing: 20px;
+}
+
+.Header {
+  text-align: left;
+}
+
+.User {
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+}
+
+.Date,
+.Amount {
+  font-weight: 300;
+}
+
+.Status {
+  button {
+    padding: 5px 7px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e5faf2;
+    color: #3bb077;
+  }
+
+  &--Pending {
+    @extend .Status;
+    button {
+      background-color: #ebf1fe;
+      color: #2a7ade;
+    }
+  }
+  &--Declined {
+    @extend .Status;
+    button {
+      background-color: #fff0f1;
+      color: #d95087;
+    }
+  }
 }
