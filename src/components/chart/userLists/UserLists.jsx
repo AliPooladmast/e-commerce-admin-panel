@@ -1,6 +1,7 @@
 import * as React from "react";
 import style from "./userLists.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
+import { DeleteOutlined } from "@material-ui/icons";
 
 const rows = [
   {
@@ -68,6 +69,19 @@ const columns = [
   { field: "email", headerName: "Email", width: 250 },
   { field: "status", headerName: "Status", width: 150 },
   { field: "transaction", headerName: "Transaction Volume", width: 200 },
+  {
+    field: "action",
+    headerName: "Action",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <>
+          <button className={style.Edit}>Edit</button>
+          <DeleteOutlined className={style.Delete} />
+        </>
+      );
+    },
+  },
 ];
 
 export default function UserLists() {
