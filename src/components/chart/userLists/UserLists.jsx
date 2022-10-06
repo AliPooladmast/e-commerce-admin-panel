@@ -2,6 +2,7 @@ import * as React from "react";
 import style from "./userLists.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutlined } from "@material-ui/icons";
+import { Box } from "@material-ui/core";
 
 const rows = [
   {
@@ -86,8 +87,8 @@ const columns = [
 
 export default function UserLists() {
   return (
-    <div className={style.UserLists}>
+    <Box className={style.UserLists}>
       <DataGrid rows={rows} columns={columns} />
-    </div>
+    </Box>
   );
 }
