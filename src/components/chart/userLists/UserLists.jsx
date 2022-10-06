@@ -4,6 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutlined } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { userRows } from "../../../DummyData";
+import { Link } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -30,7 +31,9 @@ const columns = [
     renderCell: (params) => {
       return (
         <>
-          <button className={style.Edit}>Edit</button>
+          <Link to={"/users/" + params.row.id}>
+            <button className={style.Edit}>Edit</button>
+          </Link>
           <DeleteOutlined className={style.Delete} />
         </>
       );
