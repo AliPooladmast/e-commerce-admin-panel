@@ -50,6 +50,69 @@ const rows = [
     status: "active",
     transaction: "$320.00",
   },
+  {
+    id: 6,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
+  {
+    id: 7,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
+  {
+    id: 8,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
+  {
+    id: 9,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
+  {
+    id: 10,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
+  {
+    id: 11,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
+  {
+    id: 12,
+    username: "Mathew Perry",
+    avatar:
+      "https://www.stuttgarter-nachrichten.de/media.media.0341ffdd-892c-4752-99b3-7ef350d6780f.original1024.jpg",
+    email: "mathew.perry@gmail.com",
+    status: "active",
+    transaction: "$320.00",
+  },
 ];
 
 const columns = [
@@ -91,6 +154,7 @@ export default function UserLists() {
       <DataGrid
         rows={rows}
         columns={columns}
+        pageSize={8}
         checkboxSelection
         disableSelectionOnClick
       />
