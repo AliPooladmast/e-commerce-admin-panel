@@ -52,7 +52,19 @@ const rows = [
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "username", headerName: "Username", width: 200 },
+  {
+    field: "user",
+    headerName: "User",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className={style.User}>
+          <img src={params.row.avatar} alt="avatar" />
+          {params.row.username}
+        </div>
+      );
+    },
+  },
   { field: "email", headerName: "Email", width: 250 },
   { field: "status", headerName: "Status", width: 150 },
   { field: "transaction", headerName: "Transaction Volume", width: 200 },
