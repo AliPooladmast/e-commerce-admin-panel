@@ -88,7 +88,12 @@ const columns = [
 export default function UserLists() {
   return (
     <Box className={style.UserLists}>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        checkboxSelection
+        disableSelectionOnClick
+      />
     </Box>
   );
 }
