@@ -1,9 +1,9 @@
-import UserLists from "../../components/chart/userLists/UserLists";
+import UserLists from "../../components/userLists/UserLists";
 import SideBar from "../../components/siderbar/SideBar";
 import TopBar from "../../components/topbar/TopBar";
 import style from "./users.module.scss";
 
-const home = () => {
+const Users = () => {
   return (
     <>
       <TopBar />
@@ -17,4 +17,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Users;
