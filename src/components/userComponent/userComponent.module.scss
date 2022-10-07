@@ -1,21 +1,21 @@
 .UserComponent {
   padding: 20px;
-}
 
-.TitleContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .TitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  button {
-    background-color: teal;
-    color: white;
-    border: none;
-    width: 80px;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    button {
+      background-color: teal;
+      color: white;
+      border: none;
+      width: 80px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
   }
 }
 
@@ -36,5 +36,34 @@
     border-radius: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin-left: 20px;
+  }
+}
+
+.Top {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .TitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+
+    .Name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .Title {
+      font-weight: 300;
+      font-size: 14px;
+    }
   }
 }
