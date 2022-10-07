@@ -30,7 +30,7 @@ const UserComponent = () => {
             <span className={style.Title}>Account Details</span>
             <div className={style.Info}>
               <PermIdentity className={style.Icon} />
-              <span>Emily Dimmer</span>
+              <span>emily_dimmer5424</span>
             </div>
             <div className={style.Info}>
               <CalendarToday className={style.Icon} />
@@ -51,7 +51,34 @@ const UserComponent = () => {
             </div>
           </div>
         </div>
-        <div className={style.Update}>Update</div>
+        <div className={style.Update}>
+          <span className={style.Title}>Edit</span>
+          <form action="" className={style.Form}>
+            <div className={style.Left}>
+              <div className={style.Item}>
+                <label>Username</label>
+                <input type="text" placeholder="emily_dimmer5424" />
+              </div>
+              <div className={style.Item}>
+                <label>Full Name</label>
+                <input type="text" placeholder="Emily Dimmer" />
+              </div>
+              <div className={style.Item}>
+                <label>Phone Number</label>
+                <input type="text" placeholder="+25 253 254 24" />
+              </div>
+              <div className={style.Item}>
+                <label>Email</label>
+                <input type="text" placeholder="emily.dimmer@gmail.com" />
+              </div>
+              <div className={style.Item}>
+                <label>Address</label>
+                <input type="text" placeholder="Berlin | Germany" />
+              </div>
+            </div>
+            <div className={style.Right}></div>
+          </form>
+        </div>
       </div>
     </div>
   );
