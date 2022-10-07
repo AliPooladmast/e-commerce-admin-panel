@@ -4,6 +4,7 @@ import {
   MailOutline,
   PermIdentity,
   PhoneAndroid,
+  Publish,
 } from "@material-ui/icons";
 import style from "./userComponent.module.scss";
 
@@ -51,9 +52,10 @@ const UserComponent = () => {
             </div>
           </div>
         </div>
+
         <div className={style.Update}>
           <span className={style.Title}>Edit</span>
-          <form action="" className={style.Form}>
+          <form action="">
             <div className={style.Left}>
               <div className={style.Item}>
                 <label>Username</label>
@@ -76,7 +78,18 @@ const UserComponent = () => {
                 <input type="text" placeholder="Berlin | Germany" />
               </div>
             </div>
-            <div className={style.Right}></div>
+            <div className={style.Right}>
+              <div className={style.Upload}>
+                <img
+                  src="https://t4.ftcdn.net/jpg/01/87/14/51/360_F_187145146_SB34n4kdiNqlVSvaTy4YUJcUWjNO540N.jpg"
+                  alt="edit profile"
+                />
+                <label htmlFor="upload">
+                  <Publish />
+                </label>
+                <input type="file" id="upload" style={{ display: "none" }} />
+              </div>
+            </div>
           </form>
         </div>
       </div>
