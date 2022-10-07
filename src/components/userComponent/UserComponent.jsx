@@ -6,6 +6,7 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import style from "./userComponent.module.scss";
 
 const UserComponent = () => {
@@ -13,7 +14,9 @@ const UserComponent = () => {
     <div className={style.UserComponent}>
       <div className={style.TitleContainer}>
         <h1>Edit User</h1>
-        <button>Create</button>
+        <Link to={"/newUser"}>
+          <button>Create</button>
+        </Link>
       </div>
       <div className={style.UserContainer}>
         <div className={style.Show}>
