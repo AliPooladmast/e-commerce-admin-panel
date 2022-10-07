@@ -2,9 +2,9 @@ import style from "./userLists.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutlined } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
-import { userRows } from "../../../DummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { userRows } from "../../DummyData";
 
 export default function UserLists() {
   const [data, setData] = useState(userRows);
