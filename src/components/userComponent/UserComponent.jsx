@@ -7,6 +7,10 @@ const UserComponent = () => {
         <h1>Edit User</h1>
         <button>Create</button>
       </div>
+      <div className={style.UserContainer}>
+        <div className={style.Show}>Show</div>
+        <div className={style.Update}>Update</div>
+      </div>
     </div>
   );
 };
