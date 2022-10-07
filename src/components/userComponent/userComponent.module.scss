@@ -1,0 +1,161 @@
+.UserComponent {
+  padding: 20px;
+
+  .TitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      background-color: teal;
+      color: white;
+      border: none;
+      width: 80px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+}
+
+.UserContainer {
+  display: flex;
+  margin-top: 20px;
+
+  .Show {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  .Update {
+    flex: 2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-left: 20px;
+  }
+}
+
+.Top {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .TitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+
+    .Name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .Title {
+      font-weight: 300;
+      font-size: 14px;
+    }
+  }
+}
+
+.Bottom {
+  margin-top: 20px;
+
+  .Title {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(148, 147, 147);
+  }
+
+  .Info {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #555;
+
+    .Icon {
+      font-size: 16px;
+    }
+
+    span {
+      margin-left: 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+.Update {
+  span {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}
+
+.Left {
+  .Item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid grey;
+      width: 250px;
+      height: 30px;
+    }
+  }
+}
+
+.Right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .Upload {
+    display: flex;
+    align-items: center;
+
+    label {
+      cursor: pointer;
+    }
+
+    img {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  button {
+    background-color: rgb(2, 2, 110);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

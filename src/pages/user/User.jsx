@@ -1,20 +1,20 @@
-import UserLists from "../../components/userLists/UserLists";
 import SideBar from "../../components/siderbar/SideBar";
 import TopBar from "../../components/topbar/TopBar";
-import style from "./users.module.scss";
+import UserComponent from "../../components/userComponent/UserComponent";
+import style from "./user.module.scss";
 
-const Users = () => {
+const User = () => {
   return (
     <>
       <TopBar />
       <div className={style.MainLayout}>
         <SideBar />
         <div className={style.Body}>
-          <UserLists />
+          <UserComponent />
         </div>
       </div>
     </>
   );
 };
 
-export default Users;
+export default User;

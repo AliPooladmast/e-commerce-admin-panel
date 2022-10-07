@@ -7,7 +7,7 @@ import { userData } from "../../DummyData";
 import WidgetLarge from "../../components/widgetLarge/WidgetLarge";
 import WidgetSmall from "../../components/widgetSmall/WidgetSmall";
 
-const home = () => {
+const Home = () => {
   return (
     <>
       <TopBar />
@@ -31,4 +31,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
