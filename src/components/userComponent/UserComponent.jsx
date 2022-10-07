@@ -89,6 +89,7 @@ const UserComponent = () => {
                 </label>
                 <input type="file" id="upload" style={{ display: "none" }} />
               </div>
+              <button>Update</button>
             </div>
           </form>
         </div>
