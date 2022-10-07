@@ -93,3 +93,48 @@
     }
   }
 }
+
+.Update {
+  span {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}
+
+.Left {
+  .Item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    label {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid grey;
+      width: 250px;
+      height: 30px;
+    }
+  }
+}
+
+.Right {
+  .Upload {
+    img {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+  }
+}
