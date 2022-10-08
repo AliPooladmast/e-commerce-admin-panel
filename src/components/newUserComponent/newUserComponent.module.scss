@@ -11,4 +11,11 @@
   flex-direction: column;
   margin-top: 10px;
   margin-right: 20px;
+
+  label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: grey;
+  }
 }
