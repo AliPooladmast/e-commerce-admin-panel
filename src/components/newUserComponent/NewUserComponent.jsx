@@ -55,7 +55,9 @@ const NewUserComponent = () => {
             <option value="no">No</option>
           </select>
         </div>
-        <button>Create</button>
+        <div className={style.Item}>
+          <button>Create</button>
+        </div>
       </form>
     </div>
   );
