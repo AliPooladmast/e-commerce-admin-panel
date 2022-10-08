@@ -1,2 +1,8 @@
-.NewUser {
+.MainLayout {
+  display: flex;
+}
+
+.Body {
+  flex: 4;
+  height: 100%;
 }
