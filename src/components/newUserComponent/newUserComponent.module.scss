@@ -4,3 +4,11 @@
     flex-wrap: wrap;
   }
 }
+
+.Item {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+}
