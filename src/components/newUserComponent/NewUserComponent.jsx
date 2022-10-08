@@ -39,11 +39,11 @@ const NewUserComponent = () => {
         <div className={style.Item}>
           <label>Gender</label>
           <div className={style.Gender}>
-            <label for="male">Male</label>
+            <label forhtml="male">Male</label>
             <input type="radio" id="male" value="male" />
-            <label for="female">Female</label>
+            <label forhtml="female">Female</label>
             <input type="radio" id="female" value="female" />
-            <label for="other">Other</label>
+            <label forhtml="other">Other</label>
             <input type="radio" id="other" value="other" />
           </div>
         </div>
