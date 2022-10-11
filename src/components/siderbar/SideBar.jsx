@@ -1,4 +1,18 @@
-import { LineStyle, Timeline, TrendingUp } from "@material-ui/icons";
+import {
+  AssessmentOutlined,
+  AttachMoney,
+  Category,
+  DynamicFeedOutlined,
+  LineStyle,
+  MailOutline,
+  MessageOutlined,
+  Person,
+  ReportOutlined,
+  Timeline,
+  TrendingUp,
+  WorkOutline,
+} from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import style from "./SideBar.module.scss";
 
 const SideBar = () => {
@@ -25,20 +39,24 @@ const SideBar = () => {
         <div className={style.Menu}>
           <h1>Quick Menu</h1>
           <ul>
+            <Link to="/users" className={style.Link}>
+              <li>
+                <Person className={style.Icons} />
+                Users
+              </li>
+            </Link>
+            <Link to="/products" className={style.Link}>
+              <li>
+                <Category className={style.Icons} />
+                Products
+              </li>
+            </Link>
             <li>
-              <LineStyle className={style.Icons} />
-              Users
-            </li>
-            <li>
-              <Timeline className={style.Icons} />
-              Products
-            </li>
-            <li>
-              <TrendingUp className={style.Icons} />
+              <AttachMoney className={style.Icons} />
               Transactions
             </li>
             <li>
-              <TrendingUp className={style.Icons} />
+              <AssessmentOutlined className={style.Icons} />
               Reports
             </li>
           </ul>
@@ -47,15 +65,15 @@ const SideBar = () => {
           <h1>Notifications</h1>
           <ul>
             <li>
-              <LineStyle className={style.Icons} />
+              <MailOutline className={style.Icons} />
               Mail
             </li>
             <li>
-              <Timeline className={style.Icons} />
+              <DynamicFeedOutlined className={style.Icons} />
               Feedback
             </li>
             <li>
-              <TrendingUp className={style.Icons} />
+              <MessageOutlined className={style.Icons} />
               Messages
             </li>
           </ul>
@@ -64,7 +82,7 @@ const SideBar = () => {
           <h1>Staff</h1>
           <ul>
             <li>
-              <LineStyle className={style.Icons} />
+              <WorkOutline className={style.Icons} />
               Manage
             </li>
             <li>
@@ -72,7 +90,7 @@ const SideBar = () => {
               Analytics
             </li>
             <li>
-              <TrendingUp className={style.Icons} />
+              <ReportOutlined className={style.Icons} />
               Reports
             </li>
           </ul>
