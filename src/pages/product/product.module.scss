@@ -1,2 +1,20 @@
 .Product {
+  margin: 20px;
+}
+
+.TitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    border: none;
+    width: 80px;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
 }
