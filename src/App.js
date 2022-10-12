@@ -7,6 +7,7 @@ import Products from "./pages/products/Products";
 import SideBar from "./components/siderbar/SideBar";
 import TopBar from "./components/topbar/TopBar";
 import style from "./App.module.scss";
+import Product from "./pages/product/Product";
 
 function App() {
   return (
@@ -26,8 +27,8 @@ function App() {
 
             <Route path="/products" element={<Products />} />
             <Route path="/newproduct" element={<NewUser />} />
-            <Route path="/product" element={<User />}>
-              <Route path=":id" element={<User />} />
+            <Route path="/product" element={<Product />}>
+              <Route path=":id" element={<Product />} />
             </Route>
           </Routes>
         </div>
