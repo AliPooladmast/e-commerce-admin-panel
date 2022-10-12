@@ -18,3 +18,50 @@
     cursor: pointer;
   }
 }
+
+.Top {
+  display: flex;
+}
+
+.ChartContainer {
+  flex: 1;
+}
+
+.Info {
+  flex: 1;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  .ImageContainer {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-weight: 600;
+    }
+
+    img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+  }
+}
+
+.Details {
+  margin-top: 10px;
+
+  .Item {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+
+    .Value {
+      font-weight: 300;
+    }
+  }
+}
