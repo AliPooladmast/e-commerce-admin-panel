@@ -1,8 +1,32 @@
-.MainLayout {
-  display: flex;
+.ProductList {
+  height: calc(100vh - 50px);
+  width: 100%;
 }
 
-.Body {
-  flex: 4;
-  height: 100%;
+.Product {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+}
+
+.Edit {
+  background-color: #3bb077;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.Delete {
+  color: red;
+  cursor: pointer;
 }
