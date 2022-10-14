@@ -57,6 +57,7 @@ export default function Products() {
         rows={data}
         columns={columns}
         pageSize={8}
+        rowsPerPageOptions={[8]}
         checkboxSelection
         disableSelectionOnClick
       />
