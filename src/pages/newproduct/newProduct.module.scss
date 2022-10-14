@@ -1,0 +1,49 @@
+.NewProductComponent {
+  padding: 30px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.Item {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  > label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: grey;
+  }
+
+  > input {
+    height: 30px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+  }
+
+  > select {
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  > button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}
