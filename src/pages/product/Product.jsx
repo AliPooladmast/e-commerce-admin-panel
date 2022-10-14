@@ -1,6 +1,7 @@
 import style from "./product.module.scss";
 import Chart from "../../components/chart/Chart";
 import { productData } from "../../DummyData";
+import { Publish } from "@material-ui/icons";
 
 const Product = () => {
   return (
@@ -15,7 +16,7 @@ const Product = () => {
           <Chart data={productData} title="Sales Performance" dataKey="Sales" />
         </div>
 
-        <div className={style.Info}>
+        <div className={style.InfoContainer}>
           <div className={style.ImageContainer}>
             <img
               src="https://static.giga.de/wp-content/uploads/2021/10/hero_intro_endframe__e6khcva4hkeq_large.jpg"
@@ -46,6 +47,38 @@ const Product = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className={style.Bottom}>
+        <form>
+          <div className={style.EditDetails}>
+            <label>Product Name</label>
+            <input type="text" placeholder="Apple MacBook Pro" />
+            <label>In Stock</label>
+            <select name="inStock" id="inStock">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+            <label>Active</label>
+            <select name="active" id="active">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div className={style.Upload}>
+            <div className={style.FileUpload}>
+              <img
+                src="https://static.giga.de/wp-content/uploads/2021/10/hero_intro_endframe__e6khcva4hkeq_large.jpg"
+                alt="upload product"
+              />
+              <label htmlFor="file">
+                <Publish />
+              </label>
+              <input type="file" id="file" />
+            </div>
+            <button>Update</button>
+          </div>
+        </form>
       </div>
     </div>
   );
