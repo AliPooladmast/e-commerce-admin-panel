@@ -2,13 +2,16 @@ import style from "./product.module.scss";
 import Chart from "../../components/chart/Chart";
 import { productData } from "../../DummyData";
 import { Publish } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const Product = () => {
   return (
     <div className={style.Product}>
       <div className={style.TitleContainer}>
         <h1>Product</h1>
-        <button>Create</button>
+        <Link to="/newproduct">
+          <button>Create</button>
+        </Link>
       </div>
 
       <div className={style.Top}>
