@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 20px;
 
   button {
     border: none;
@@ -24,15 +25,26 @@
 }
 
 .ChartContainer {
-  flex: 1;
+  flex: 3;
 }
 
-.Info {
+.InfoContainer {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  .Details {
+    .Item {
+      margin-bottom: 10px;
+      border-bottom: 1px solid lightgrey;
+    }
+  }
 
   .ImageContainer {
     display: flex;
@@ -63,5 +75,74 @@
     .Value {
       font-weight: 300;
     }
+  }
+}
+
+.Bottom {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.EditDetails {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 3px;
+  }
+
+  select {
+    margin-bottom: 20px;
+  }
+
+  input {
+    margin-bottom: 20px;
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+  }
+}
+
+.Upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  button {
+    border: none;
+    padding: 10px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+.FileUpload {
+  display: flex;
+  align-items: center;
+
+  label {
+    cursor: pointer;
+  }
+
+  input {
+    display: none;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
   }
 }
