@@ -8,6 +8,7 @@ import SideBar from "./components/siderbar/SideBar";
 import TopBar from "./components/topbar/TopBar";
 import style from "./App.module.scss";
 import Product from "./pages/product/Product";
+import NewProduct from "./pages/newproduct/NewProduct";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
             </Route>
 
             <Route path="/products" element={<Products />} />
-            <Route path="/newproduct" element={<NewUser />} />
+            <Route path="/newproduct" element={<NewProduct />} />
             <Route path="/product" element={<Product />}>
               <Route path=":id" element={<Product />} />
             </Route>
