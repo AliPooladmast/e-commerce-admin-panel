@@ -8,10 +8,18 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newproduct/NewProduct";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-
+import AddMarginToPage from "./hoc/AddMarginToPage";
 import { useSelector } from "react-redux";
 
 function App() {
+  const WrappedHome = AddMarginToPage(Home);
+  const WrappedUsers = AddMarginToPage(Users);
+  const WrappedNewUser = AddMarginToPage(NewUser);
+  const WrappedUser = AddMarginToPage(User);
+  const WrappedProducts = AddMarginToPage(Products);
+  const WrappedNewProduct = AddMarginToPage(NewProduct);
+  const WrappedProduct = AddMarginToPage(Product);
+
   const user = useSelector((state) => state.user.currentUser);
 
   return (
@@ -27,18 +35,18 @@ function App() {
           element={user ? <Navigate to="/" replace /> : <Register />}
         />
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<WrappedHome />} />
 
-        <Route path="/users" element={<Users />} />
-        <Route path="/newuser" element={<NewUser />} />
-        <Route path="/user" element={<User />}>
-          <Route path=":id" element={<User />} />
+        <Route path="/users" element={<WrappedUsers />} />
+        <Route path="/newuser" element={<WrappedNewUser />} />
+        <Route path="/user" element={<WrappedUser />}>
+          <Route path=":id" element={<WrappedUser />} />
         </Route>
 
-        <Route path="/products" element={<Products />} />
-        <Route path="/newproduct" element={<NewProduct />} />
-        <Route path="/product" element={<Product />}>
-          <Route path=":id" element={<Product />} />
+        <Route path="/products" element={<WrappedProducts />} />
+        <Route path="/newproduct" element={<WrappedNewProduct />} />
+        <Route path="/product" element={<WrappedProduct />}>
+          <Route path=":id" element={<WrappedProduct />} />
         </Route>
       </Routes>
     </BrowserRouter>
