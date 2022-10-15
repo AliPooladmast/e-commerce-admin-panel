@@ -33,8 +33,8 @@ const Login = () => {
             LOGIN
           </button>
           {error && <div className={style.Error}>Somthing went wrong...</div>}
-          <a href="">Forgot your password?</a>
-          <a href="">Create an account</a>
+          <a href="/register">Forgot your password?</a>
+          <a href="/register">Create an account</a>
         </form>
       </div>
     </div>
