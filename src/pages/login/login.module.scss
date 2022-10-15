@@ -1,0 +1,65 @@
+.Container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../../assets/images/login-background.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Wrapper {
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+
+  @media only screen and (max-width: 600px) {
+    width: 75%;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    flex: 1;
+    min-width: 40%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  button {
+    width: 40%;
+    padding: 15px 20px;
+    border: none;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 5px;
+
+    &:disabled {
+      background-color: rgb(56, 192, 192);
+      cursor: not-allowed;
+    }
+  }
+
+  a {
+    margin: 5px 0;
+    font-size: 12px;
+  }
+}
+
+.Error {
+  color: red;
+}
