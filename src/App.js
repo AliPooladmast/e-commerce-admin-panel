@@ -1,39 +1,46 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Users from "./pages/users/Users";
 import User from "./pages/user/User";
 import NewUser from "./pages/newuser/NewUser";
 import Products from "./pages/products/Products";
-import SideBar from "./components/siderbar/SideBar";
-import TopBar from "./components/topbar/TopBar";
-import style from "./App.module.scss";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newproduct/NewProduct";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.user.currentUser);
+
   return (
     <BrowserRouter>
-      <TopBar />
-      <div className={style.MainLayout}>
-        <SideBar />
-        <div className={style.Body}>
-          <Routes>
-            <Route path="/" element={<Home />} />
+      <Routes>
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/" replace /> : <Login />}
+        />
 
-            <Route path="/users" element={<Users />} />
-            <Route path="/newuser" element={<NewUser />} />
-            <Route path="/user" element={<User />}>
-              <Route path=":id" element={<User />} />
-            </Route>
+        <Route
+          path="/register"
+          element={user ? <Navigate to="/" replace /> : <Register />}
+        />
 
-            <Route path="/products" element={<Products />} />
-            <Route path="/newproduct" element={<NewProduct />} />
-            <Route path="/product" element={<Product />}>
-              <Route path=":id" element={<Product />} />
-            </Route>
-          </Routes>
-        </div>
-      </div>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/users" element={<Users />} />
+        <Route path="/newuser" element={<NewUser />} />
+        <Route path="/user" element={<User />}>
+          <Route path=":id" element={<User />} />
+        </Route>
+
+        <Route path="/products" element={<Products />} />
+        <Route path="/newproduct" element={<NewProduct />} />
+        <Route path="/product" element={<Product />}>
+          <Route path=":id" element={<Product />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
