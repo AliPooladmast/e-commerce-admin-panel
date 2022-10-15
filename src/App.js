@@ -35,18 +35,51 @@ function App() {
           element={user ? <Navigate to="/" replace /> : <Register />}
         />
 
-        <Route path="/" element={<WrappedHome />} />
+        <Route
+          path="/"
+          element={user ? <WrappedHome /> : <Navigate to="/login" replace />}
+        />
 
-        <Route path="/users" element={<WrappedUsers />} />
-        <Route path="/newuser" element={<WrappedNewUser />} />
-        <Route path="/user" element={<WrappedUser />}>
-          <Route path=":id" element={<WrappedUser />} />
+        <Route
+          path="/users"
+          element={user ? <WrappedUsers /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/newuser"
+          element={user ? <WrappedNewUser /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/user"
+          element={user ? <WrappedUser /> : <Navigate to="/login" replace />}
+        >
+          <Route
+            path=":id"
+            element={user ? <WrappedUser /> : <Navigate to="/login" replace />}
+          />
         </Route>
 
-        <Route path="/products" element={<WrappedProducts />} />
-        <Route path="/newproduct" element={<WrappedNewProduct />} />
-        <Route path="/product" element={<WrappedProduct />}>
-          <Route path=":id" element={<WrappedProduct />} />
+        <Route
+          path="/products"
+          element={
+            user ? <WrappedProducts /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/newproduct"
+          element={
+            user ? <WrappedNewProduct /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/product"
+          element={user ? <WrappedProduct /> : <Navigate to="/login" replace />}
+        >
+          <Route
+            path=":id"
+            element={
+              user ? <WrappedProduct /> : <Navigate to="/login" replace />
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
