@@ -21,63 +21,72 @@ function App() {
   const WrappedProduct = AddMarginToPage(Product);
 
   const user = useSelector((state) => state.user.currentUser);
+  const isAdmin = user?.isAdmin;
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/login"
-          element={user ? <Navigate to="/" replace /> : <Login />}
+          element={isAdmin ? <Navigate to="/" replace /> : <Login />}
         />
 
         <Route
           path="/register"
-          element={user ? <Navigate to="/" replace /> : <Register />}
+          element={isAdmin ? <Navigate to="/" replace /> : <Register />}
         />
 
         <Route
           path="/"
-          element={user ? <WrappedHome /> : <Navigate to="/login" replace />}
+          element={isAdmin ? <WrappedHome /> : <Navigate to="/login" replace />}
         />
 
         <Route
           path="/users"
-          element={user ? <WrappedUsers /> : <Navigate to="/login" replace />}
+          element={
+            isAdmin ? <WrappedUsers /> : <Navigate to="/login" replace />
+          }
         />
         <Route
           path="/newuser"
-          element={user ? <WrappedNewUser /> : <Navigate to="/login" replace />}
+          element={
+            isAdmin ? <WrappedNewUser /> : <Navigate to="/login" replace />
+          }
         />
         <Route
           path="/user"
-          element={user ? <WrappedUser /> : <Navigate to="/login" replace />}
+          element={isAdmin ? <WrappedUser /> : <Navigate to="/login" replace />}
         >
           <Route
             path=":id"
-            element={user ? <WrappedUser /> : <Navigate to="/login" replace />}
+            element={
+              isAdmin ? <WrappedUser /> : <Navigate to="/login" replace />
+            }
           />
         </Route>
 
         <Route
           path="/products"
           element={
-            user ? <WrappedProducts /> : <Navigate to="/login" replace />
+            isAdmin ? <WrappedProducts /> : <Navigate to="/login" replace />
           }
         />
         <Route
           path="/newproduct"
           element={
-            user ? <WrappedNewProduct /> : <Navigate to="/login" replace />
+            isAdmin ? <WrappedNewProduct /> : <Navigate to="/login" replace />
           }
         />
         <Route
           path="/product"
-          element={user ? <WrappedProduct /> : <Navigate to="/login" replace />}
+          element={
+            isAdmin ? <WrappedProduct /> : <Navigate to="/login" replace />
+          }
         >
           <Route
             path=":id"
             element={
-              user ? <WrappedProduct /> : <Navigate to="/login" replace />
+              isAdmin ? <WrappedProduct /> : <Navigate to="/login" replace />
             }
           />
         </Route>
