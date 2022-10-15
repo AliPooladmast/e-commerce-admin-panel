@@ -1,39 +1,96 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Users from "./pages/users/Users";
 import User from "./pages/user/User";
 import NewUser from "./pages/newuser/NewUser";
 import Products from "./pages/products/Products";
-import SideBar from "./components/siderbar/SideBar";
-import TopBar from "./components/topbar/TopBar";
-import style from "./App.module.scss";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newproduct/NewProduct";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import AddMarginToPage from "./hoc/AddMarginToPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const WrappedHome = AddMarginToPage(Home);
+  const WrappedUsers = AddMarginToPage(Users);
+  const WrappedNewUser = AddMarginToPage(NewUser);
+  const WrappedUser = AddMarginToPage(User);
+  const WrappedProducts = AddMarginToPage(Products);
+  const WrappedNewProduct = AddMarginToPage(NewProduct);
+  const WrappedProduct = AddMarginToPage(Product);
+
+  const user = useSelector((state) => state.user.currentUser);
+  const isAdmin = user?.isAdmin;
+
   return (
     <BrowserRouter>
-      <TopBar />
-      <div className={style.MainLayout}>
-        <SideBar />
-        <div className={style.Body}>
-          <Routes>
-            <Route path="/" element={<Home />} />
+      <Routes>
+        <Route
+          path="/login"
+          element={isAdmin ? <Navigate to="/" replace /> : <Login />}
+        />
 
-            <Route path="/users" element={<Users />} />
-            <Route path="/newuser" element={<NewUser />} />
-            <Route path="/user" element={<User />}>
-              <Route path=":id" element={<User />} />
-            </Route>
+        <Route
+          path="/register"
+          element={isAdmin ? <Navigate to="/" replace /> : <Register />}
+        />
 
-            <Route path="/products" element={<Products />} />
-            <Route path="/newproduct" element={<NewProduct />} />
-            <Route path="/product" element={<Product />}>
-              <Route path=":id" element={<Product />} />
-            </Route>
-          </Routes>
-        </div>
-      </div>
+        <Route
+          path="/"
+          element={isAdmin ? <WrappedHome /> : <Navigate to="/login" replace />}
+        />
+
+        <Route
+          path="/users"
+          element={
+            isAdmin ? <WrappedUsers /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/newuser"
+          element={
+            isAdmin ? <WrappedNewUser /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/user"
+          element={isAdmin ? <WrappedUser /> : <Navigate to="/login" replace />}
+        >
+          <Route
+            path=":id"
+            element={
+              isAdmin ? <WrappedUser /> : <Navigate to="/login" replace />
+            }
+          />
+        </Route>
+
+        <Route
+          path="/products"
+          element={
+            isAdmin ? <WrappedProducts /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/newproduct"
+          element={
+            isAdmin ? <WrappedNewProduct /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            isAdmin ? <WrappedProduct /> : <Navigate to="/login" replace />
+          }
+        >
+          <Route
+            path=":id"
+            element={
+              isAdmin ? <WrappedProduct /> : <Navigate to="/login" replace />
+            }
+          />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
