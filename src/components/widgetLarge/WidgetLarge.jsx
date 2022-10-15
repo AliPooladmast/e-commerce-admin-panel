@@ -4,8 +4,8 @@ const WidgetLarge = () => {
   return (
     <div className={style.WidgetLarge}>
       <h1>Latest Transactions</h1>
-      <tbody>
-        <table className={style.Table}>
+      <table className={style.Table}>
+        <tbody>
           <tr className={style.Row}>
             <th className={style.Header}>Customer</th>
             <th className={style.Header}>Date</th>
@@ -68,8 +68,8 @@ const WidgetLarge = () => {
               <button>Approved</button>
             </td>
           </tr>
-        </table>
-      </tbody>
+        </tbody>
+      </table>
     </div>
   );
 };
