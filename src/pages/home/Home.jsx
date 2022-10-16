@@ -1,20 +1,54 @@
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import Chart from "../../components/chart/Chart";
 import style from "./home.module.scss";
-import { userData } from "../../DummyData";
 import WidgetLarge from "../../components/widgetLarge/WidgetLarge";
 import WidgetSmall from "../../components/widgetSmall/WidgetSmall";
+import { useEffect, useMemo, useState } from "react";
+import { userRequest } from "../../requestMethods";
 
 const Home = () => {
+  const [stats, setStats] = useState([]);
+
+  const MONTH = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get("/users/stats");
+        setStats([]);
+        res?.data.forEach((item) => {
+          setStats((prev) => [
+            ...prev,
+            { name: MONTH[item._id - 1], "active user": item.total },
+          ]);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getStats();
+  }, [MONTH]);
+
   return (
     <>
       <FeaturedInfo />
-      <Chart
-        title="User Analytics"
-        data={userData}
-        dataKey="active user"
-        grid
-      />
+      <Chart title="User Analytics" data={stats} dataKey="active user" grid />
       <div className={style.Widgets}>
         <WidgetSmall />
         <WidgetLarge />

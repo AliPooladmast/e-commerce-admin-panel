@@ -3,13 +3,11 @@ import { userRequest } from "../../requestMethods";
 import style from "./widgetLarge.module.scss";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo("en-US");
 
 const WidgetLarge = () => {
-  TimeAgo.addDefaultLocale(en);
-  const timeAgo = new TimeAgo("en-US");
-
   const [orders, setOrders] = useState([]);
-  console.log(orders);
 
   useEffect(() => {
     const getOrders = async () => {
