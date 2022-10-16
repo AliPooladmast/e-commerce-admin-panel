@@ -32,16 +32,18 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  min-width: 300px;
 
   .Details {
     .Item {
-      margin-bottom: 10px;
+      width: 250px;
+      margin-bottom: 5px;
       border-bottom: 1px solid lightgrey;
     }
   }
@@ -144,5 +146,6 @@
     object-fit: cover;
     border-radius: 10px;
     margin-right: 20px;
+    margin-bottom: 20px;
   }
 }
