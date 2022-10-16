@@ -3,13 +3,11 @@ import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutlined } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { productRows } from "../../DummyData";
-import { getProducts } from "../../redux/apiCalls";
+import { useEffect } from "react";
+import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Products() {
-  const [data, setData] = useState(productRows);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
 
@@ -18,7 +16,7 @@ export default function Products() {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    deleteProduct(dispatch, id);
   };
 
   const columns = [
@@ -45,12 +43,12 @@ export default function Products() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link to={"/product/" + params.row._id}>
               <button className={style.Edit}>Edit</button>
             </Link>
             <DeleteOutlined
               className={style.Delete}
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
