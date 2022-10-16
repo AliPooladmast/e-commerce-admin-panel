@@ -1,20 +1,56 @@
 import style from "./product.module.scss";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../DummyData";
 import { Publish } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { userRequest } from "../../requestMethods";
 
 const Product = () => {
+  const [productStats, setProductStats] = useState([]);
   const location = useLocation();
-
   const productId = location.pathname.split("/")[2];
-
   const product = useSelector((state) =>
     state.product.products.find((item) => item._id === productId)
   );
 
-  console.log(product);
+  const MONTH = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const getProductStats = async () => {
+      try {
+        const res = await userRequest.get("/orders/income?pid=" + productId);
+        const data = res.data?.sort((a, b) => a._id - b._id);
+
+        setProductStats([]);
+        data.forEach((item) => {
+          setProductStats((prev) => [
+            ...prev,
+            { name: MONTH[item._id - 1], Sales: item.total },
+          ]);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProductStats();
+  }, [MONTH, productId]);
 
   return (
     <div className={style.Product}>
@@ -27,7 +63,11 @@ const Product = () => {
 
       <div className={style.Top}>
         <div className={style.ChartContainer}>
-          <Chart data={productData} title="Sales Performance" dataKey="Sales" />
+          <Chart
+            data={productStats}
+            title="Sales Performance"
+            dataKey="Sales"
+          />
         </div>
 
         <div className={style.InfoContainer}>
