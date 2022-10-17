@@ -7,22 +7,38 @@ const NewProduct = () => {
 
       <form>
         <div className={style.Item}>
-          <label>Product Name</label>
-          <input type="text" placeholder="Apple Macbook" />
+          <label>Title</label>
+          <input type="text" placeholder="product title" />
+        </div>
+
+        <div className={style.Item}>
+          <label>Description</label>
+          <input type="text" placeholder="description..." />
+        </div>
+
+        <div className={style.Item}>
+          <label>Price</label>
+          <input type="number" placeholder="100" />
+        </div>
+
+        <div className={style.Item}>
+          <label>Categories</label>
+          <input type="text" placeholder="jeans, t-shirts, ..." />
         </div>
 
         <div className={style.Item}>
           <label>Stock</label>
-          <input type="text" placeholder="235" />
-        </div>
-
-        <div className={style.Item}>
-          <label>Active</label>
-          <select name="active" id="active">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+          <select name="inStock" id="inStock">
+            <option value={true}>Yes</option>
+            <option value={false}>No</option>
           </select>
         </div>
+
+        <div className={style.Image}>
+          <label>Image</label>
+          <input type="file" id="file" />
+        </div>
+
         <div className={style.Item}>
           <button>Create</button>
         </div>
