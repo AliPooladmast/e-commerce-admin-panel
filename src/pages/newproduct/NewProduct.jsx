@@ -1,6 +1,20 @@
+import { useState } from "react";
 import style from "./newProduct.module.scss";
 
 const NewProduct = () => {
+  const [input, setInput] = useState({});
+  const [category, setCategory] = useState([]);
+
+  const handleInput = (e) => {
+    setInput((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleCategory = (e) => {
+    setCategory(e.target.value?.split(",")?.map((item) => item.trim()));
+  };
+
   return (
     <div className={style.NewProductComponent}>
       <h1>New Product</h1>
@@ -8,29 +22,48 @@ const NewProduct = () => {
       <form>
         <div className={style.Item}>
           <label>Title</label>
-          <input type="text" placeholder="product title" />
+          <input
+            name="title"
+            type="text"
+            placeholder="product title"
+            onChange={handleInput}
+          />
         </div>
 
         <div className={style.Item}>
           <label>Description</label>
-          <input type="text" placeholder="description..." />
+          <input
+            name="desc"
+            type="text"
+            placeholder="description..."
+            onChange={handleInput}
+          />
         </div>
 
         <div className={style.Item}>
           <label>Price</label>
-          <input type="number" placeholder="100" />
+          <input
+            name="price"
+            type="number"
+            placeholder="100"
+            onChange={handleInput}
+          />
         </div>
 
         <div className={style.Item}>
           <label>Categories</label>
-          <input type="text" placeholder="jeans, t-shirts, ..." />
+          <input
+            type="text"
+            placeholder="jeans, t-shirts, ..."
+            onChange={handleCategory}
+          />
         </div>
 
         <div className={style.Item}>
           <label>Stock</label>
-          <select name="inStock" id="inStock">
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
+          <select name="inStock" id="inStock" onChange={handleInput}>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
           </select>
         </div>
 
