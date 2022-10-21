@@ -5,6 +5,7 @@ import {
   getProductSuccess,
   deleteProductSuccess,
   addProductSuccess,
+  editProductSuccess,
 } from "./productSlice";
 import { loginFailure, loginStart, loginSuccess } from "./userSlice";
 
@@ -43,6 +44,16 @@ export const addProduct = async (dispatch, product) => {
   try {
     const res = await userRequest.post("/products", product);
     dispatch(addProductSuccess(res?.data));
+  } catch (err) {
+    dispatch(productFailure());
+  }
+};
+
+export const editProduct = async (dispatch, productId, product) => {
+  dispatch(productStart());
+  try {
+    const res = await userRequest.put("/products/" + productId, product);
+    dispatch(editProductSuccess(res?.data));
   } catch (err) {
     dispatch(productFailure());
   }
