@@ -3,18 +3,29 @@ import Chart from "../../components/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../../firebase";
+import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+const storage = getStorage(app);
 
 const Product = () => {
   const [productStats, setProductStats] = useState([]);
   const location = useLocation();
-  const productId = location.pathname.split("/")[2];
+  const productId = location.pathname?.split("/")[2];
   const product = useSelector((state) =>
     state.product.products.find((item) => item._id === productId)
   );
   const [draftProduct, setDraftProduct] = useState(product);
   const [categories, setCategories] = useState(product.categories);
+  const [progress, setProgress] = useState(0);
+  const [image, setImage] = useState(null);
 
   const handleInput = (e) => {
     setDraftProduct((prev) => ({
@@ -25,6 +36,44 @@ const Product = () => {
 
   const handleCategory = (e) => {
     setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
+  };
+
+  const handleImage = (e) => {
+    const file = e.target.files?.[0];
+    const fileName = new Date().getTime() + file?.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        switch (snapshot.state) {
+          case "paused":
+            break;
+          case "running":
+            break;
+          default:
+        }
+      },
+      (error) => {
+        switch (error.code) {
+          case "storage/unauthorized":
+            break;
+          case "storage/canceled":
+            break;
+
+          case "storage/unknown":
+            break;
+          default:
+        }
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImage(downloadURL);
+        });
+      }
+    );
   };
 
   const MONTH = useMemo(
@@ -151,11 +200,18 @@ const Product = () => {
 
           <div className={style.Upload}>
             <div className={style.FileUpload}>
-              <img src={product.img} alt="upload product" />
+              <div className={style.ImageContainer}>
+                <img src={image || product.img} alt="upload product" />
+                {Boolean(progress) && progress !== 100 ? (
+                  <LinearProgressWithLabel value={progress} />
+                ) : Boolean(progress) && progress === 100 ? (
+                  <div className={style.Uploaded}>File Uploaded</div>
+                ) : null}
+              </div>
               <label htmlFor="file">
                 <Publish />
               </label>
-              <input type="file" id="file" />
+              <input type="file" id="file" onChange={handleImage} />
             </div>
 
             <button>Update</button>
