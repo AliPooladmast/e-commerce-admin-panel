@@ -13,6 +13,14 @@ const Product = () => {
   const product = useSelector((state) =>
     state.product.products.find((item) => item._id === productId)
   );
+  const [draftProduct, setDraftProduct] = useState(product);
+
+  const handleInput = (e) => {
+    setDraftProduct((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const MONTH = useMemo(
     () => [
@@ -99,19 +107,34 @@ const Product = () => {
         <form>
           <div className={style.EditDetails}>
             <label>Title</label>
-            <input type="text" placeholder={product.title} />
+            <input
+              name="title"
+              type="text"
+              placeholder={product.title}
+              onChange={handleInput}
+            />
 
             <label>Description</label>
-            <input type="text" placeholder={product.desc} />
+            <input
+              name="desc"
+              type="text"
+              placeholder={product.desc}
+              onChange={handleInput}
+            />
 
             <label>Price</label>
-            <input type="text" placeholder={product.price} />
+            <input
+              name="price"
+              type="text"
+              placeholder={product.price}
+              onChange={handleInput}
+            />
 
             <label>Categories</label>
             <input type="text" placeholder={product.categories} />
 
             <label>Stock</label>
-            <select name="inStock" id="inStock">
+            <select name="inStock" id="inStock" onChange={handleInput}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
