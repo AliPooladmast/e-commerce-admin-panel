@@ -14,12 +14,17 @@ const Product = () => {
     state.product.products.find((item) => item._id === productId)
   );
   const [draftProduct, setDraftProduct] = useState(product);
+  const [categories, setCategories] = useState(product.categories);
 
   const handleInput = (e) => {
     setDraftProduct((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleCategory = (e) => {
+    setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
   };
 
   const MONTH = useMemo(
@@ -131,7 +136,11 @@ const Product = () => {
             />
 
             <label>Categories</label>
-            <input type="text" placeholder={product.categories} />
+            <input
+              type="text"
+              placeholder={product.categories}
+              onChange={handleCategory}
+            />
 
             <label>Stock</label>
             <select name="inStock" id="inStock" onChange={handleInput}>
