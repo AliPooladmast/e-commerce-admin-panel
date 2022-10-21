@@ -1,9 +1,21 @@
 import { useState } from "react";
 import style from "./newProduct.module.scss";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../../firebase";
+import { addProduct } from "../../redux/apiCalls";
+import { useDispatch } from "react-redux";
+const storage = getStorage(app);
 
 const NewProduct = () => {
   const [input, setInput] = useState({});
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     setInput((prev) => {
@@ -12,7 +24,52 @@ const NewProduct = () => {
   };
 
   const handleCategory = (e) => {
-    setCategory(e.target.value?.split(",")?.map((item) => item.trim()));
+    setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
+  };
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+
+    const fileName = new Date().getTime() + file?.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+        }
+      },
+      (error) => {
+        switch (error.code) {
+          case "storage/unauthorized":
+            break;
+          case "storage/canceled":
+            break;
+
+          case "storage/unknown":
+            break;
+          default:
+        }
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          const product = { ...input, categories, img: downloadURL };
+          addProduct(dispatch, product);
+        });
+      }
+    );
   };
 
   return (
@@ -69,11 +126,15 @@ const NewProduct = () => {
 
         <div className={style.Image}>
           <label>Image</label>
-          <input type="file" id="file" />
+          <input
+            type="file"
+            id="file"
+            onChange={(e) => setFile(e.target.files?.[0])}
+          />
         </div>
 
         <div className={style.Item}>
-          <button>Create</button>
+          <button onClick={handleCreate}>Create</button>
         </div>
       </form>
     </div>
