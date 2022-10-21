@@ -98,18 +98,25 @@ const Product = () => {
       <div className={style.Bottom}>
         <form>
           <div className={style.EditDetails}>
-            <label>Product Name</label>
+            <label>Title</label>
             <input type="text" placeholder={product.title} />
-            <label>Product Desc</label>
+
+            <label>Description</label>
             <input type="text" placeholder={product.desc} />
-            <label>Product Price</label>
+
+            <label>Price</label>
             <input type="text" placeholder={product.price} />
-            <label>In Stock</label>
+
+            <label>Categories</label>
+            <input type="text" placeholder={product.categories} />
+
+            <label>Stock</label>
             <select name="inStock" id="inStock">
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </div>
+
           <div className={style.Upload}>
             <div className={style.FileUpload}>
               <img src={product.img} alt="upload product" />
@@ -118,6 +125,7 @@ const Product = () => {
               </label>
               <input type="file" id="file" />
             </div>
+
             <button>Update</button>
           </div>
         </form>
