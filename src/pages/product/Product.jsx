@@ -2,8 +2,8 @@ import style from "./product.module.scss";
 import Chart from "../../components/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import {
   getStorage,
@@ -13,9 +13,11 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+import { editProduct } from "../../redux/apiCalls";
 const storage = getStorage(app);
 
 const Product = () => {
+  const dispatch = useDispatch();
   const [productStats, setProductStats] = useState([]);
   const location = useLocation();
   const productId = location.pathname?.split("/")[2];
@@ -74,6 +76,12 @@ const Product = () => {
         });
       }
     );
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const editedProduct = { ...draftProduct, categories, img: image };
+    editProduct(dispatch, productId, editedProduct);
   };
 
   const MONTH = useMemo(
@@ -214,7 +222,7 @@ const Product = () => {
               <input type="file" id="file" onChange={handleImage} />
             </div>
 
-            <button>Update</button>
+            <button onClick={handleEdit}>Update</button>
           </div>
         </form>
       </div>
