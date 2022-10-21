@@ -6,7 +6,7 @@
 
   > form {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 }
 
@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  margin-right: 20px;
 
   > label {
     margin-bottom: 5px;
@@ -45,5 +46,20 @@
     margin-top: 30px;
     cursor: pointer;
     font-weight: 600;
+  }
+}
+
+.Image {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-right: 20px;
+
+  label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: grey;
   }
 }

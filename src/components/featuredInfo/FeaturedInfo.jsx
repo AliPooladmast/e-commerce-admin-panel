@@ -10,8 +10,8 @@ const FeaturedInfo = () => {
   useEffect(() => {
     const getIncome = async () => {
       try {
-        const { data } = await userRequest.get("/orders/income");
-        data.sort((a, b) => a._id - b._id);
+        const res = await userRequest.get("/orders/income");
+        const data = res.data?.sort((a, b) => a._id - b._id);
         setIncome(data);
         setMonthChange(
           (data[data.length - 1].total / data[data.length - 2].total) * 100 -
