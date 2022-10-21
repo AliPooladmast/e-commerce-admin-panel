@@ -32,6 +32,12 @@ const productSlice = createSlice({
       state.isFetching = false;
       state.products.push(action.payload);
     },
+    editProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products[
+        state.products.findIndex((item) => item._id === action.payload._id)
+      ] = action.payload;
+    },
   },
 });
 
@@ -41,5 +47,6 @@ export const {
   getProductSuccess,
   deleteProductSuccess,
   addProductSuccess,
+  editProductSuccess,
 } = productSlice.actions;
 export default productSlice.reducer;
