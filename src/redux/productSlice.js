@@ -28,6 +28,10 @@ const productSlice = createSlice({
         1
       );
     },
+    addProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products.push(action.payload);
+    },
   },
 });
 
@@ -36,5 +40,6 @@ export const {
   productFailure,
   getProductSuccess,
   deleteProductSuccess,
+  addProductSuccess,
 } = productSlice.actions;
 export default productSlice.reducer;
