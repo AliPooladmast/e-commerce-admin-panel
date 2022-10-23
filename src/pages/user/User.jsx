@@ -6,10 +6,18 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import style from "./user.module.scss";
+import noAvatar from "../../assets/icons/no-avatar.svg";
 
 const User = () => {
+  const location = useLocation();
+  const userId = location.pathname?.split("/")?.[2];
+  const user = useSelector((state) =>
+    state.user.users?.find((user) => user._id === userId)
+  );
+
   return (
     <div className={style.UserComponent}>
       <div className={style.TitleContainer}>
@@ -21,37 +29,36 @@ const User = () => {
       <div className={style.UserContainer}>
         <div className={style.Show}>
           <div className={style.Top}>
-            <img
-              src="https://t4.ftcdn.net/jpg/01/87/14/51/360_F_187145146_SB34n4kdiNqlVSvaTy4YUJcUWjNO540N.jpg"
-              alt="user profile"
-            />
+            <img src={user.img || noAvatar} alt="user profile" />
             <div className={style.TitleContainer}>
-              <span className={style.Name}>Emily Dimmer</span>
-              <span className={style.Title}>IT Specialist</span>
+              <span className={style.Name}>
+                {user.fullName || user.username}
+              </span>
+              <span className={style.Title}>{user.title}</span>
             </div>
           </div>
           <div className={style.Bottom}>
             <span className={style.Title}>Account Details</span>
             <div className={style.Info}>
               <PermIdentity className={style.Icon} />
-              <span>emily_dimmer5424</span>
+              <span>{user.username}</span>
             </div>
             <div className={style.Info}>
               <CalendarToday className={style.Icon} />
-              <span>14.06.1995</span>
+              <span>{user.birthdate || "-- / -- / ----"}</span>
             </div>
             <span className={style.Title}>Contact Details</span>
             <div className={style.Info}>
               <PhoneAndroid className={style.Icon} />
-              <span>+25 253 254 24</span>
+              <span>{user.phoneNumber || "-------"}</span>
             </div>
             <div className={style.Info}>
               <MailOutline className={style.Icon} />
-              <span>emily.dimmer@gmail.com</span>
+              <span>{user.email}</span>
             </div>
             <div className={style.Info}>
               <LocationSearching className={style.Icon} />
-              <span>Berlin | Germany</span>
+              <span>{user.address || "-----"}</span>
             </div>
           </div>
         </div>
@@ -62,31 +69,37 @@ const User = () => {
             <div className={style.Left}>
               <div className={style.Item}>
                 <label>Username</label>
-                <input type="text" placeholder="emily_dimmer5424" />
+                <input type="text" placeholder={user.username} />
               </div>
               <div className={style.Item}>
                 <label>Full Name</label>
-                <input type="text" placeholder="Emily Dimmer" />
+                <input
+                  type="text"
+                  placeholder={user.fullName || user.username}
+                />
               </div>
               <div className={style.Item}>
                 <label>Phone Number</label>
-                <input type="text" placeholder="+25 253 254 24" />
+                <input
+                  type="text"
+                  placeholder={user.phoneNumber || "enter phone number"}
+                />
               </div>
               <div className={style.Item}>
                 <label>Email</label>
-                <input type="text" placeholder="emily.dimmer@gmail.com" />
+                <input type="text" placeholder={user.email} />
               </div>
               <div className={style.Item}>
                 <label>Address</label>
-                <input type="text" placeholder="Berlin | Germany" />
+                <input
+                  type="text"
+                  placeholder={user.address || "enter address"}
+                />
               </div>
             </div>
             <div className={style.Right}>
               <div className={style.Upload}>
-                <img
-                  src="https://t4.ftcdn.net/jpg/01/87/14/51/360_F_187145146_SB34n4kdiNqlVSvaTy4YUJcUWjNO540N.jpg"
-                  alt="edit profile"
-                />
+                <img src={user.img || noAvatar} alt="edit profile" />
                 <label htmlFor="upload">
                   <Publish />
                 </label>
