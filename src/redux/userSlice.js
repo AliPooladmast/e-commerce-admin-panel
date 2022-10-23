@@ -32,6 +32,13 @@ const userSlice = createSlice({
         state.users.findIndex((user) => user._id === action.payload._id)
       ] = action.payload;
     },
+    deleteUserSuccess: (state, action) => {
+      state.isFetching = false;
+      state.users.splice(
+        state.users.findIndex((user) => user._id === action.payload),
+        1
+      );
+    },
   },
 });
 
@@ -41,5 +48,6 @@ export const {
   userFailure,
   getUserSuccess,
   editUserSuccess,
+  deleteUserSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;
