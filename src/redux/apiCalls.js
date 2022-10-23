@@ -7,23 +7,62 @@ import {
   addProductSuccess,
   editProductSuccess,
 } from "./productSlice";
-import { loginFailure, loginStart, loginSuccess } from "./userSlice";
+import {
+  userFailure,
+  userStart,
+  loginSuccess,
+  getUserSuccess,
+  editUserSuccess,
+  deleteUserSuccess,
+} from "./userSlice";
 
+//User API Calls
 export const login = async (dispatch, user) => {
-  dispatch(loginStart());
+  dispatch(userStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
-    dispatch(loginSuccess(res.data));
+    dispatch(loginSuccess(res?.data));
   } catch (err) {
-    dispatch(loginFailure());
+    dispatch(userFailure());
   }
 };
 
+export const getUsers = async (dispatch) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getUserSuccess(res?.data));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
+export const editUser = async (dispatch, userId, user) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.put("/users/" + userId, user);
+    dispatch(editUserSuccess(res?.data));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
+export const deleteUser = async (dispatch, userId) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.delete("/users/" + userId);
+    res && dispatch(deleteUserSuccess(userId));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
+//Product API Calls
 export const getProducts = async (dispatch) => {
   dispatch(productStart());
   try {
     const res = await publicRequest.get("/products");
-    dispatch(getProductSuccess(res.data));
+    dispatch(getProductSuccess(res?.data));
   } catch (err) {
     dispatch(productFailure());
   }
