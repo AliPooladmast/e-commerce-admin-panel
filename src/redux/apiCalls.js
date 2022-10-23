@@ -7,18 +7,35 @@ import {
   addProductSuccess,
   editProductSuccess,
 } from "./productSlice";
-import { loginFailure, loginStart, loginSuccess } from "./userSlice";
+import {
+  userFailure,
+  userStart,
+  loginSuccess,
+  getUserSuccess,
+} from "./userSlice";
 
+//User API Calls
 export const login = async (dispatch, user) => {
-  dispatch(loginStart());
+  dispatch(userStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
   } catch (err) {
-    dispatch(loginFailure());
+    dispatch(userFailure());
   }
 };
 
+export const getUsers = async (dispatch) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getUserSuccess(res.data));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
+//Product API Calls
 export const getProducts = async (dispatch) => {
   dispatch(productStart());
   try {
