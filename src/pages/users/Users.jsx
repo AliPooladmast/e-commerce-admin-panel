@@ -4,7 +4,7 @@ import { DeleteOutlined } from "@material-ui/icons";
 import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { getUsers } from "../../redux/apiCalls";
+import { deleteUser, getUsers } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import noAvatar from "../../assets/icons/no-avatar.svg";
 
@@ -12,7 +12,9 @@ export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
 
-  const handleDelete = (id) => {};
+  const handleDelete = (id) => {
+    deleteUser(dispatch, id);
+  };
 
   useEffect(() => {
     getUsers(dispatch);
@@ -55,7 +57,7 @@ export default function Users() {
             </Link>
             <DeleteOutlined
               className={style.Delete}
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
