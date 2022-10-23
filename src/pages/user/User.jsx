@@ -6,7 +6,7 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import style from "./user.module.scss";
 import noAvatar from "../../assets/icons/no-avatar.svg";
@@ -19,9 +19,11 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+import { editUser } from "../../redux/apiCalls";
 const storage = getStorage(app);
 
 const User = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const userId = location.pathname?.split("/")?.[2];
   const user = useSelector((state) =>
@@ -71,6 +73,12 @@ const User = () => {
         });
       }
     );
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const editedUser = { ...draftUser, img: image };
+    editUser(dispatch, userId, editedUser);
   };
 
   return (
@@ -183,7 +191,7 @@ const User = () => {
                   onChange={handleImage}
                 />
               </div>
-              <button>Update</button>
+              <button onClick={handleEdit}>Update</button>
             </div>
           </form>
         </div>
