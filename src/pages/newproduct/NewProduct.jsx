@@ -11,7 +11,6 @@ import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
-import { Publish } from "@material-ui/icons";
 const storage = getStorage(app);
 
 const NewProduct = () => {
