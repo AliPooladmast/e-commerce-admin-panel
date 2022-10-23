@@ -14,9 +14,20 @@ import {
   getUserSuccess,
   editUserSuccess,
   deleteUserSuccess,
+  addUserSuccess,
 } from "./userSlice";
 
 //User API Calls
+export const addUser = async (dispatch, user) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.post("/auth/register", user);
+    dispatch(addUserSuccess(res?.data));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
 export const login = async (dispatch, user) => {
   dispatch(userStart());
   try {

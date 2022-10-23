@@ -6,7 +6,24 @@
 
   > form {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+
+    .Body {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    > button {
+      background-color: darkblue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      width: 200px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
   }
 }
 
@@ -35,18 +52,6 @@
     height: 30px;
     border-radius: 5px;
   }
-
-  > button {
-    background-color: darkblue;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    width: 200px;
-    margin-top: 30px;
-    cursor: pointer;
-    font-weight: 600;
-  }
 }
 
 .Gender {
@@ -61,4 +66,9 @@
     color: #555;
     font-size: 14px;
   }
+}
+
+.Error {
+  color: red;
+  margin-top: 10px;
 }

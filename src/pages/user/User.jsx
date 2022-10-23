@@ -85,7 +85,7 @@ const User = () => {
     <div className={style.UserComponent}>
       <div className={style.TitleContainer}>
         <h1>Edit User</h1>
-        <Link to={"/register"}>
+        <Link to={"/newUser"}>
           <button>Create</button>
         </Link>
       </div>

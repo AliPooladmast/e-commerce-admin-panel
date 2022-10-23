@@ -39,6 +39,10 @@ const userSlice = createSlice({
         1
       );
     },
+    addUserSuccess: (state, action) => {
+      state.isFetching = false;
+      state.users.push(action.payload);
+    },
   },
 });
 
@@ -49,5 +53,6 @@ export const {
   getUserSuccess,
   editUserSuccess,
   deleteUserSuccess,
+  addUserSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;
