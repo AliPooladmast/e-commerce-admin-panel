@@ -12,6 +12,7 @@ import {
   userStart,
   loginSuccess,
   getUserSuccess,
+  editUserSuccess,
 } from "./userSlice";
 
 //User API Calls
@@ -19,7 +20,7 @@ export const login = async (dispatch, user) => {
   dispatch(userStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
-    dispatch(loginSuccess(res.data));
+    dispatch(loginSuccess(res?.data));
   } catch (err) {
     dispatch(userFailure());
   }
@@ -29,7 +30,17 @@ export const getUsers = async (dispatch) => {
   dispatch(userStart());
   try {
     const res = await userRequest.get("/users");
-    dispatch(getUserSuccess(res.data));
+    dispatch(getUserSuccess(res?.data));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
+export const editUser = async (dispatch, userId, user) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.put("/users/" + userId, user);
+    dispatch(editUserSuccess(res?.data));
   } catch (err) {
     dispatch(userFailure());
   }
@@ -40,7 +51,7 @@ export const getProducts = async (dispatch) => {
   dispatch(productStart());
   try {
     const res = await publicRequest.get("/products");
-    dispatch(getProductSuccess(res.data));
+    dispatch(getProductSuccess(res?.data));
   } catch (err) {
     dispatch(productFailure());
   }
