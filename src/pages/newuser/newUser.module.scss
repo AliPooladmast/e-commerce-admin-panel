@@ -14,25 +14,25 @@
   width: 400px;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 15px;
   margin-right: 20px;
 
   > label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 14px;
     font-weight: 600;
     color: grey;
   }
 
   > input {
-    height: 20px;
+    height: 30px;
     padding: 10px;
     border: 1px solid grey;
     border-radius: 5px;
   }
 
   > select {
-    height: 40px;
+    height: 30px;
     border-radius: 5px;
   }
 
@@ -50,13 +50,16 @@
 }
 
 .Gender {
-  > input {
-    margin-top: 15px;
-  }
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 10px;
 
   > label {
-    margin: 10px;
+    margin: 0 5px;
     color: #555;
-    font-size: 18px;
+    font-size: 14px;
   }
 }
