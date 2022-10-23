@@ -13,6 +13,7 @@ import {
   loginSuccess,
   getUserSuccess,
   editUserSuccess,
+  deleteUserSuccess,
 } from "./userSlice";
 
 //User API Calls
@@ -41,6 +42,16 @@ export const editUser = async (dispatch, userId, user) => {
   try {
     const res = await userRequest.put("/users/" + userId, user);
     dispatch(editUserSuccess(res?.data));
+  } catch (err) {
+    dispatch(userFailure());
+  }
+};
+
+export const deleteUser = async (dispatch, userId) => {
+  dispatch(userStart());
+  try {
+    const res = await userRequest.delete("/users/" + userId);
+    res && dispatch(deleteUserSuccess(userId));
   } catch (err) {
     dispatch(userFailure());
   }
