@@ -6,7 +6,7 @@ import Products from "./pages/products/Products";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newproduct/NewProduct";
 import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import NewUser from "./pages/newuser/NewUser";
 import AddMarginToPage from "./hoc/AddMarginToPage";
 import { useSelector } from "react-redux";
 
@@ -17,6 +17,7 @@ function App() {
   const WrappedProducts = AddMarginToPage(Products);
   const WrappedNewProduct = AddMarginToPage(NewProduct);
   const WrappedProduct = AddMarginToPage(Product);
+  const WrappedNewUser = AddMarginToPage(NewUser);
 
   const user = useSelector((state) => state.user.currentUser);
   const isAdmin = user?.isAdmin;
@@ -29,8 +30,6 @@ function App() {
           element={isAdmin ? <Navigate to="/" replace /> : <Login />}
         />
 
-        <Route path="/register" element={<Register />} />
-
         <Route
           path="/"
           element={isAdmin ? <WrappedHome /> : <Navigate to="/login" replace />}
@@ -40,6 +39,12 @@ function App() {
           path="/users"
           element={
             isAdmin ? <WrappedUsers /> : <Navigate to="/login" replace />
+          }
+        />
+        <Route
+          path="/newuser"
+          element={
+            isAdmin ? <WrappedNewUser /> : <Navigate to="/login" replace />
           }
         />
         <Route
