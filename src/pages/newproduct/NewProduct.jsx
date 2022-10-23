@@ -9,12 +9,17 @@ import {
 import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+import { Publish } from "@material-ui/icons";
 const storage = getStorage(app);
 
 const NewProduct = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({});
   const [categories, setCategories] = useState([]);
-  const [file, setFile] = useState(null);
+  const [image, setImage] = useState("");
+  const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
 
   const handleInput = (e) => {
@@ -27,9 +32,8 @@ const NewProduct = () => {
     setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
   };
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-
+  const handleImage = (e) => {
+    const file = e.target.files?.[0];
     const fileName = new Date().getTime() + file?.name;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -37,9 +41,7 @@ const NewProduct = () => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
+        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -64,12 +66,17 @@ const NewProduct = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-          const product = { ...input, categories, img: downloadURL };
-          addProduct(dispatch, product);
+          setImage(downloadURL);
         });
       }
     );
+  };
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    const product = { ...input, categories, img: image };
+    addProduct(dispatch, product);
+    navigate("/products");
   };
 
   return (
@@ -77,63 +84,68 @@ const NewProduct = () => {
       <h1>New Product</h1>
 
       <form>
-        <div className={style.Item}>
-          <label>Title</label>
-          <input
-            name="title"
-            type="text"
-            placeholder="product title"
-            onChange={handleInput}
-          />
+        <div className={style.Left}>
+          <div className={style.Item}>
+            <label>Title</label>
+            <input
+              name="title"
+              type="text"
+              placeholder="product title"
+              onChange={handleInput}
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Description</label>
+            <input
+              name="desc"
+              type="text"
+              placeholder="description..."
+              onChange={handleInput}
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Price</label>
+            <input
+              name="price"
+              type="number"
+              placeholder="100"
+              onChange={handleInput}
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Categories</label>
+            <input
+              type="text"
+              placeholder="jeans, t-shirts, ..."
+              onChange={handleCategory}
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Stock</label>
+            <select name="inStock" id="inStock" onChange={handleInput}>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
         </div>
 
-        <div className={style.Item}>
-          <label>Description</label>
-          <input
-            name="desc"
-            type="text"
-            placeholder="description..."
-            onChange={handleInput}
-          />
-        </div>
+        <div className={style.Right}>
+          <div className={style.Image}>
+            {image && <img src={image} alt="upload product" />}
 
-        <div className={style.Item}>
-          <label>Price</label>
-          <input
-            name="price"
-            type="number"
-            placeholder="100"
-            onChange={handleInput}
-          />
-        </div>
+            <input type="file" id="file" onChange={handleImage} />
 
-        <div className={style.Item}>
-          <label>Categories</label>
-          <input
-            type="text"
-            placeholder="jeans, t-shirts, ..."
-            onChange={handleCategory}
-          />
-        </div>
+            {Boolean(progress) && progress !== 100 ? (
+              <LinearProgressWithLabel value={progress} />
+            ) : Boolean(progress) && progress === 100 ? (
+              <div className={style.Uploaded}>File Uploaded</div>
+            ) : null}
+          </div>
 
-        <div className={style.Item}>
-          <label>Stock</label>
-          <select name="inStock" id="inStock" onChange={handleInput}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
-
-        <div className={style.Image}>
-          <label>Image</label>
-          <input
-            type="file"
-            id="file"
-            onChange={(e) => setFile(e.target.files?.[0])}
-          />
-        </div>
-
-        <div className={style.Item}>
           <button onClick={handleCreate}>Create</button>
         </div>
       </form>
