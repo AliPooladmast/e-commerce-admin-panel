@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import style from "./user.module.scss";
 import noAvatar from "../../assets/icons/no-avatar.svg";
+import { useState } from "react";
 
 const User = () => {
   const location = useLocation();
@@ -17,6 +18,11 @@ const User = () => {
   const user = useSelector((state) =>
     state.user.users?.find((user) => user._id === userId)
   );
+  const [draftUser, setDraftUser] = useState(user);
+
+  const handleInput = (e) => {
+    setDraftUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   return (
     <div className={style.UserComponent}>
@@ -69,7 +75,12 @@ const User = () => {
             <div className={style.Left}>
               <div className={style.Item}>
                 <label>Username</label>
-                <input type="text" placeholder={user.username} />
+                <input
+                  name="username"
+                  type="text"
+                  placeholder={user.username}
+                  onChange={handleInput}
+                />
               </div>
               <div className={style.Item}>
                 <label>Full Name</label>
@@ -87,7 +98,12 @@ const User = () => {
               </div>
               <div className={style.Item}>
                 <label>Email</label>
-                <input type="text" placeholder={user.email} />
+                <input
+                  name="email"
+                  type="text"
+                  placeholder={user.email}
+                  onChange={handleInput}
+                />
               </div>
               <div className={style.Item}>
                 <label>Address</label>
