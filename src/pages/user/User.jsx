@@ -11,6 +11,15 @@ import { Link, useLocation } from "react-router-dom";
 import style from "./user.module.scss";
 import noAvatar from "../../assets/icons/no-avatar.svg";
 import { useState } from "react";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../../firebase";
+import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+const storage = getStorage(app);
 
 const User = () => {
   const location = useLocation();
@@ -19,9 +28,49 @@ const User = () => {
     state.user.users?.find((user) => user._id === userId)
   );
   const [draftUser, setDraftUser] = useState(user);
+  const [image, setImage] = useState("");
+  const [progress, setProgress] = useState(0);
 
   const handleInput = (e) => {
     setDraftUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleImage = (e) => {
+    const file = e.target.files?.[0];
+    const fileName = new Date().getTime() + file?.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        switch (snapshot.state) {
+          case "paused":
+            break;
+          case "running":
+            break;
+          default:
+        }
+      },
+      (error) => {
+        switch (error.code) {
+          case "storage/unauthorized":
+            break;
+          case "storage/canceled":
+            break;
+
+          case "storage/unknown":
+            break;
+          default:
+        }
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImage(downloadURL);
+        });
+      }
+    );
   };
 
   return (
@@ -71,7 +120,7 @@ const User = () => {
 
         <div className={style.Update}>
           <span className={style.Title}>Edit</span>
-          <form action="">
+          <form>
             <div className={style.Left}>
               <div className={style.Item}>
                 <label>Username</label>
@@ -115,11 +164,24 @@ const User = () => {
             </div>
             <div className={style.Right}>
               <div className={style.Upload}>
-                <img src={user.img || noAvatar} alt="edit profile" />
+                <div className={style.ImageContainer}>
+                  <img src={image || user.img || noAvatar} alt="edit profile" />
+                  {Boolean(progress) && progress !== 100 ? (
+                    <LinearProgressWithLabel value={progress} />
+                  ) : Boolean(progress) && progress === 100 ? (
+                    <div className={style.Uploaded}>File Uploaded</div>
+                  ) : null}
+                </div>
+
                 <label htmlFor="upload">
                   <Publish />
                 </label>
-                <input type="file" id="upload" style={{ display: "none" }} />
+                <input
+                  type="file"
+                  id="upload"
+                  style={{ display: "none" }}
+                  onChange={handleImage}
+                />
               </div>
               <button>Update</button>
             </div>
