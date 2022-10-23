@@ -22,7 +22,7 @@ const User = () => {
     <div className={style.UserComponent}>
       <div className={style.TitleContainer}>
         <h1>Edit User</h1>
-        <Link to={"/newUser"}>
+        <Link to={"/register"}>
           <button>Create</button>
         </Link>
       </div>
