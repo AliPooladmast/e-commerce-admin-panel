@@ -1,6 +1,13 @@
+import { useState } from "react";
 import style from "./newUser.module.scss";
 
 const NewUser = () => {
+  const [input, setInput] = useState();
+
+  const handleInput = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <div className={style.NewUserComponent}>
       <h1>New User</h1>
@@ -8,7 +15,12 @@ const NewUser = () => {
       <form>
         <div className={style.Item}>
           <label>Username</label>
-          <input type="text" placeholder="enter username" />
+          <input
+            name="username"
+            type="text"
+            placeholder="enter username"
+            onChange={handleInput}
+          />
         </div>
 
         <div className={style.Item}>
@@ -18,12 +30,22 @@ const NewUser = () => {
 
         <div className={style.Item}>
           <label>Email</label>
-          <input type="email" placeholder="enter email" />
+          <input
+            name="email"
+            type="email"
+            placeholder="enter email"
+            onChange={handleInput}
+          />
         </div>
 
         <div className={style.Item}>
           <label>Password</label>
-          <input type="password" placeholder="enter password" />
+          <input
+            name="password"
+            type="password"
+            placeholder="enter password"
+            onChange={handleInput}
+          />
         </div>
 
         <div className={style.Item}>
@@ -38,7 +60,7 @@ const NewUser = () => {
 
         <div className={style.Item}>
           <label>Admin</label>
-          <select name="active" id="active">
+          <select name="admin" id="admin" onChange={handleInput}>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -46,14 +68,14 @@ const NewUser = () => {
 
         <div className={style.Item}>
           <label>Gender</label>
-          <div className={style.Gender}>
+          <fieldset className={style.Gender}>
             <input name="gender" type="radio" id="male" value="male" />
             <label forhtml="male">Male</label>
             <input name="gender" type="radio" id="female" value="female" />
             <label forhtml="female">Female</label>
             <input name="gender" type="radio" id="other" value="other" />
             <label forhtml="other">Other</label>
-          </div>
+          </fieldset>
         </div>
 
         <div className={style.Item}>
