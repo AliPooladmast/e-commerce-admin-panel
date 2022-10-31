@@ -1,7 +1,6 @@
 import style from "./users.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutlined } from "@material-ui/icons";
-import { Box } from "@material-ui/core";
+import { DeleteOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { deleteUser, getUsers } from "../../redux/apiCalls";
@@ -66,7 +65,7 @@ export default function Users() {
   ];
 
   return (
-    <Box className={style.UserLists}>
+    <div className={style.UserLists}>
       <DataGrid
         rows={users}
         columns={columns}
@@ -76,6 +75,6 @@ export default function Users() {
         disableSelectionOnClick
         getRowId={(row) => row._id}
       />
-    </Box>
+    </div>
   );
 }

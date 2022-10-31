@@ -1,6 +1,6 @@
 import style from "./product.module.scss";
 import Chart from "../../components/chart/Chart";
-import { Publish } from "@material-ui/icons";
+import { Publish } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";

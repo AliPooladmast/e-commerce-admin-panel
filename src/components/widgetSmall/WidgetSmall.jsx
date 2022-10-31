@@ -1,4 +1,4 @@
-import { Visibility } from "@material-ui/icons";
+import { Visibility } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import style from "./widgetSmall.module.scss";

@@ -1,7 +1,6 @@
 import style from "./products.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutlined } from "@material-ui/icons";
-import { Box } from "@material-ui/core";
+import { DeleteOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
@@ -57,7 +56,7 @@ export default function Products() {
   ];
 
   return (
-    <Box className={style.ProductList}>
+    <div className={style.ProductList}>
       <DataGrid
         rows={products}
         columns={columns}
@@ -67,6 +66,6 @@ export default function Products() {
         disableSelectionOnClick
         getRowId={(row) => row._id}
       />
-    </Box>
+    </div>
   );
 }

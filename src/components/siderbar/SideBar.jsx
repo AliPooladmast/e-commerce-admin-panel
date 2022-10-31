@@ -11,7 +11,7 @@ import {
   Timeline,
   TrendingUp,
   WorkOutline,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import style from "./SideBar.module.scss";
 
