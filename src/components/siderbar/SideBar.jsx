@@ -12,10 +12,12 @@ import {
   TrendingUp,
   WorkOutline,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import style from "./SideBar.module.scss";
 
 const SideBar = () => {
+  const location = useLocation();
+
   return (
     <div className={style.SideBar}>
       <div className={style.Wrapper}>
@@ -23,7 +25,7 @@ const SideBar = () => {
           <h1>Dashboard</h1>
           <ul>
             <Link to="/" className={style.Link}>
-              <li className={style.Active}>
+              <li className={location.pathname === "/" ? style.Active : null}>
                 <LineStyle className={style.Icons} />
                 Home
               </li>
@@ -42,13 +44,19 @@ const SideBar = () => {
           <h1>Quick Menu</h1>
           <ul>
             <Link to="/users" className={style.Link}>
-              <li>
+              <li
+                className={location.pathname === "/users" ? style.Active : null}
+              >
                 <Person className={style.Icons} />
                 Users
               </li>
             </Link>
             <Link to="/products" className={style.Link}>
-              <li>
+              <li
+                className={
+                  location.pathname === "/products" ? style.Active : null
+                }
+              >
                 <Category className={style.Icons} />
                 Products
               </li>
