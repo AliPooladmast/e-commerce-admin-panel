@@ -9,11 +9,14 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../redux/userSlice";
+import { userRequest } from "../../requestMethods";
 
 export default function AccountMenu() {
   const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -23,6 +26,12 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    userRequest.defaults.headers.token = "";
+  };
+
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -86,7 +95,6 @@ export default function AccountMenu() {
                   height: "35px",
                   width: "35px",
                   borderRadius: "50%",
-                  marginRight: "10px",
                 }}
                 src={user?.img}
                 alt="profile"
@@ -94,11 +102,11 @@ export default function AccountMenu() {
             ) : (
               <Avatar />
             )}
-            Edit My account
+            Edit Profile
           </MenuItem>
         </Link>
 
-        <Divider />
+        <Divider style={{ margin: "5px 0" }} />
 
         <Link
           to={"/newUser"}
@@ -106,15 +114,15 @@ export default function AccountMenu() {
         >
           <MenuItem>
             <ListItemIcon>
-              <PersonAdd fontSize="small" />
+              <PersonAdd fontSize="medium" />
             </ListItemIcon>
-            Add another account
+            Add New User
           </MenuItem>
         </Link>
 
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="medium" />
           </ListItemIcon>
           Logout
         </MenuItem>
