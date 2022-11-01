@@ -1,6 +1,6 @@
 .TopBar {
-  background-color: #fff;
-  height: 50px;
+  background-color: teal;
+  height: 60px;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -17,7 +17,7 @@
 .Logo {
   font-weight: bold;
   font-size: 30px;
-  color: darkblue;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -34,7 +34,7 @@
   position: relative;
   cursor: pointer;
   margin-right: 10px;
-  color: #555;
+  color: #fff;
 }
 
 .IconBadge {
@@ -53,8 +53,8 @@
 }
 
 .Avatar {
-  height: 40px;
-  height: 40px;
+  height: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
