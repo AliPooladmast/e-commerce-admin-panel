@@ -14,11 +14,11 @@ const TopBar = () => {
           </Link>
         </div>
         <div className={style.Icons}>
-          <div className={style.IconContainer}>
+          <div className={style["IconContainer--Disable"]}>
             <NotificationsNone />
-            <span className={style.IconBadge}>2</span>
+            {/* <span className={style.IconBadge}>2</span> */}
           </div>
-          <div className={style.IconContainer}>
+          <div className={style["IconContainer--Disable"]}>
             <Language />
           </div>
           <div className={style.IconContainer}>
