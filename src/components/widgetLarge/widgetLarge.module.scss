@@ -2,12 +2,23 @@
   flex: 2;
   border-radius: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  padding: 20px;
+  height: 50vh;
+  overflow: hidden;
 
   h1 {
     font-size: 22px;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 15px 0;
   }
+}
+
+.Wrapper {
+  height: 50vh;
+  overflow: auto;
+  padding: 0 20px;
 }
 
 .Table {
@@ -17,6 +28,10 @@
 
 .Header {
   text-align: left;
+  position: sticky;
+  top: 50px;
+  background-color: #fff;
+  padding: 15px 0;
 }
 
 .User {
