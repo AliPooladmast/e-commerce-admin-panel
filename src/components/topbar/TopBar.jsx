@@ -2,13 +2,16 @@ import { Language, NotificationsNone, Settings } from "@mui/icons-material";
 import React from "react";
 import style from "./ToBar.module.scss";
 import profileAvatar from "../../assets/images/profile-picture.jpg";
+import { Link } from "react-router-dom";
 
 const TopBar = () => {
   return (
     <div className={style.TopBar}>
       <div className={style.Wrapper}>
         <div className={style.LogoContainer}>
-          <span className={style.Logo}>E-Shope Admin</span>
+          <Link to="/" className={style.Link}>
+            <span className={style.Logo}>E-Shope Admin</span>
+          </Link>
         </div>
         <div className={style.Icons}>
           <div className={style.IconContainer}>
