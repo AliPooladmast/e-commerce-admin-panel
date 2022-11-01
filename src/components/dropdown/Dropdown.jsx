@@ -10,6 +10,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function AccountMenu() {
   const user = useSelector((state) => state.user.currentUser);
@@ -74,30 +75,42 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          {user?.img ? (
-            <img
-              style={{
-                height: "35px",
-                width: "35px",
-                borderRadius: "50%",
-                marginRight: "10px",
-              }}
-              src={user?.img}
-              alt="profile"
-            />
-          ) : (
-            <Avatar />
-          )}
-          Edit My account
-        </MenuItem>
+        <Link
+          to={"/user/" + user?._id}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <MenuItem>
+            {user?.img ? (
+              <img
+                style={{
+                  height: "35px",
+                  width: "35px",
+                  borderRadius: "50%",
+                  marginRight: "10px",
+                }}
+                src={user?.img}
+                alt="profile"
+              />
+            ) : (
+              <Avatar />
+            )}
+            Edit My account
+          </MenuItem>
+        </Link>
+
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
+
+        <Link
+          to={"/newUser"}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <MenuItem>
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Add another account
+          </MenuItem>
+        </Link>
 
         <MenuItem>
           <ListItemIcon>
