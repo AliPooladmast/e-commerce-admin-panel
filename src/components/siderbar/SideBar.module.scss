@@ -1,6 +1,6 @@
 .SideBar {
   flex: 1;
-  background-color: rgb(240, 247, 247);
+  background-color: rgb(245, 245, 245);
   min-height: calc(100vh - 50px);
   position: sticky;
   top: 50px;
@@ -8,7 +8,7 @@
 
 .Wrapper {
   padding: 20px;
-  color: #555;
+  color: teal;
 }
 
 .Menu {
@@ -16,16 +16,12 @@
 
   h1 {
     font-size: 16px;
-    color: rgb(146, 141, 141);
+    color: teal;
   }
 
   ul {
     list-style: none;
     padding: 5px;
-
-    .Active {
-      background-color: rgb(206, 211, 211);
-    }
 
     li {
       display: flex;
@@ -35,12 +31,16 @@
       font-size: 14px;
 
       &:hover {
-        background-color: rgb(227, 233, 233);
+        background-color: rgb(230, 230, 230);
       }
+    }
 
-      &:active {
-        background-color: rgb(206, 211, 211);
-      }
+    .Disable {
+      color: rgb(180, 180, 180);
+    }
+
+    .Selected {
+      background-color: rgb(210, 210, 210);
     }
   }
 }
