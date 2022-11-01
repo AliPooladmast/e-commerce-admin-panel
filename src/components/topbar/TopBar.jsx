@@ -1,8 +1,8 @@
 import { Language, NotificationsNone, Settings } from "@mui/icons-material";
 import React from "react";
 import style from "./ToBar.module.scss";
-import profileAvatar from "../../assets/images/profile-picture.jpg";
 import { Link } from "react-router-dom";
+import Dropdown from "../dropdown/Dropdown";
 
 const TopBar = () => {
   return (
@@ -21,10 +21,10 @@ const TopBar = () => {
           <div className={style["IconContainer--Disable"]}>
             <Language />
           </div>
-          <div className={style.IconContainer}>
+          <div className={style["IconContainer--Disable"]}>
             <Settings />
           </div>
-          <img className={style.Avatar} src={profileAvatar} alt="profile" />
+          <Dropdown />
         </div>
       </div>
     </div>
