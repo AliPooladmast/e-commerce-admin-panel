@@ -82,6 +82,7 @@ export default function Users() {
             username={selectedUser?.username}
             onClose={() => setShowModal(false)}
             onConfirm={handleConfirmDelete}
+            allowed={!selectedUser?.isAdmin}
           />
         </Modal>
       )}
