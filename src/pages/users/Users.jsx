@@ -30,7 +30,6 @@ export default function Users() {
   }, [dispatch]);
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 270 },
     {
       field: "user",
       headerName: "User",
@@ -45,6 +44,22 @@ export default function Users() {
       },
     },
     { field: "email", headerName: "Email", width: 270 },
+    {
+      field: "date",
+      headerName: "Register Date",
+      width: 270,
+      renderCell: (params) => {
+        const date = params.row.createdAt.split("T")?.[0];
+        const time = params.row.createdAt.split("T")?.[1];
+        const cleanTime = time.split(".")?.[0];
+        return (
+          <>
+            <span style={{ marginRight: "20px" }}>{date}</span>
+            <span>{cleanTime}</span>
+          </>
+        );
+      },
+    },
     {
       field: "status",
       headerName: "Status",
