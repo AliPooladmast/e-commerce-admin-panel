@@ -12,8 +12,8 @@
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
-
   padding: 30px;
+  animation: slide-down 300ms ease-out forwards;
 }
 
 .Backdrop {
@@ -24,4 +24,15 @@
   top: 0;
   left: 0;
   z-index: 20;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
