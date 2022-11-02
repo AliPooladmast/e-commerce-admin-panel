@@ -1,7 +1,11 @@
+@use "src/styles";
+
 .WidgetLarge {
   flex: 2;
   border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
   height: 50vh;
   overflow: hidden;
 

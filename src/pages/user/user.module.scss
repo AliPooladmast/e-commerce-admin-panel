@@ -1,3 +1,5 @@
+@use "src/styles";
+
 .UserComponent {
   padding: 20px;
 
@@ -28,14 +30,18 @@
   flex: 1;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
 }
 
 .EditUser {
   flex: 2;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
   margin-left: 20px;
 }
 

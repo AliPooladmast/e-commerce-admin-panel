@@ -1,8 +1,12 @@
+@use "src/styles";
+
 .Chart {
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
 
   h1 {
     font-size: 20px;
