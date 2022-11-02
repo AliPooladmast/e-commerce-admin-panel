@@ -1,0 +1,40 @@
+.Delete {
+  span {
+    font-size: 20px;
+  }
+}
+
+.Username {
+  color: darkblue;
+  font-weight: bold;
+}
+
+.Confirm {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 150px;
+    background-color: red;
+
+    &:hover {
+      background-color: rgb(255, 100, 100);
+    }
+  }
+
+  .Yes {
+    background-color: darkblue;
+
+    &:hover {
+      background-color: rgb(0, 0, 200);
+    }
+  }
+}

@@ -13,8 +13,11 @@ const Modal = (props) => {
       )}
       {ReactDOM.createPortal(
         <div className={style.Modal}>
-          <div className={style.IconContainer} onClick={props.onClose}>
-            <Close className={style.CloseIcon} />
+          <div className={style.Header}>
+            <h1>{props.title}</h1>
+            <div className={style.IconContainer} onClick={props.onClose}>
+              <Close className={style.CloseIcon} />
+            </div>
           </div>
           {props.children}
         </div>,

@@ -2,17 +2,27 @@ import style from "./users.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { deleteUser, getUsers } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import noAvatar from "../../assets/icons/no-avatar.svg";
+import Modal from "../../components/modal/Modal";
+import Delete from "../../components/delete/Delete";
 
 export default function Users() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const handleDelete = (id) => {
-    deleteUser(dispatch, id);
+  const handleDeleteDialog = (id) => {
+    setSelectedUser(users?.find((user) => user._id === id));
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteUser(dispatch, selectedUser?._id);
+    setShowModal(false);
   };
 
   useEffect(() => {
@@ -20,7 +30,6 @@ export default function Users() {
   }, [dispatch]);
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 270 },
     {
       field: "user",
       headerName: "User",
@@ -35,6 +44,22 @@ export default function Users() {
       },
     },
     { field: "email", headerName: "Email", width: 270 },
+    {
+      field: "date",
+      headerName: "Register Date",
+      width: 270,
+      renderCell: (params) => {
+        const date = params.row.createdAt.split("T")?.[0];
+        const time = params.row.createdAt.split("T")?.[1];
+        const cleanTime = time.split(".")?.[0];
+        return (
+          <>
+            <span style={{ marginRight: "20px" }}>{date}</span>
+            <span>{cleanTime}</span>
+          </>
+        );
+      },
+    },
     {
       field: "status",
       headerName: "Status",
@@ -56,7 +81,7 @@ export default function Users() {
             </Link>
             <DeleteOutlined
               className={style.Delete}
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDeleteDialog(params.row._id)}
             />
           </>
         );
@@ -66,6 +91,24 @@ export default function Users() {
 
   return (
     <div className={style.UserLists}>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)} title="Delete User">
+          <Delete
+            username={selectedUser?.username}
+            onClose={() => setShowModal(false)}
+            onConfirm={handleConfirmDelete}
+            allowed={!selectedUser?.isAdmin}
+          />
+        </Modal>
+      )}
+
+      <div className={style.Title}>
+        <h1>Users List</h1>
+        <Link to={"/newUser"}>
+          <button>Create Account</button>
+        </Link>
+      </div>
+
       <DataGrid
         rows={users}
         columns={columns}
