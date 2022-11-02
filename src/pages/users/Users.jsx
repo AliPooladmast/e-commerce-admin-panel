@@ -66,6 +66,13 @@ export default function Users() {
 
   return (
     <div className={style.UserLists}>
+      <div className={style.Title}>
+        <h1>Users List</h1>
+        <Link to={"/newUser"}>
+          <button>Create Account</button>
+        </Link>
+      </div>
+
       <DataGrid
         rows={users}
         columns={columns}
