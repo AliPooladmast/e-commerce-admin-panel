@@ -7,7 +7,7 @@
   z-index: 30;
   width: 30%;
   left: 35%;
-  height: 70vh;
+  height: fit-content;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
@@ -26,13 +26,21 @@
   z-index: 20;
 }
 
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 26px;
+  }
+}
+
 .IconContainer {
   background-color: rgb(240, 240, 240);
   height: 32px;
   width: 32px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
