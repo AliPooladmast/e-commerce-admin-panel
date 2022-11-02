@@ -5,9 +5,13 @@ import WidgetLarge from "../../components/widgetLarge/WidgetLarge";
 import WidgetSmall from "../../components/widgetSmall/WidgetSmall";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../redux/apiCalls";
 
 const Home = () => {
   const [stats, setStats] = useState([]);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.user.users);
 
   const MONTH = useMemo(
     () => [
@@ -26,6 +30,10 @@ const Home = () => {
     ],
     []
   );
+
+  useEffect(() => {
+    getUsers(dispatch);
+  }, [dispatch]);
 
   useEffect(() => {
     const getStats = async () => {
@@ -51,8 +59,8 @@ const Home = () => {
       <FeaturedInfo />
       <Chart title="User Analytics" data={stats} dataKey="active user" grid />
       <div className={style.Widgets}>
-        <WidgetSmall />
-        <WidgetLarge />
+        <WidgetSmall users={users} />
+        <WidgetLarge users={users} />
       </div>
     </>
   );
