@@ -6,7 +6,7 @@ import en from "javascript-time-ago/locale/en";
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo("en-US");
 
-const WidgetLarge = () => {
+const WidgetLarge = ({ users }) => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,10 @@ const WidgetLarge = () => {
             {orders.map((order) => (
               <tr className={style.Row} key={order._id}>
                 <td className={style.User}>
-                  <span>{order.userId}</span>
+                  <span>
+                    {users?.find((user) => user._id === order.userId)
+                      ?.username || "anonymous"}
+                  </span>
                 </td>
                 <td className={style.Date}>
                   {timeAgo.format(new Date(order.createdAt))}
