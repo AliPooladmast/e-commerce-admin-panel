@@ -22,21 +22,21 @@
 .UserContainer {
   display: flex;
   margin-top: 20px;
+}
 
-  .Show {
-    flex: 1;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  }
+.UserInfo {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 
-  .Update {
-    flex: 2;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    margin-left: 20px;
-  }
+.EditUser {
+  flex: 2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-left: 20px;
 }
 
 .Top {
