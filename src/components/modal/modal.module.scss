@@ -26,6 +26,29 @@
   z-index: 20;
 }
 
+.IconContainer {
+  background-color: rgb(240, 240, 240);
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(230, 230, 230);
+  }
+}
+
+.CloseIcon {
+  color: #000;
+  font-size: 16px !important;
+}
+
 @keyframes slide-down {
   from {
     opacity: 0;

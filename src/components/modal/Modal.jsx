@@ -1,3 +1,4 @@
+import { Close } from "@mui/icons-material";
 import ReactDOM from "react-dom";
 import style from "./modal.module.scss";
 
@@ -11,7 +12,12 @@ const Modal = (props) => {
         portalElement
       )}
       {ReactDOM.createPortal(
-        <div className={style.Modal}>{props.children}</div>,
+        <div className={style.Modal}>
+          <div className={style.IconContainer} onClick={props.onClose}>
+            <Close className={style.CloseIcon} />
+          </div>
+          {props.children}
+        </div>,
         portalElement
       )}
     </>
