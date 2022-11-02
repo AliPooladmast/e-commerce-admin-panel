@@ -60,10 +60,12 @@
 .User {
   display: flex;
   flex-direction: column;
+  width: 45%;
 }
 
 .UserName {
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .UserTitle {
