@@ -1,27 +1,21 @@
 import { Visibility } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
 import style from "./widgetSmall.module.scss";
 import noAvatar from "../../assets/icons/no-avatar.svg";
 import Modal from "../../components/modal/Modal";
 import UserInfo from "../userInfo/UserInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../redux/apiCalls";
 
 const WidgetSmall = () => {
-  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.user.users);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await userRequest.get("users/?=new");
-        setUsers(res?.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUsers();
-  }, []);
+    getUsers(dispatch);
+  }, [dispatch]);
 
   const handleDisplay = (user) => {
     setSelectedUser(user);
