@@ -17,7 +17,7 @@ const WidgetSmall = ({ users }) => {
   return (
     <div className={style.WidgetSmall}>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal onClose={() => setShowModal(false)} title="User Info">
           <UserInfo user={selectedUser} />
         </Modal>
       )}
