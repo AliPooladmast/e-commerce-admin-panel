@@ -12,10 +12,12 @@ import {
   TrendingUp,
   WorkOutline,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import style from "./SideBar.module.scss";
 
 const SideBar = () => {
+  const location = useLocation();
+
   return (
     <div className={style.SideBar}>
       <div className={style.Wrapper}>
@@ -23,16 +25,16 @@ const SideBar = () => {
           <h1>Dashboard</h1>
           <ul>
             <Link to="/" className={style.Link}>
-              <li className={style.Active}>
+              <li className={location.pathname === "/" ? style.Selected : null}>
                 <LineStyle className={style.Icons} />
                 Home
               </li>
             </Link>
-            <li>
+            <li className={style.Disable}>
               <Timeline className={style.Icons} />
               Analytics
             </li>
-            <li>
+            <li className={style.Disable}>
               <TrendingUp className={style.Icons} />
               Sales
             </li>
@@ -42,22 +44,30 @@ const SideBar = () => {
           <h1>Quick Menu</h1>
           <ul>
             <Link to="/users" className={style.Link}>
-              <li>
+              <li
+                className={
+                  location.pathname === "/users" ? style.Selected : null
+                }
+              >
                 <Person className={style.Icons} />
                 Users
               </li>
             </Link>
             <Link to="/products" className={style.Link}>
-              <li>
+              <li
+                className={
+                  location.pathname === "/products" ? style.Selected : null
+                }
+              >
                 <Category className={style.Icons} />
                 Products
               </li>
             </Link>
-            <li>
+            <li className={style.Disable}>
               <AttachMoney className={style.Icons} />
               Transactions
             </li>
-            <li>
+            <li className={style.Disable}>
               <AssessmentOutlined className={style.Icons} />
               Reports
             </li>
@@ -66,15 +76,15 @@ const SideBar = () => {
         <div className={style.Menu}>
           <h1>Notifications</h1>
           <ul>
-            <li>
+            <li className={style.Disable}>
               <MailOutline className={style.Icons} />
               Mail
             </li>
-            <li>
+            <li className={style.Disable}>
               <DynamicFeedOutlined className={style.Icons} />
               Feedback
             </li>
-            <li>
+            <li className={style.Disable}>
               <MessageOutlined className={style.Icons} />
               Messages
             </li>
@@ -83,15 +93,15 @@ const SideBar = () => {
         <div className={style.Menu}>
           <h1>Staff</h1>
           <ul>
-            <li>
+            <li className={style.Disable}>
               <WorkOutline className={style.Icons} />
               Manage
             </li>
-            <li>
+            <li className={style.Disable}>
               <Timeline className={style.Icons} />
               Analytics
             </li>
-            <li>
+            <li className={style.Disable}>
               <ReportOutlined className={style.Icons} />
               Reports
             </li>

@@ -33,6 +33,7 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res?.data));
+    userRequest.defaults.headers.token = "Bearer " + res?.data?.token;
   } catch (err) {
     dispatch(userFailure());
   }

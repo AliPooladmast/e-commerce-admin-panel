@@ -1,14 +1,29 @@
+@use "src/styles";
+
 .WidgetSmall {
   flex: 1;
   border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  padding: 20px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
   margin-right: 20px;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.Wrapper {
+  height: 50vh;
+  overflow: auto;
+  padding: 0 20px;
 }
 
 .Title {
   font-size: 22px;
   font-weight: 600;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding: 15px 0;
 }
 
 .List {
@@ -45,10 +60,12 @@
 .User {
   display: flex;
   flex-direction: column;
+  width: 45%;
 }
 
 .UserName {
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .UserTitle {

@@ -1,7 +1,9 @@
+@use "src/styles";
+
 .FeaturedInfo {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .Item {
@@ -9,8 +11,9 @@
   margin: 0 20px;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  cursor: pointer;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
 }
 
 .Title {
