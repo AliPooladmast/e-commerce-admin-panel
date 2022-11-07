@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import {
   LineChart,
   Line,
@@ -20,6 +21,11 @@ const Chart = ({ title, data, dataKey, grid }) => {
           {grid && <CartesianGrid stroke="#e7e5e5" strokeDasharray="5 5" />}
         </LineChart>
       </ResponsiveContainer>
+      {!data?.length > 0 && (
+        <div className={style.Loading}>
+          <CircularProgress color="inherit" />
+        </div>
+      )}
     </div>
   );
 };
