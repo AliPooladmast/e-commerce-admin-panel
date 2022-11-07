@@ -30,7 +30,6 @@ export default function Products() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 300 },
     {
       field: "product",
       headerName: "Product",
@@ -46,6 +45,22 @@ export default function Products() {
     },
     { field: "inStock", headerName: "Stock", width: 150 },
     { field: "price", headerName: "Price", width: 150 },
+    {
+      field: "date",
+      headerName: "Register Date",
+      width: 270,
+      renderCell: (params) => {
+        const date = params.row.createdAt.split("T")?.[0];
+        const time = params.row.createdAt.split("T")?.[1];
+        const cleanTime = time.split(".")?.[0];
+        return (
+          <>
+            <span style={{ marginRight: "20px" }}>{date}</span>
+            <span>{cleanTime}</span>
+          </>
+        );
+      },
+    },
     {
       field: "action",
       headerName: "Action",
