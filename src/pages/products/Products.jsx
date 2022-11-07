@@ -57,6 +57,13 @@ export default function Products() {
 
   return (
     <div className={style.ProductList}>
+      <div className={style.Title}>
+        <h1>Products List</h1>
+        <Link to={"/newProduct"}>
+          <button>Add Product</button>
+        </Link>
+      </div>
+
       <DataGrid
         rows={products}
         columns={columns}
