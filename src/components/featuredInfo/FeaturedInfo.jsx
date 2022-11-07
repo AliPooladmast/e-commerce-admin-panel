@@ -27,12 +27,23 @@ const FeaturedInfo = () => {
   return (
     <div className={style.FeaturedInfo}>
       <FeatureCard
+        loading={!income || !monthChange}
         title="Revenue"
         amount={income[income.length - 1]?.total}
         percentage={Math.floor(monthChange)}
       />
-      <FeatureCard title="Sales" amount="724" percentage=" -11.8" />
-      <FeatureCard title="Costs" amount="267" percentage=" +9.8" />
+      <FeatureCard
+        title="Sales"
+        amount="724"
+        percentage=" -11.8"
+        loading={!income || !monthChange}
+      />
+      <FeatureCard
+        title="Costs"
+        amount="267"
+        percentage=" +9.8"
+        loading={!income || !monthChange}
+      />
     </div>
   );
 };
