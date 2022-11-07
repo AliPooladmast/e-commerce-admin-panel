@@ -9,9 +9,7 @@ const FeatureCard = ({ amount, percentage, title, loading }) => {
       {loading ? (
         <>
           <Skeleton sx={{ fontSize: "20px" }} />
-          <div className={style.MoneyContainer}>
-            <Skeleton sx={{ fontSize: "30px" }} width="100%" />
-          </div>
+          <Skeleton sx={{ fontSize: "30px" }} style={{ margin: "10px 0" }} />
           <Skeleton />
         </>
       ) : (
