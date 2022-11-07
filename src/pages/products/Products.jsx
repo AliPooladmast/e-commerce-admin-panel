@@ -2,20 +2,31 @@ import style from "./products.module.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import Modal from "../../components/modal/Modal";
+import Delete from "../../components/delete/Delete";
 
 export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    deleteProduct(dispatch, id);
+  const handleDeleteDialog = (id) => {
+    setSelectedProduct(products?.find((product) => product._id === id));
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowModal(false);
+    deleteProduct(dispatch, selectedProduct?._id);
   };
 
   const columns = [
@@ -47,7 +58,7 @@ export default function Products() {
             </Link>
             <DeleteOutlined
               className={style.Delete}
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDeleteDialog(params.row._id)}
             />
           </>
         );
@@ -57,6 +68,16 @@ export default function Products() {
 
   return (
     <div className={style.ProductList}>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)} title="Delete Product">
+          <Delete
+            name={selectedProduct?.title}
+            onClose={() => setShowModal(false)}
+            onConfirm={handleConfirmDelete}
+          />
+        </Modal>
+      )}
+
       <div className={style.Title}>
         <h1>Products List</h1>
         <Link to={"/newProduct"}>
