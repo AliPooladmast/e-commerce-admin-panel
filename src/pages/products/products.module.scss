@@ -1,6 +1,24 @@
 .ProductList {
   height: calc(100vh - 50px);
   width: 100%;
+  padding: 20px;
+}
+
+.Title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  button {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
 }
 
 .Product {

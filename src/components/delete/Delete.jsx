@@ -1,20 +1,20 @@
 import React from "react";
 import style from "./delete.module.scss";
 
-const Delete = ({ username, onClose, onConfirm, allowed = true }) => {
+const Delete = ({ name, onClose, onConfirm, allowed = true }) => {
   return (
     <div className={style.Delete}>
       <div className={style.Message}>
         {allowed ? (
           <>
             <span>{"Are you sure that you want to delete "}</span>
-            <span className={style.Username}>{username}</span>
+            <span className={style.Username}>{name}</span>
             <span>{"?"}</span>
           </>
         ) : (
           <>
             <span>{"Sorry, admin users like "}</span>
-            <span className={style.Username}>{username}</span>
+            <span className={style.Username}>{name}</span>
             <span>{" could not be deleted."}</span>
           </>
         )}
