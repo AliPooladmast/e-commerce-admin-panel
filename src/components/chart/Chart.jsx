@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import style from "./chart.module.scss";
 
-const Chart = ({ title, data, dataKey, grid }) => {
+const Chart = ({ title, data, dataKey, grid, loading }) => {
   return (
     <div className={style.Chart}>
       <h1 className={style.Title}>{title}</h1>
@@ -21,7 +21,7 @@ const Chart = ({ title, data, dataKey, grid }) => {
           {grid && <CartesianGrid stroke="#e7e5e5" strokeDasharray="5 5" />}
         </LineChart>
       </ResponsiveContainer>
-      {!data?.length > 0 && (
+      {loading && (
         <div className={style.Loading}>
           <CircularProgress color="inherit" />
         </div>
