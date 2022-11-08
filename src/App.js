@@ -17,8 +17,6 @@ function App() {
   useEffect(() => {
     if (!currentUser?.isAdmin || error) {
       navigate("/login");
-    } else {
-      navigate("/");
     }
   }, [currentUser, error, navigate]);
 
