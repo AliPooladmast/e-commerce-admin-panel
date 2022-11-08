@@ -9,12 +9,17 @@ const timeAgo = new TimeAgo("en-US");
 
 const WidgetLarge = ({ users }) => {
   const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
 
   useEffect(() => {
     const getOrders = async () => {
       try {
+        setOrdersLoading(true);
         const res = await userRequest.get("orders");
-        setOrders(res?.data);
+        if (res) {
+          setOrders(res.data);
+          setOrdersLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -27,7 +32,7 @@ const WidgetLarge = ({ users }) => {
       <div className={style.Wrapper}>
         <h1>Latest Transactions</h1>
 
-        {!orders?.length > 0 ? (
+        {ordersLoading ? (
           <div style={{ marginTop: "30px" }}>
             {Array(5)
               .fill(null)
