@@ -11,6 +11,7 @@ import AddMarginToPage from "../../hoc/AddMarginToPage";
 
 const Home = () => {
   const [stats, setStats] = useState([]);
+  const [statsLoading, setStatesLoading] = useState(false);
   const dispatch = useDispatch();
   const { users, isFetching } = useSelector((state) => state.user);
 
@@ -39,15 +40,19 @@ const Home = () => {
   useEffect(() => {
     const getStats = async () => {
       try {
+        setStatesLoading(true);
         const res = await userRequest.get("/users/stats");
-        const data = res.data?.sort((a, b) => a._id - b._id);
-        setStats([]);
-        data.forEach((item) => {
-          setStats((prev) => [
-            ...prev,
-            { name: MONTH[item._id - 1], "active user": item.total },
-          ]);
-        });
+        if (res) {
+          const data = res.data?.sort((a, b) => a._id - b._id);
+          setStats([]);
+          data.forEach((item) => {
+            setStats((prev) => [
+              ...prev,
+              { name: MONTH[item._id - 1], "active user": item.total },
+            ]);
+          });
+          setStatesLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -58,7 +63,13 @@ const Home = () => {
   return (
     <>
       <FeaturedInfo />
-      <Chart title="User Analytics" data={stats} dataKey="active user" grid />
+      <Chart
+        title="User Analytics"
+        data={stats}
+        dataKey="active user"
+        grid
+        loading={statsLoading}
+      />
       <div className={style.Widgets}>
         <WidgetSmall users={users} isFetching={isFetching} />
         <WidgetLarge users={users} />
