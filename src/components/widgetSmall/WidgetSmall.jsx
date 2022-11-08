@@ -6,7 +6,7 @@ import Modal from "../../components/modal/Modal";
 import UserInfo from "../userInfo/UserInfo";
 import { Skeleton } from "@mui/material";
 
-const WidgetSmall = ({ users }) => {
+const WidgetSmall = ({ users, isFetching }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -25,11 +25,12 @@ const WidgetSmall = ({ users }) => {
       <div className={style.Wrapper}>
         <div className={style.Title}>New Join Members</div>
         <ul className={style.List}>
-          {!users?.length > 0
+          {isFetching
             ? Array(4)
                 .fill(null)
-                .map((element) => (
+                .map((element, index) => (
                   <div
+                    key={index}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -45,7 +46,7 @@ const WidgetSmall = ({ users }) => {
                     <Skeleton width={200} height={20} animation="wave" />
                   </div>
                 ))
-            : users.map((user) => (
+            : users?.map((user) => (
                 <li className={style.ListItem} key={user._id}>
                   <img src={user.img || noAvatar} alt="profile" />
                   <div className={style.User}>

@@ -11,7 +11,7 @@ import { getUsers } from "../../redux/apiCalls";
 const Home = () => {
   const [stats, setStats] = useState([]);
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.users);
+  const { users, isFetching } = useSelector((state) => state.user);
 
   const MONTH = useMemo(
     () => [
@@ -59,7 +59,7 @@ const Home = () => {
       <FeaturedInfo />
       <Chart title="User Analytics" data={stats} dataKey="active user" grid />
       <div className={style.Widgets}>
-        <WidgetSmall users={users} />
+        <WidgetSmall users={users} isFetching={isFetching} />
         <WidgetLarge users={users} />
       </div>
     </>
