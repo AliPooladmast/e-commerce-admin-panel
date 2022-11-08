@@ -1,3 +1,4 @@
+import { Backdrop, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/apiCalls";
@@ -35,6 +36,13 @@ const Login = () => {
           {error && <div className={style.Error}>Somthing went wrong...</div>}
         </form>
       </div>
+
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isFetching}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
