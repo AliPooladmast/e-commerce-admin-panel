@@ -26,19 +26,23 @@ const WidgetLarge = ({ users }) => {
     <div className={style.WidgetLarge}>
       <div className={style.Wrapper}>
         <h1>Latest Transactions</h1>
-        <table className={style.Table}>
-          {!orders?.length > 0 ? (
-            Array(6)
+
+        {!orders?.length > 0 ? (
+          <div style={{ marginTop: "30px" }}>
+            {Array(5)
               .fill(null)
-              .map((element) => (
+              .map((element, index) => (
                 <Skeleton
+                  key={index}
                   style={{
-                    marginBottom: "20px",
+                    marginBottom: "30px",
                   }}
                   animation="wave"
                 />
-              ))
-          ) : (
+              ))}
+          </div>
+        ) : (
+          <table className={style.Table}>
             <tbody>
               <tr className={style.Row}>
                 <th className={style.Header}>Customer</th>
@@ -64,8 +68,8 @@ const WidgetLarge = ({ users }) => {
                 </tr>
               ))}
             </tbody>
-          )}
-        </table>
+          </table>
+        )}
       </div>
     </div>
   );
