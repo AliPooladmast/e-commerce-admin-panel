@@ -11,6 +11,7 @@ import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 const storage = getStorage(app);
 
 const NewProduct = () => {
@@ -152,4 +153,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default AddMarginToPage(NewProduct);

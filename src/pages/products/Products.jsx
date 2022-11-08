@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/modal/Modal";
 import Delete from "../../components/delete/Delete";
 import LoadingSkeleton from "../../components/loadingSkeleton/LoadingSkeleton";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 
-export default function Products() {
+const Products = () => {
   const dispatch = useDispatch();
   const { products, isFetching } = useSelector((state) => state.product);
 
@@ -116,4 +117,6 @@ export default function Products() {
       />
     </div>
   );
-}
+};
+
+export default AddMarginToPage(Products);

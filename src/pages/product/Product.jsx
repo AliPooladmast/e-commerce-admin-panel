@@ -14,6 +14,7 @@ import {
 import app from "../../firebase";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import { editProduct } from "../../redux/apiCalls";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 const storage = getStorage(app);
 
 const Product = () => {
@@ -227,4 +228,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default AddMarginToPage(Product);

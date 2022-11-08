@@ -9,8 +9,9 @@ import noAvatar from "../../assets/icons/no-avatar.svg";
 import Modal from "../../components/modal/Modal";
 import Delete from "../../components/delete/Delete";
 import LoadingSkeleton from "../../components/loadingSkeleton/LoadingSkeleton";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 
-export default function Users() {
+const Users = () => {
   const dispatch = useDispatch();
   const { users, isFetching } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
@@ -125,4 +126,6 @@ export default function Users() {
       />
     </div>
   );
-}
+};
+
+export default AddMarginToPage(Users);

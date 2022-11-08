@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/apiCalls";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 
 const Home = () => {
   const [stats, setStats] = useState([]);
@@ -66,4 +67,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AddMarginToPage(Home);
