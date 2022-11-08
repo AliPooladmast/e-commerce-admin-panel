@@ -5,21 +5,25 @@ import style from "./featuredInfo.module.scss";
 
 const FeaturedInfo = () => {
   const [income, setIncome] = useState([]);
+  const [incomeLoading, setIncomeLoading] = useState(false);
   const [monthChange, setMonthChange] = useState(0);
 
   useEffect(() => {
     const getIncome = async () => {
       try {
+        setIncomeLoading(true);
         const res = await userRequest.get("/orders/income");
-        const data = res.data?.sort((a, b) => a._id - b._id);
-
-        setIncome(data);
-        data.length > 1 &&
-          setMonthChange(
-            (data[data.length - 1]?.total / data[data.length - 2]?.total) *
-              100 -
-              100
-          );
+        if (res) {
+          const data = res.data?.sort((a, b) => a._id - b._id);
+          setIncome(data);
+          data.length > 1 &&
+            setMonthChange(
+              (data[data.length - 1]?.total / data[data.length - 2]?.total) *
+                100 -
+                100
+            );
+          setIncomeLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -30,7 +34,7 @@ const FeaturedInfo = () => {
   return (
     <div className={style.FeaturedInfo}>
       <FeatureCard
-        loading={!income?.length > 0}
+        loading={incomeLoading}
         title="Revenue"
         amount={income[income.length - 1]?.total}
         percentage={Math.floor(monthChange)}
@@ -39,13 +43,13 @@ const FeaturedInfo = () => {
         title="Sales"
         amount="724"
         percentage=" -11.8"
-        loading={!income?.length > 0}
+        loading={incomeLoading}
       />
       <FeatureCard
         title="Costs"
         amount="267"
         percentage=" +9.8"
-        loading={!income?.length > 0}
+        loading={incomeLoading}
       />
     </div>
   );
