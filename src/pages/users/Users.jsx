@@ -96,7 +96,7 @@ const Users = () => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)} title="Delete User">
           <Delete
-            username={selectedUser?.username}
+            name={selectedUser?.username}
             onClose={() => setShowModal(false)}
             onConfirm={handleConfirmDelete}
             allowed={!selectedUser?.isAdmin}
