@@ -11,16 +11,16 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function App() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!currentUser?.isAdmin) {
+    if (!currentUser?.isAdmin || error) {
       navigate("/login");
     } else {
       navigate("/");
     }
-  }, [currentUser, navigate]);
+  }, [currentUser, error, navigate]);
 
   return (
     <Routes>
