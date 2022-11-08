@@ -12,11 +12,14 @@ const FeaturedInfo = () => {
       try {
         const res = await userRequest.get("/orders/income");
         const data = res.data?.sort((a, b) => a._id - b._id);
+
         setIncome(data);
-        setMonthChange(
-          (data[data.length - 1].total / data[data.length - 2].total) * 100 -
-            100
-        );
+        data.length > 1 &&
+          setMonthChange(
+            (data[data.length - 1]?.total / data[data.length - 2]?.total) *
+              100 -
+              100
+          );
       } catch (err) {
         console.log(err);
       }
@@ -27,7 +30,7 @@ const FeaturedInfo = () => {
   return (
     <div className={style.FeaturedInfo}>
       <FeatureCard
-        loading={!income || !monthChange}
+        loading={!income?.length > 0}
         title="Revenue"
         amount={income[income.length - 1]?.total}
         percentage={Math.floor(monthChange)}
@@ -36,13 +39,13 @@ const FeaturedInfo = () => {
         title="Sales"
         amount="724"
         percentage=" -11.8"
-        loading={!income || !monthChange}
+        loading={!income?.length > 0}
       />
       <FeatureCard
         title="Costs"
         amount="267"
         percentage=" +9.8"
-        loading={!income || !monthChange}
+        loading={!income?.length > 0}
       />
     </div>
   );
