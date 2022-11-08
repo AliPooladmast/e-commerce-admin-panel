@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import style from "./user.module.scss";
 import UserInfo from "../../components/userInfo/UserInfo";
 import EditUser from "../../components/editUser/EditUser";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 
 const User = () => {
   const location = useLocation();
@@ -28,4 +29,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default AddMarginToPage(User);

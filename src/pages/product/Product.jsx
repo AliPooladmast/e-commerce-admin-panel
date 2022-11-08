@@ -14,11 +14,13 @@ import {
 import app from "../../firebase";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import { editProduct } from "../../redux/apiCalls";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 const storage = getStorage(app);
 
 const Product = () => {
   const dispatch = useDispatch();
   const [productStats, setProductStats] = useState([]);
+  const [productStatsLoading, setProductStatsLoading] = useState(false);
   const location = useLocation();
   const productId = location.pathname?.split("/")[2];
   const product = useSelector((state) =>
@@ -105,16 +107,20 @@ const Product = () => {
   useEffect(() => {
     const getProductStats = async () => {
       try {
+        setProductStatsLoading(true);
         const res = await userRequest.get("/orders/income?pid=" + productId);
-        const data = res.data?.sort((a, b) => a._id - b._id);
+        if (res) {
+          const data = res.data?.sort((a, b) => a._id - b._id);
 
-        setProductStats([]);
-        data.forEach((item) => {
-          setProductStats((prev) => [
-            ...prev,
-            { name: MONTH[item._id - 1], Sales: item.total },
-          ]);
-        });
+          setProductStats([]);
+          data.forEach((item) => {
+            setProductStats((prev) => [
+              ...prev,
+              { name: MONTH[item._id - 1], Sales: item.total },
+            ]);
+          });
+          setProductStatsLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -134,6 +140,7 @@ const Product = () => {
             data={productStats}
             title="Sales Performance"
             dataKey="Sales"
+            loading={productStatsLoading}
           />
         </div>
 
@@ -227,4 +234,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default AddMarginToPage(Product);

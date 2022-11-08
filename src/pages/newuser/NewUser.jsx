@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { addUser } from "../../redux/apiCalls";
 import style from "./newUser.module.scss";
 
@@ -115,4 +116,4 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+export default AddMarginToPage(NewUser);

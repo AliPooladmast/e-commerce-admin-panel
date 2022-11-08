@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import noAvatar from "../../assets/icons/no-avatar.svg";
 import Modal from "../../components/modal/Modal";
 import Delete from "../../components/delete/Delete";
+import LoadingSkeleton from "../../components/loadingSkeleton/LoadingSkeleton";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 
-export default function Users() {
+const Users = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.users);
+  const { users, isFetching } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -94,7 +96,7 @@ export default function Users() {
       {showModal && (
         <Modal onClose={() => setShowModal(false)} title="Delete User">
           <Delete
-            username={selectedUser?.username}
+            name={selectedUser?.username}
             onClose={() => setShowModal(false)}
             onConfirm={handleConfirmDelete}
             allowed={!selectedUser?.isAdmin}
@@ -110,14 +112,20 @@ export default function Users() {
       </div>
 
       <DataGrid
-        rows={users}
+        rows={isFetching ? [] : users}
         columns={columns}
         pageSize={8}
         rowsPerPageOptions={[8]}
         checkboxSelection
         disableSelectionOnClick
         getRowId={(row) => row._id}
+        components={{
+          LoadingOverlay: LoadingSkeleton,
+        }}
+        loading={isFetching}
       />
     </div>
   );
-}
+};
+
+export default AddMarginToPage(Users);

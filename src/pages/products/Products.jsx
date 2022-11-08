@@ -7,10 +7,12 @@ import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/modal/Modal";
 import Delete from "../../components/delete/Delete";
+import LoadingSkeleton from "../../components/loadingSkeleton/LoadingSkeleton";
+import AddMarginToPage from "../../hoc/AddMarginToPage";
 
-export default function Products() {
+const Products = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
+  const { products, isFetching } = useSelector((state) => state.product);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -101,14 +103,20 @@ export default function Products() {
       </div>
 
       <DataGrid
-        rows={products}
+        rows={isFetching ? [] : products}
         columns={columns}
         pageSize={8}
         rowsPerPageOptions={[8]}
         checkboxSelection
         disableSelectionOnClick
         getRowId={(row) => row._id}
+        components={{
+          LoadingOverlay: LoadingSkeleton,
+        }}
+        loading={isFetching}
       />
     </div>
   );
-}
+};
+
+export default AddMarginToPage(Products);
