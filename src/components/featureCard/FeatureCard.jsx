@@ -21,9 +21,9 @@ const FeatureCard = ({ amount, percentage, title, loading }) => {
               % {percentage}
               {percentage > 0 ? (
                 <ArrowUpward className={style.Icon} />
-              ) : (
+              ) : percentage < 0 ? (
                 <ArrowDownward className={style["Icon--Negetive"]} />
-              )}
+              ) : null}
             </span>
           </div>
           <span className={style.SubTitle}>Compared to last month</span>
