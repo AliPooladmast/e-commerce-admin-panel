@@ -2,6 +2,9 @@
 
 .FeaturedInfo {
   display: flex;
-  justify-content: space-between;
-  margin: 25px 10px 0 10px;
+  margin: 10px;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 }
