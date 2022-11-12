@@ -94,7 +94,11 @@ const Users = () => {
   return (
     <div className={style.UserLists}>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)} title="Delete User">
+        <Modal
+          onClose={() => setShowModal(false)}
+          title="Delete User"
+          height="220px"
+        >
           <Delete
             name={selectedUser?.username}
             onClose={() => setShowModal(false)}

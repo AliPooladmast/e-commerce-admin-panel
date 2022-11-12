@@ -86,7 +86,11 @@ const Products = () => {
   return (
     <div className={style.ProductList}>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)} title="Delete Product">
+        <Modal
+          onClose={() => setShowModal(false)}
+          title="Delete Product"
+          height="220px"
+        >
           <Delete
             name={selectedProduct?.title}
             onClose={() => setShowModal(false)}
