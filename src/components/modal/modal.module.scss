@@ -1,19 +1,24 @@
 @use "src/styles";
+$modal-width: 70%;
 
 .Modal {
   background-color: #fff;
   position: fixed;
-  top: 15vh;
   z-index: 30;
-  width: 30%;
-  left: 35%;
-  height: fit-content;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
   padding: 30px;
   animation: slide-down 300ms ease-out forwards;
+
+  width: $modal-width;
+  left: calc((100% - $modal-width) / 2);
+
+  @media only screen and (min-width: 660px) {
+    width: 400px;
+    left: calc((100% - 400px) / 2);
+  }
 }
 
 .Backdrop {
