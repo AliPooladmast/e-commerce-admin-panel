@@ -48,13 +48,18 @@ const WidgetSmall = ({ users, isFetching }) => {
                 ))
             : users?.map((user) => (
                 <li className={style.ListItem} key={user._id}>
-                  <img src={user.img || noAvatar} alt="profile" />
-                  <div className={style.User}>
-                    <span className={style.UserName}>{user.username}</span>
-                    <span className={style.UserTitle}>{user.title || ""}</span>
+                  <div className={style.UserContainer}>
+                    <img src={user.img || noAvatar} alt="profile" />
+                    <div className={style.User}>
+                      <span className={style.UserName}>{user.username}</span>
+                      <span className={style.UserTitle}>
+                        {user.title || ""}
+                      </span>
+                    </div>
                   </div>
                   <button onClick={() => handleDisplay(user)}>
-                    <Visibility className={style.Icon} /> Display
+                    <Visibility className={style.Icon} />
+                    <span className={style.DisplayText}>Display</span>
                   </button>
                 </li>
               ))}

@@ -9,12 +9,20 @@
   margin-right: 20px;
   height: 50vh;
   overflow: hidden;
+
+  @media only screen and (max-width: 1000px) {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 85vw;
+  }
 }
 
 .Wrapper {
   height: 50vh;
   overflow: auto;
-  padding: 0 20px;
 }
 
 .Title {
@@ -23,13 +31,13 @@
   position: sticky;
   top: 0;
   background-color: #fff;
-  padding: 15px 0;
+  padding: 15px 20px;
 }
 
 .List {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
 }
 
 .ListItem {
@@ -57,15 +65,24 @@
   }
 }
 
+.UserContainer {
+  display: flex;
+  align-items: center;
+}
+
 .User {
   display: flex;
   flex-direction: column;
   width: 45%;
+  margin: 0 10px;
 }
 
 .UserName {
   font-weight: 600;
-  white-space: nowrap;
+
+  @media only screen and (max-width: 1000px) and (min-width: 380px) {
+    white-space: nowrap;
+  }
 }
 
 .UserTitle {
@@ -74,5 +91,17 @@
 
 .Icon {
   font-size: 16px;
-  margin-right: 5px;
+  margin-right: 0;
+
+  @media only screen and (max-width: 1000px) {
+    margin-right: 5px;
+  }
+}
+
+.DisplayText {
+  display: none;
+
+  @media only screen and (max-width: 1000px) {
+    display: block;
+  }
 }
