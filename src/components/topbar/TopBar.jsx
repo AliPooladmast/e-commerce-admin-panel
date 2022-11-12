@@ -1,14 +1,32 @@
-import { Language, NotificationsNone, Settings } from "@mui/icons-material";
+import {
+  Language,
+  Menu,
+  NotificationsNone,
+  Settings,
+} from "@mui/icons-material";
 import React from "react";
 import style from "./ToBar.module.scss";
 import { Link } from "react-router-dom";
 import Dropdown from "../dropdown/Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { sideMenuToggle } from "../../redux/styleSlice";
 
 const TopBar = () => {
+  const dispatch = useDispatch();
+  const { displaySideMenu } = useSelector((state) => state.style);
+
   return (
     <div className={style.TopBar}>
       <div className={style.Wrapper}>
         <div className={style.LogoContainer}>
+          <Menu
+            className={style.Menu}
+            style={{
+              transform: displaySideMenu ? "rotate(90deg)" : "",
+              transition: "transform 0.3s",
+            }}
+            onClick={() => dispatch(sideMenuToggle())}
+          />
           <Link to="/" className={style.Link}>
             <span className={style.Logo}>E-Shope Admin</span>
           </Link>
