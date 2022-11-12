@@ -13,7 +13,11 @@ const Chart = ({ title, data, dataKey, grid, loading }) => {
   return (
     <div className={style.Chart}>
       <h1 className={style.Title}>{title}</h1>
-      <ResponsiveContainer width="99%" aspect={4 / 1}>
+      <ResponsiveContainer
+        width="99%"
+        aspect={3 / 1}
+        className={style.ResponsiveContainer}
+      >
         <LineChart data={data}>
           <XAxis dataKey={"name"} stroke="#5550bd" />
           <Line dataKey={dataKey} type={"monotone"} stroke="#5550bd" />
