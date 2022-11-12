@@ -29,6 +29,8 @@
 
 .Bottom {
   margin-top: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
 
   .Title {
     font-size: 15px;
