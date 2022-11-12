@@ -12,14 +12,19 @@ import {
   TrendingUp,
   WorkOutline,
 } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import style from "./SideBar.module.scss";
 
 const SideBar = () => {
   const location = useLocation();
+  const { displaySideMenu } = useSelector((state) => state.style);
 
   return (
-    <div className={style.SideBar}>
+    <div
+      className={style.SideBar}
+      style={{ width: displaySideMenu ? "50vw" : "0px" }}
+    >
       <div className={style.Wrapper}>
         <div className={style.Menu}>
           <h1>Dashboard</h1>

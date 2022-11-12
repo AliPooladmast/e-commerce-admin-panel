@@ -1,9 +1,21 @@
+@use "src/styles";
+
 .SideBar {
   flex: 1;
   background-color: rgb(245, 245, 245);
   height: calc(100vh - 60px);
   position: sticky;
   top: 60px;
+
+  @media only screen and (max-width: 660px) {
+    position: fixed;
+    z-index: 40;
+    overflow: hidden;
+    -webkit-box-shadow: styles.$shadow;
+    -moz-box-shadow: styles.$shadow;
+    box-shadow: styles.$shadow;
+    transition: 0.3s;
+  }
 }
 
 .Wrapper {
