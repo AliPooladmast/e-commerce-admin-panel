@@ -70,7 +70,7 @@ const EditUser = ({ user, userId }) => {
   };
 
   return (
-    <>
+    <div className={style.EditUser}>
       <span className={style.Title}>Edit</span>
       <form className={style.Form}>
         <div className={style.Left}>
@@ -132,7 +132,7 @@ const EditUser = ({ user, userId }) => {
           <button onClick={handleEdit}>Update</button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
