@@ -21,10 +21,7 @@ const SideBar = () => {
   const { displaySideMenu } = useSelector((state) => state.style);
 
   return (
-    <div
-      className={style.SideBar}
-      style={{ width: displaySideMenu ? "50vw" : "0px" }}
-    >
+    <div className={displaySideMenu ? style["SideBar--Open"] : style.SideBar}>
       <div className={style.Wrapper}>
         <div className={style.Menu}>
           <h1>Dashboard</h1>

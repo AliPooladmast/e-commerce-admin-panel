@@ -8,6 +8,7 @@
   top: 60px;
 
   @media only screen and (max-width: 660px) {
+    width: 0;
     position: fixed;
     z-index: 40;
     overflow: hidden;
@@ -15,6 +16,11 @@
     -moz-box-shadow: styles.$shadow;
     box-shadow: styles.$shadow;
     transition: 0.3s;
+  }
+
+  &--Open {
+    @extend .SideBar;
+    width: 50vw;
   }
 }
 
