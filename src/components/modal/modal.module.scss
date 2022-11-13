@@ -90,4 +90,6 @@ $modal-width: 80%;
 
 .Children {
   flex-grow: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
