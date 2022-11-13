@@ -129,21 +129,20 @@ const Product = () => {
   }, [MONTH, productId]);
 
   return (
-    <div className={style.Product}>
+    <>
       <div className={style.TitleContainer}>
-        <h1>Product</h1>
+        <h1>Edit Product</h1>
       </div>
 
-      <div className={style.Top}>
-        <div className={style.ChartContainer}>
-          <Chart
-            data={productStats}
-            title="Sales Performance"
-            dataKey="Sales"
-            loading={productStatsLoading}
-          />
-        </div>
+      <Chart
+        data={productStats}
+        title="Sales Performance"
+        dataKey="Sales"
+        loading={productStatsLoading}
+        className={style.Chart}
+      />
 
+      <div className={style.Product}>
         <div className={style.InfoContainer}>
           <div className={style.ImageContainer}>
             <img src={product.img} alt="product view" />
@@ -152,85 +151,98 @@ const Product = () => {
 
           <div className={style.Details}>
             <div className={style.Item}>
-              <span className={style.Key}>id:</span>
-              <span className={style.Value}>{product._id}</span>
+              <span className={style.Key}>Description:</span>
+              <span className={style.Value}>{product.desc}</span>
             </div>
 
             <div className={style.Item}>
-              <span className={style.Key}>sales:</span>
+              <span className={style.Key}>Sales:</span>
               <span className={style.Value}>{product.price}</span>
             </div>
 
             <div className={style.Item}>
-              <span className={style.Key}>in stock:</span>
-              <span className={style.Value}>{product.inStock.toString()}</span>
+              <span className={style.Key}>Categories:</span>
+              <span className={style.Value}>
+                {product.categories?.join(", ")}
+              </span>
+            </div>
+
+            <div className={style.Item}>
+              <span className={style.Key}>In stock:</span>
+              <span className={style.Value}>
+                {product.inStock ? "Yes" : "No"}
+              </span>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className={style.Bottom}>
-        <form>
-          <div className={style.EditDetails}>
-            <label>Title</label>
-            <input
-              name="title"
-              type="text"
-              placeholder={product.title}
-              onChange={handleInput}
-            />
+        <div className={style.EditProduct}>
+          <form>
+            <div className={style.EditDetails}>
+              <label>Title</label>
+              <input
+                name="title"
+                type="text"
+                placeholder={product.title}
+                onChange={handleInput}
+              />
 
-            <label>Description</label>
-            <input
-              name="desc"
-              type="text"
-              placeholder={product.desc}
-              onChange={handleInput}
-            />
+              <label>Description</label>
+              <input
+                name="desc"
+                type="text"
+                placeholder={product.desc}
+                onChange={handleInput}
+              />
 
-            <label>Price</label>
-            <input
-              name="price"
-              type="text"
-              placeholder={product.price}
-              onChange={handleInput}
-            />
+              <label>Price</label>
+              <input
+                name="price"
+                type="text"
+                placeholder={product.price}
+                onChange={handleInput}
+              />
 
-            <label>Categories</label>
-            <input
-              type="text"
-              placeholder={product.categories}
-              onChange={handleCategory}
-            />
+              <label>Categories</label>
+              <input
+                type="text"
+                placeholder={product.categories}
+                onChange={handleCategory}
+              />
 
-            <label>Stock</label>
-            <select name="inStock" id="inStock" onChange={handleInput}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-
-          <div className={style.Upload}>
-            <div className={style.FileUpload}>
-              <div className={style.ImageContainer}>
-                <img src={image || product.img} alt="upload product" />
-                {Boolean(progress) && progress !== 100 ? (
-                  <LinearProgressWithLabel value={progress} />
-                ) : Boolean(progress) && progress === 100 ? (
-                  <div className={style.Uploaded}>File Uploaded</div>
-                ) : null}
-              </div>
-              <label htmlFor="file">
-                <Publish />
-              </label>
-              <input type="file" id="file" onChange={handleImage} />
+              <label>Stock</label>
+              <select name="inStock" id="inStock" onChange={handleInput}>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
             </div>
 
-            <button onClick={handleEdit}>Update</button>
-          </div>
-        </form>
+            <div className={style.Upload}>
+              <div className={style.FileUpload}>
+                <div className={style.ImageContainer}>
+                  <img src={image || product.img} alt="upload product" />
+                  <label htmlFor="file">
+                    <Publish />
+                  </label>
+                </div>
+
+                <div>
+                  {Boolean(progress) && progress !== 100 ? (
+                    <LinearProgressWithLabel value={progress} />
+                  ) : Boolean(progress) && progress === 100 ? (
+                    <div className={style.Uploaded}>File Uploaded</div>
+                  ) : null}
+                </div>
+
+                <input type="file" id="file" onChange={handleImage} />
+              </div>
+
+              <button onClick={handleEdit}>Update</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
