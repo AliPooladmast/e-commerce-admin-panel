@@ -35,7 +35,8 @@ const Products = () => {
     {
       field: "product",
       headerName: "Product",
-      width: 250,
+      minWidth: 160,
+      flex: 2,
       renderCell: (params) => {
         return (
           <div className={style.Product}>
@@ -45,12 +46,13 @@ const Products = () => {
         );
       },
     },
-    { field: "inStock", headerName: "Stock", width: 150 },
-    { field: "price", headerName: "Price", width: 150 },
+    { field: "inStock", headerName: "Stock", minWidth: 60, flex: 1 },
+    { field: "price", headerName: "Price", minWidth: 60, flex: 1 },
     {
       field: "date",
       headerName: "Register Date",
-      width: 270,
+      minWidth: 160,
+      flex: 2,
       renderCell: (params) => {
         const date = params.row.createdAt.split("T")?.[0];
         const time = params.row.createdAt.split("T")?.[1];
@@ -66,7 +68,8 @@ const Products = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 100,
+      minWidth: 90,
+      flex: 1,
       renderCell: (params) => {
         return (
           <>
