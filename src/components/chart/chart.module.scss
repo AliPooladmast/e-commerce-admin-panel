@@ -1,7 +1,6 @@
 @use "src/styles";
 
 .Chart {
-  margin: 0 20px;
   padding: 20px;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
@@ -9,25 +8,9 @@
   box-shadow: styles.$shadow;
   position: relative;
 
-  //specific width to force chart to scroll
-  //for felx ratio 1 to 5
-  width: calc((100vw * 4 / 5) - 40px);
-  overflow-x: auto;
-  overflow-y: hidden;
-
   h1 {
     font-size: 20px;
     margin-bottom: 20px;
-  }
-
-  //for felx ratio 1 to 4
-  @media only screen and (max-width: 900px) {
-    width: calc((100vw * 3 / 4) - 40px);
-  }
-
-  //when side menu is collapsible
-  @media only screen and (max-width: 660px) {
-    width: calc(100vw - 60px);
   }
 }
 

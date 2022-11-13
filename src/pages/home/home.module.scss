@@ -6,3 +6,21 @@
     flex-direction: column;
   }
 }
+
+.Chart {
+  margin: 0 20px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  //specific width to force chart to scroll
+  //for felx ratio 1 to 4
+  @media only screen and (max-width: 900px) {
+    width: calc(((100vw - 20px) * 3 / 4) - 40px);
+  }
+
+  //when side menu is collapsible
+  @media only screen and (max-width: 660px) {
+    width: calc(100vw - 60px);
+  }
+}

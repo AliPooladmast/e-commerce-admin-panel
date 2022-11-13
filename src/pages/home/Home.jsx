@@ -69,6 +69,7 @@ const Home = () => {
         dataKey="active user"
         grid
         loading={statsLoading}
+        className={style.Chart}
       />
       <div className={style.Widgets}>
         <WidgetSmall users={users} isFetching={isFetching} />

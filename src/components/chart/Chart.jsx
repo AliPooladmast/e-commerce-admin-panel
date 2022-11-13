@@ -9,9 +9,9 @@ import {
 } from "recharts";
 import style from "./chart.module.scss";
 
-const Chart = ({ title, data, dataKey, grid, loading }) => {
+const Chart = ({ title, data, dataKey, grid, loading, className }) => {
   return (
-    <div className={style.Chart}>
+    <div className={`${style.Chart} ${className}`}>
       <h1 className={style.Title}>{title}</h1>
       <ResponsiveContainer
         width="99%"
