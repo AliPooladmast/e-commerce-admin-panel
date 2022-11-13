@@ -11,6 +11,8 @@ $modal-width: 70%;
   box-shadow: styles.$shadow;
   padding: 30px;
   animation: slide-down 300ms ease-out forwards;
+  display: flex;
+  flex-direction: column;
 
   width: $modal-width;
   left: calc((100% - $modal-width) / 2);
@@ -18,6 +20,10 @@ $modal-width: 70%;
   @media only screen and (min-width: 660px) {
     width: 400px;
     left: calc((100% - 400px) / 2);
+  }
+
+  @media only screen and (max-width: 660px) {
+    padding: 20px;
   }
 }
 
@@ -38,14 +44,23 @@ $modal-width: 70%;
   margin-bottom: 20px;
 
   h1 {
-    font-size: 26px;
+    font-size: 24px;
+    white-space: nowrap;
+    margin-right: 5px;
+
+    @media only screen and (max-width: 660px) {
+      font-size: 20px;
+    }
+    @media only screen and (max-width: 380px) {
+      font-size: 16px;
+    }
   }
 }
 
 .IconContainer {
   background-color: rgb(240, 240, 240);
-  height: 32px;
-  width: 32px;
+  min-height: 32px;
+  min-width: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -71,4 +86,8 @@ $modal-width: 70%;
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.Children {
+  flex-grow: 1;
 }

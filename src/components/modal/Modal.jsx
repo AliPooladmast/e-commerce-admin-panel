@@ -25,7 +25,7 @@ const Modal = (props) => {
               <Close className={style.CloseIcon} />
             </div>
           </div>
-          {props.children}
+          <div className={style.Children}>{props.children}</div>
         </div>,
         portalElement
       )}
