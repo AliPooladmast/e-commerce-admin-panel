@@ -144,9 +144,9 @@ const NewProduct = () => {
             ) : Boolean(progress) && progress === 100 ? (
               <div className={style.Uploaded}>File Uploaded</div>
             ) : null}
-          </div>
 
-          <button onClick={handleCreate}>Create</button>
+            <button onClick={handleCreate}>Create</button>
+          </div>
         </div>
       </form>
     </div>
