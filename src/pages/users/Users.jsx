@@ -35,7 +35,8 @@ const Users = () => {
     {
       field: "user",
       headerName: "User",
-      width: 220,
+      minWidth: 180,
+      flex: 2,
       renderCell: (params) => {
         return (
           <div className={style.User}>
@@ -45,11 +46,12 @@ const Users = () => {
         );
       },
     },
-    { field: "email", headerName: "Email", width: 270 },
+    { field: "email", headerName: "Email", minWidth: 200, flex: 2 },
     {
       field: "date",
       headerName: "Register Date",
-      width: 270,
+      minWidth: 160,
+      flex: 2,
       renderCell: (params) => {
         const date = params.row.createdAt.split("T")?.[0];
         const time = params.row.createdAt.split("T")?.[1];
@@ -65,16 +67,18 @@ const Users = () => {
     {
       field: "status",
       headerName: "Status",
-      width: 100,
+      minWidth: 50,
+      flex: 1,
       renderCell: (params) => {
         return <span>{params.row.isAdmin ? "admin" : "user"}</span>;
       },
     },
-    // { field: "transaction", headerName: "Transaction Volume", width: 200 },
+    // { field: "transaction", headerName: "Transaction Volume", minWidth: 200  flex:1,},
     {
       field: "action",
       headerName: "Action",
-      width: 100,
+      minWidth: 100,
+      flex: 1,
       renderCell: (params) => {
         return (
           <>
