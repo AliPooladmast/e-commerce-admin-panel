@@ -2,12 +2,25 @@
 
 .FeatureCard {
   flex: 1;
-  margin: 0 20px;
-  padding: 30px;
+  margin: 10px;
+  padding: 20px;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+  }
+
+  @media only screen and (max-width: 380px) {
+    flex-direction: column;
+  }
 }
 
 .Title {
@@ -18,6 +31,10 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
+
+  @media only screen and (max-width: 900px) {
+    margin: 10px 3vw;
+  }
 }
 
 .Money {
@@ -29,6 +46,7 @@
   display: flex;
   align-items: center;
   margin-left: 20px;
+  white-space: nowrap;
 }
 
 .Icon {
@@ -40,4 +58,8 @@
     @extend .Icon;
     color: rgb(235, 19, 19);
   }
+}
+
+.Subtitle {
+  font-size: 14px;
 }

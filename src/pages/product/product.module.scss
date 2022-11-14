@@ -1,22 +1,39 @@
 @use "src/styles";
 
-.Product {
-  margin: 20px;
-}
-
 .TitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 10px 20px;
+
+  @media only screen and (max-width: 380px) {
+    h1 {
+      font-size: 22px;
+    }
+  }
+}
+
+.Chart {
   margin: 0 20px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  //specific width to force chart to scroll
+  //for felx ratio 1 to 4
+  @media only screen and (max-width: 900px) {
+    width: calc(((100vw - 20px) * 3 / 4) - 40px);
+  }
+
+  //when side menu is collapsible
+  @media only screen and (max-width: 660px) {
+    width: calc(100vw - 60px);
+  }
 }
 
-.Top {
+.Product {
   display: flex;
-}
-
-.ChartContainer {
-  flex: 3;
+  margin: 20px;
 }
 
 .InfoContainer {
@@ -24,19 +41,20 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
-  margin: 20px;
   padding: 20px;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
-  min-width: 300px;
+  margin-right: 20px;
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
 
   .Details {
     .Item {
-      width: 250px;
-      margin-bottom: 5px;
+      margin-bottom: 15px;
       border-bottom: 1px solid lightgrey;
     }
   }
@@ -44,28 +62,34 @@
   .ImageContainer {
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 
     span {
       font-weight: 600;
     }
 
     img {
-      height: 60px;
-      width: 60px;
+      height: 70px;
+      width: 70px;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 20px;
+      margin-right: 10px;
     }
   }
 }
 
 .Details {
   margin-top: 10px;
+  width: 100%;
 
   .Item {
-    width: 150px;
+    min-width: 200px;
     display: flex;
     justify-content: space-between;
+
+    span {
+      font-size: 14px;
+    }
 
     .Value {
       font-weight: 300;
@@ -73,8 +97,8 @@
   }
 }
 
-.Bottom {
-  margin: 20px;
+.EditProduct {
+  flex: 3;
   padding: 20px;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
@@ -84,6 +108,11 @@
   form {
     display: flex;
     justify-content: space-between;
+
+    @media only screen and (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 
@@ -91,12 +120,18 @@
   display: flex;
   flex-direction: column;
 
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
   label {
     margin-bottom: 3px;
   }
 
   select {
     margin-bottom: 20px;
+    max-width: 150px;
   }
 
   input {
@@ -104,6 +139,11 @@
     border: none;
     padding: 5px;
     border-bottom: 1px solid lightgray;
+    width: 150px;
+
+    @media only screen and (max-width: 500px) {
+      width: 100%;
+    }
   }
 }
 
@@ -120,28 +160,34 @@
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
+    margin-top: 20px;
   }
 }
 
 .FileUpload {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
-  label {
-    cursor: pointer;
+  .ImageContainer {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      cursor: pointer;
+      margin-left: 20px;
+    }
   }
 
   input {
     display: none;
-  }
-
-  img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-right: 20px;
-    margin-bottom: 20px;
   }
 }
 

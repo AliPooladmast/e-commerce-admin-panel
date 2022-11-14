@@ -28,19 +28,23 @@ const Login = () => {
       <div className={style.Wrapper}>
         <h1>SIGN IN</h1>
         <form action="">
-          <input
-            type="text"
-            placeholder="username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleClick} disabled={isFetching}>
-            LOGIN
-          </button>
+          <div className={style.InputContainer}>
+            <input
+              type="text"
+              placeholder="username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className={style.LoginButton}>
+            <button onClick={handleClick} disabled={isFetching}>
+              LOGIN
+            </button>
+          </div>
           {error && <div className={style.Error}>Somthing went wrong...</div>}
         </form>
       </div>

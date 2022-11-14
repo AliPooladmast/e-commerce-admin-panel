@@ -9,6 +9,10 @@
   height: 50vh;
   overflow: hidden;
 
+  @media only screen and (max-width: 500px) {
+    width: 85vw;
+  }
+
   h1 {
     font-size: 22px;
     font-weight: 600;
@@ -54,6 +58,7 @@
 .Date,
 .Amount {
   font-weight: 300;
+  white-space: nowrap;
 }
 
 .Status {
@@ -83,6 +88,14 @@
     button {
       background-color: #fff0f1;
       color: #d95087;
+    }
+  }
+}
+
+.Row {
+  td {
+    @media only screen and (max-width: 900px) {
+      font-size: 14px;
     }
   }
 }

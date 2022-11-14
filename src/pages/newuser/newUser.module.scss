@@ -8,13 +8,26 @@
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
 
+  @media only screen and (max-width: 380px) {
+    padding: 20px;
+
+    h1 {
+      font-size: 24px;
+    }
+  }
+
   > form {
     display: flex;
     flex-direction: column;
 
+    @media only screen and (max-width: 380px) {
+      align-items: center;
+    }
+
     .Body {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-around;
     }
 
     > button {
@@ -27,16 +40,26 @@
       margin-top: 20px;
       cursor: pointer;
       font-weight: 600;
+
+      @media only screen and (max-width: 380px) {
+        width: 90%;
+      }
     }
   }
 }
 
 .Item {
-  width: 400px;
+  flex: 1;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
   margin-right: 20px;
+
+  @media only screen and (max-width: 380px) {
+    align-items: center;
+    margin-right: 0;
+  }
 
   > label {
     margin-bottom: 5px;
@@ -50,11 +73,19 @@
     padding: 10px;
     border: 1px solid grey;
     border-radius: 5px;
+
+    @media only screen and (max-width: 380px) {
+      width: 100%;
+    }
   }
 
   > select {
     height: 30px;
     border-radius: 5px;
+
+    @media only screen and (max-width: 380px) {
+      width: 100%;
+    }
   }
 }
 
@@ -64,11 +95,16 @@
   align-items: center;
   border: 1px solid lightgrey;
   border-radius: 5px;
+  width: fit-content;
 
   label {
     margin: 0 5px;
     color: #555;
     font-size: 14px;
+
+    @media only screen and (max-width: 380px) {
+      font-size: 12px;
+    }
   }
 }
 

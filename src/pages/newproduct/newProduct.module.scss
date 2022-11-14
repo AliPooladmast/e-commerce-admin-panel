@@ -8,12 +8,34 @@
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
 
+  @media only screen and (max-width: 380px) {
+    padding: 20px;
+
+    h1 {
+      font-size: 24px;
+    }
+  }
+
   > form {
     display: flex;
+    justify-content: space-between;
+
+    @media only screen and (max-width: 550px) {
+      flex-direction: column;
+    }
 
     .Left {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      width: 25vw;
+
+      @media only screen and (max-width: 660px) {
+        width: 40vw;
+      }
+      @media only screen and (max-width: 550px) {
+        width: 100%;
+        margin-bottom: 20px;
+      }
     }
 
     .Right {
@@ -32,18 +54,25 @@
         margin-top: 30px;
         cursor: pointer;
         font-weight: 600;
+
+        @media only screen and (max-width: 380px) {
+          width: 150px;
+        }
       }
     }
   }
 }
 
 .Item {
-  width: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   margin-top: 20px;
   margin-right: 20px;
+
+  @media only screen and (max-width: 380px) {
+    align-items: center;
+    margin-right: 0;
+  }
 
   > label {
     margin-bottom: 5px;
@@ -57,11 +86,19 @@
     padding: 10px;
     border: 1px solid grey;
     border-radius: 5px;
+
+    @media only screen and (max-width: 550px) {
+      width: 100%;
+    }
   }
 
   > select {
     height: 30px;
     border-radius: 5px;
+
+    @media only screen and (max-width: 550px) {
+      width: 100%;
+    }
   }
 }
 
@@ -72,6 +109,10 @@
   justify-content: space-around;
   margin-top: 20px;
   margin-right: 20px;
+
+  @media only screen and (max-width: 380px) {
+    width: 150px;
+  }
 
   input {
     margin-top: 20px;

@@ -5,6 +5,10 @@
 .Body {
   flex: 4;
   height: 100%;
+
+  @media only screen and (max-width: 900px) {
+    flex: 3;
+  }
 }
 
 * {

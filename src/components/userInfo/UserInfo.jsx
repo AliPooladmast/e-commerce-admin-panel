@@ -11,7 +11,7 @@ import noAvatar from "../../assets/icons/no-avatar.svg";
 
 const UserInfo = ({ user }) => {
   return (
-    <>
+    <div className={style.UserInfo}>
       <div className={style.Top}>
         <img src={user.img || noAvatar} alt="user profile" />
         <div className={style.TitleContainer}>
@@ -43,7 +43,7 @@ const UserInfo = ({ user }) => {
           <span>{user.address || "-----"}</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

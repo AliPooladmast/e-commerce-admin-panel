@@ -2,48 +2,9 @@
 
 .FeaturedInfo {
   display: flex;
-  justify-content: space-between;
-  margin-top: 25px;
-}
+  margin: 10px;
 
-.Item {
-  flex: 1;
-  margin: 0 20px;
-  padding: 30px;
-  border-radius: 10px;
-  -webkit-box-shadow: styles.$shadow;
-  -moz-box-shadow: styles.$shadow;
-  box-shadow: styles.$shadow;
-}
-
-.Title {
-  font-size: 20px;
-}
-
-.MoneyContainer {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-}
-
-.Money {
-  font-size: 30px;
-  font-weight: 600;
-}
-
-.MoneyRate {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-}
-
-.Icon {
-  font-size: 14px;
-  margin-left: 5px;
-  color: rgb(12, 141, 12);
-
-  &--Negetive {
-    @extend .Icon;
-    color: rgb(235, 19, 19);
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
   }
 }

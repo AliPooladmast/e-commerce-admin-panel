@@ -26,7 +26,7 @@ const FeatureCard = ({ amount, percentage, title, loading }) => {
               ) : null}
             </span>
           </div>
-          <span className={style.SubTitle}>Compared to last month</span>
+          <span className={style.Subtitle}>Compared to last month</span>
         </>
       )}
     </div>

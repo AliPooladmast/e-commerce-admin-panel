@@ -1,29 +1,30 @@
 @use "src/styles";
+$modal-width: 80%;
 
 .Modal {
   background-color: #fff;
   position: fixed;
-  top: 15vh;
   z-index: 30;
-  width: 30%;
-  left: 35%;
-  height: fit-content;
   border-radius: 10px;
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
   padding: 30px;
   animation: slide-down 300ms ease-out forwards;
-}
+  display: flex;
+  flex-direction: column;
 
-.Backdrop {
-  background-color: rgb(0, 0, 0, 0.75);
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 20;
+  width: $modal-width;
+  left: calc((100% - $modal-width) / 2);
+
+  @media only screen and (min-width: 660px) {
+    width: 400px;
+    left: calc((100% - 400px) / 2);
+  }
+
+  @media only screen and (max-width: 660px) {
+    padding: 20px;
+  }
 }
 
 .Header {
@@ -33,14 +34,23 @@
   margin-bottom: 20px;
 
   h1 {
-    font-size: 26px;
+    font-size: 24px;
+    white-space: nowrap;
+    margin-right: 5px;
+
+    @media only screen and (max-width: 660px) {
+      font-size: 20px;
+    }
+    @media only screen and (max-width: 380px) {
+      font-size: 16px;
+    }
   }
 }
 
 .IconContainer {
   background-color: rgb(240, 240, 240);
-  height: 32px;
-  width: 32px;
+  min-height: 32px;
+  min-width: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -66,4 +76,10 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.Children {
+  flex-grow: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
