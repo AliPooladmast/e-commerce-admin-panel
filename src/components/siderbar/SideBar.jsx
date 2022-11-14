@@ -12,13 +12,22 @@ import {
   TrendingUp,
   WorkOutline,
 } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { sideMenuToggle } from "../../redux/styleSlice";
 import style from "./SideBar.module.scss";
 
 const SideBar = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const { displaySideMenu } = useSelector((state) => state.style);
+
+  useEffect(() => {
+    if (displaySideMenu) {
+      dispatch(sideMenuToggle());
+    }
+  }, [location]); // eslint-disable-line
 
   return (
     <div className={displaySideMenu ? style["SideBar--Open"] : style.SideBar}>
