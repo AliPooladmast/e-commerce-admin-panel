@@ -90,7 +90,7 @@
 }
 
 .Icon {
-  font-size: 16px;
+  font-size: 20px !important;
   margin-right: 0;
 
   @media only screen and (max-width: 1000px) {
@@ -101,7 +101,7 @@
 .DisplayText {
   display: none;
 
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 1000px) and (min-width: 380px) {
     display: block;
   }
 }
