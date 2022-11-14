@@ -1,5 +1,6 @@
 import { Close } from "@mui/icons-material";
 import ReactDOM from "react-dom";
+import Backdrop from "../backdrop/Backdrop";
 import style from "./modal.module.scss";
 
 const portalElement = document.getElementById("modal");
@@ -7,10 +8,7 @@ const portalElement = document.getElementById("modal");
 const Modal = (props) => {
   return (
     <>
-      {ReactDOM.createPortal(
-        <div className={style.Backdrop} onClick={props.onClose} />,
-        portalElement
-      )}
+      <Backdrop onClose={props.onClose} />
       {ReactDOM.createPortal(
         <div
           className={style.Modal}
