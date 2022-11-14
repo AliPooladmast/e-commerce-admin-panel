@@ -13,13 +13,10 @@
 }
 
 .Wrapper {
-  width: 40%;
+  width: 70%;
+  max-width: 400px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
-
-  @media only screen and (max-width: 600px) {
-    width: 75%;
-  }
 
   h1 {
     font-size: 24px;
@@ -32,15 +29,31 @@
     flex-direction: column;
   }
 
-  input {
-    flex: 1;
-    min-width: 40%;
-    margin-bottom: 10px;
-    padding: 10px;
+  .InputContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    input {
+      flex: 1;
+      min-width: 40%;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
   }
+}
+
+.Error {
+  color: red;
+}
+
+.LoginButton {
+  display: flex;
+  justify-content: center;
 
   button {
-    width: 40%;
+    width: 60%;
+    max-width: 150px;
     padding: 15px 20px;
     border: none;
     background-color: teal;
@@ -53,13 +66,4 @@
       cursor: not-allowed;
     }
   }
-
-  a {
-    margin: 5px 0;
-    font-size: 12px;
-  }
-}
-
-.Error {
-  color: red;
 }
