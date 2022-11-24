@@ -24,7 +24,7 @@ export const addUser = async (dispatch, user) => {
     const res = await userRequest.post("/auth/register", user);
     dispatch(addUserSuccess(res?.data));
   } catch (err) {
-    dispatch(userFailure());
+    dispatch(userFailure(err?.response?.data));
   }
 };
 
@@ -35,7 +35,7 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res?.data));
     userRequest.defaults.headers.token = "Bearer " + res?.data?.token;
   } catch (err) {
-    dispatch(userFailure());
+    dispatch(userFailure(err?.response?.data));
   }
 };
 
@@ -45,7 +45,7 @@ export const getUsers = async (dispatch) => {
     const res = await userRequest.get("/users");
     dispatch(getUserSuccess(res?.data));
   } catch (err) {
-    dispatch(userFailure());
+    dispatch(userFailure(err?.response?.data));
   }
 };
 
@@ -55,7 +55,7 @@ export const editUser = async (dispatch, userId, user) => {
     const res = await userRequest.put("/users/" + userId, user);
     dispatch(editUserSuccess(res?.data));
   } catch (err) {
-    dispatch(userFailure());
+    dispatch(userFailure(err?.response?.data));
   }
 };
 
@@ -65,7 +65,7 @@ export const deleteUser = async (dispatch, userId) => {
     const res = await userRequest.delete("/users/" + userId);
     res && dispatch(deleteUserSuccess(userId));
   } catch (err) {
-    dispatch(userFailure());
+    dispatch(userFailure(err?.response?.data));
   }
 };
 
