@@ -4,7 +4,7 @@ const initialState = {
   users: [],
   currentUser: null,
   isFetching: false,
-  error: false,
+  error: "",
 };
 
 const userSlice = createSlice({
@@ -13,31 +13,32 @@ const userSlice = createSlice({
   reducers: {
     userStart: (state) => {
       state.isFetching = true;
+      state.error = "";
     },
-    userFailure: (state) => {
+    userFailure: (state, action) => {
       state.isFetching = false;
-      state.error = true;
+      state.error = action.payload;
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
-      state.error = false;
+      state.error = "";
       state.currentUser = action.payload;
     },
     getUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.error = false;
+      state.error = "";
       state.users = action.payload;
     },
     editUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.error = false;
+      state.error = "";
       state.users[
         state.users.findIndex((user) => user._id === action.payload._id)
       ] = action.payload;
     },
     deleteUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.error = false;
+      state.error = "";
       state.users.splice(
         state.users.findIndex((user) => user._id === action.payload),
         1
@@ -45,7 +46,7 @@ const userSlice = createSlice({
     },
     addUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.error = false;
+      state.error = "";
       state.users.push(action.payload);
     },
     logout: (state) => {
