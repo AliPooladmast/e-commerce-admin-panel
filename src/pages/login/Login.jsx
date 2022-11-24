@@ -1,4 +1,4 @@
-import { Backdrop, CircularProgress } from "@mui/material";
+import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,8 @@ const Login = () => {
     isFetching,
   } = useSelector((state) => state.user);
   const [input, setInput] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleInput = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -28,18 +30,43 @@ const Login = () => {
   const handleClick = (e) => {
     e.preventDefault();
     const { error: joiError } = schema.validate(input);
+    if (joiError) {
+      setErrorMessage(joiError.details?.[0]?.message);
+      setShowSnackbar(true);
+    } else {
+      login(dispatch, input);
+    }
+  };
 
-    login(dispatch, input);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
   };
 
   useEffect(() => {
-    if (currentUser?.isAdmin) {
+    if (serverError) {
+      setErrorMessage(serverError);
+      setShowSnackbar(true);
+    } else if (currentUser?.isAdmin) {
       navigate("/");
     }
   }, [currentUser, serverError]); //eslint-disable-line
 
   return (
     <div className={style.Container}>
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
+
       <div className={style.Wrapper}>
         <h1>SIGN IN</h1>
         <form action="">
