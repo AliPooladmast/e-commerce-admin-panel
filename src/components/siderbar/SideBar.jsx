@@ -15,14 +15,14 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { sideMenuToggle } from "../../redux/styleSlice";
+import { sideMenuToggle } from "../../redux/uxSlice";
 import Backdrop from "../backdrop/Backdrop";
 import style from "./SideBar.module.scss";
 
 const SideBar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { displaySideMenu } = useSelector((state) => state.style);
+  const { displaySideMenu } = useSelector((state) => state.ux);
 
   useEffect(() => {
     if (displaySideMenu) {
