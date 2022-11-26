@@ -15,10 +15,10 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!currentUser?.isAdmin || error) {
+    if (!currentUser?.isAdmin) {
       navigate("/login");
     }
-  }, [currentUser, error, navigate]);
+  }, [currentUser, navigate]);
 
   return (
     <Routes>
