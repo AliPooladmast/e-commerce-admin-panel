@@ -119,26 +119,29 @@ const EditUser = ({ user }) => {
             <input
               name="username"
               type="text"
-              placeholder={user.username}
+              value={draftUser.username}
               onChange={handleInput}
+              placeholder="username"
             />
           </div>
           <div className={style.Item}>
             <label>Full Name</label>
             <input
               type="text"
-              placeholder={user.fullName || user.username}
+              value={draftUser.fullName}
               name="fullname"
               onChange={handleInput}
+              placeholder="fullname"
             />
           </div>
           <div className={style.Item}>
             <label>Phone Number</label>
             <input
               type="text"
-              placeholder={user.phoneNumber || "enter phone number"}
+              value={draftUser.phone}
               name="phone"
               onChange={handleInput}
+              placeholder="phone"
             />
           </div>
           <div className={style.Item}>
@@ -146,17 +149,19 @@ const EditUser = ({ user }) => {
             <input
               name="email"
               type="text"
-              placeholder={user.email}
+              value={draftUser.email}
               onChange={handleInput}
+              placeholder="email"
             />
           </div>
           <div className={style.Item}>
             <label>Address</label>
             <input
               type="text"
-              placeholder={user.address || "enter address"}
+              value={draftUser.address}
               name="address"
               onChange={handleInput}
+              placeholder="address"
             />
           </div>
         </div>
