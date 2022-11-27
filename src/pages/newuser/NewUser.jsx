@@ -20,6 +20,7 @@ const schema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
   password: Joi.string().min(5).max(1024).required(),
   confirmPassword: Joi.ref("password"),
+  isAdmin: Joi.boolean(),
 });
 
 const NewUser = () => {
