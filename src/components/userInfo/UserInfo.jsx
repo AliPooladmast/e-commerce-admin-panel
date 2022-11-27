@@ -15,7 +15,7 @@ const UserInfo = ({ user }) => {
       <div className={style.Top}>
         <img src={user.img || noAvatar} alt="user profile" />
         <div className={style.TitleContainer}>
-          <span className={style.Name}>{user.fullName || user.username}</span>
+          <span className={style.Name}>{user.username}</span>
           <span className={style.Title}>{user.title}</span>
         </div>
       </div>
@@ -23,7 +23,7 @@ const UserInfo = ({ user }) => {
         <span className={style.Title}>Account Details</span>
         <div className={style.Info}>
           <PermIdentity className={style.Icon} />
-          <span>{user.username}</span>
+          <span>{user.fullname || user.username}</span>
         </div>
         <div className={style.Info}>
           <CalendarToday className={style.Icon} />
