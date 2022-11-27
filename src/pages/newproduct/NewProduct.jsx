@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
+import { setMessage } from "../../redux/uxSlice";
 const storage = getStorage(app);
 
 const NewProduct = () => {
@@ -42,23 +43,14 @@ const NewProduct = () => {
       "state_changed",
       (snapshot) => {
         setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
-        }
       },
       (error) => {
+        dispatch(setMessage({ type: "error", text: error.code?.toString() }));
         switch (error.code) {
           case "storage/unauthorized":
             break;
           case "storage/canceled":
             break;
-
           case "storage/unknown":
             break;
           default:
