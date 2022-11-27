@@ -126,7 +126,7 @@ const EditUser = ({ user }) => {
             <input
               name="username"
               type="text"
-              value={draftUser.username}
+              value={draftUser?.username}
               onChange={handleInput}
               placeholder="username"
             />
@@ -135,7 +135,7 @@ const EditUser = ({ user }) => {
             <label>Full Name</label>
             <input
               type="text"
-              value={draftUser.fullName}
+              value={draftUser?.fullName}
               name="fullname"
               onChange={handleInput}
               placeholder="fullname"
@@ -145,7 +145,7 @@ const EditUser = ({ user }) => {
             <label>Phone Number</label>
             <input
               type="tel"
-              value={draftUser.phone}
+              value={draftUser?.phone}
               name="phone"
               onChange={handleInput}
               placeholder="phone"
@@ -156,7 +156,7 @@ const EditUser = ({ user }) => {
             <input
               name="email"
               type="email"
-              value={draftUser.email}
+              value={draftUser?.email}
               onChange={handleInput}
               placeholder="email"
             />
@@ -165,7 +165,7 @@ const EditUser = ({ user }) => {
             <label>Address</label>
             <input
               type="text"
-              value={draftUser.address}
+              value={draftUser?.address}
               name="address"
               onChange={handleInput}
               placeholder="address"
@@ -175,7 +175,10 @@ const EditUser = ({ user }) => {
         <div className={style.Right}>
           <div className={style.Upload}>
             <div className={style.ImageContainer}>
-              <img src={image || user.img || noAvatar} alt="edit profile" />
+              <img
+                src={image || draftUser.img || noAvatar}
+                alt="edit profile"
+              />
               {Boolean(progress) && progress !== 100 ? (
                 <LinearProgressWithLabel value={progress} />
               ) : Boolean(progress) && progress === 100 ? (
