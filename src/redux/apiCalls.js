@@ -25,7 +25,10 @@ export const addUser = async (dispatch, user) => {
     const res = await userRequest.post("/auth/register", user);
     dispatch(addUserSuccess(res?.data));
   } catch (err) {
-    dispatch(userFailure(err?.response?.data));
+    dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -66,7 +69,10 @@ export const getUsers = async (dispatch) => {
     const res = await userRequest.get("/users");
     dispatch(getUserSuccess(res?.data));
   } catch (err) {
-    dispatch(userFailure(err?.response?.data));
+    dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -76,7 +82,10 @@ export const editUser = async (dispatch, userId, user) => {
     const res = await userRequest.put("/users/" + userId, user);
     dispatch(editUserSuccess(res?.data));
   } catch (err) {
-    dispatch(userFailure(err?.response?.data));
+    dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -86,7 +95,10 @@ export const deleteUser = async (dispatch, userId) => {
     const res = await userRequest.delete("/users/" + userId);
     res && dispatch(deleteUserSuccess(userId));
   } catch (err) {
-    dispatch(userFailure(err?.response?.data));
+    dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
