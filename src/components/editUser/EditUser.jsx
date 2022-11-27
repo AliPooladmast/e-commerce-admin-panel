@@ -137,7 +137,7 @@ const EditUser = ({ user }) => {
           <div className={style.Item}>
             <label>Phone Number</label>
             <input
-              type="text"
+              type="tel"
               value={draftUser.phone}
               name="phone"
               onChange={handleInput}
@@ -148,7 +148,7 @@ const EditUser = ({ user }) => {
             <label>Email</label>
             <input
               name="email"
-              type="text"
+              type="email"
               value={draftUser.email}
               onChange={handleInput}
               placeholder="email"
