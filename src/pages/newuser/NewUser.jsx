@@ -90,7 +90,7 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Admin</label>
-            <select name="admin" id="admin" onChange={handleInput}>
+            <select name="isAdmin" id="admin" onChange={handleInput}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
