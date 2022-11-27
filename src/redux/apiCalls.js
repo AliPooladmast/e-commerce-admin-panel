@@ -86,10 +86,10 @@ export const getUsers = async (dispatch) => {
   }
 };
 
-export const editUser = async (dispatch, user) => {
+export const editUser = async (dispatch, userId, user) => {
   dispatch(userStart());
   try {
-    const res = await userRequest.put("/users/" + user?._id, user);
+    const res = await userRequest.put("/users/" + userId, user);
     if (res?.data) {
       dispatch(editUserSuccess(res.data));
       dispatch(
