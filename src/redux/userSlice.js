@@ -4,8 +4,8 @@ const initialState = {
   users: [],
   currentUser: null,
   isFetching: false,
-  error: null,
-  success: null,
+  error: false,
+  success: false,
 };
 
 const userSlice = createSlice({
@@ -14,33 +14,33 @@ const userSlice = createSlice({
   reducers: {
     userStart: (state) => {
       state.isFetching = true;
-      state.error = null;
+      state.error = false;
+      state.success = false;
     },
-    userFailure: (state, action) => {
+    userFailure: (state) => {
       state.isFetching = false;
-      state.error = action.payload;
+      state.error = true;
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
-      state.success = `welcome, ${
-        action.payload?.username || "dear new user"
-      }!`;
+      state.success = true;
       state.currentUser = action.payload;
     },
     getUserSuccess: (state, action) => {
       state.isFetching = false;
+      state.success = true;
       state.users = action.payload;
     },
     editUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.success = "user has been edited successfully";
+      state.success = true;
       state.users[
         state.users.findIndex((user) => user._id === action.payload._id)
       ] = action.payload;
     },
     deleteUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.success = "user has been deleted successfully";
+      state.success = true;
       state.users.splice(
         state.users.findIndex((user) => user._id === action.payload),
         1
@@ -48,7 +48,7 @@ const userSlice = createSlice({
     },
     addUserSuccess: (state, action) => {
       state.isFetching = false;
-      state.success = "new user has been created successfully";
+      state.success = true;
       state.users.push(action.payload);
     },
     logout: (state) => {
