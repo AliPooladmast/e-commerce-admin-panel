@@ -133,7 +133,13 @@ const NewUser = () => {
               <label forhtml="male">Male</label>
               <input name="gender" type="radio" id="female" value="female" />
               <label forhtml="female">Female</label>
-              <input name="gender" type="radio" id="other" value="other" />
+              <input
+                name="gender"
+                type="radio"
+                id="other"
+                value="other"
+                defaultChecked
+              />
               <label forhtml="other">Other</label>
             </fieldset>
           </div>
