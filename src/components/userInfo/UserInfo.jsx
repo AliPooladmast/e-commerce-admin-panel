@@ -27,12 +27,12 @@ const UserInfo = ({ user }) => {
         </div>
         <div className={style.Info}>
           <CalendarToday className={style.Icon} />
-          <span>{user.birthdate || "-- / -- / ----"}</span>
+          <span>{user.createdAt?.split("T")?.[0] || "-- / -- / ----"}</span>
         </div>
         <span className={style.Title}>Contact Details</span>
         <div className={style.Info}>
           <PhoneAndroid className={style.Icon} />
-          <span>{user.phoneNumber || "-------"}</span>
+          <span>{user.phone || "-------"}</span>
         </div>
         <div className={style.Info}>
           <MailOutline className={style.Icon} />
