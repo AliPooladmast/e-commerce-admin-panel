@@ -10,7 +10,7 @@ const NewUser = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
 
-  const [input, setInput] = useState();
+  const [input, setInput] = useState({});
 
   const handleInput = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -110,7 +110,6 @@ const NewUser = () => {
         </div>
 
         <button onClick={handleCreate}>Create</button>
-        {error && <div className={style.Error}>{error}</div>}
       </form>
     </div>
   );
