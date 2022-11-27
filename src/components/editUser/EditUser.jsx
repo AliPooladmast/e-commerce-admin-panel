@@ -12,10 +12,23 @@ import { LinearProgressWithLabel } from "../linearProgress/LinearProgress";
 import noAvatar from "../../assets/icons/no-avatar.svg";
 import { Publish } from "@mui/icons-material";
 import style from "./editUser.module.scss";
+import { setMessage } from "../../redux/uxSlice";
+const Joi = require("joi");
+
+const schema = Joi.object({
+  username: Joi.string().min(2).max(50),
+  fullname: Joi.string().min(0).max(50),
+  phone: Joi.string().min(0).max(20),
+  address: Joi.string().min(0).max(511),
+  email: Joi.string()
+    .min(5)
+    .max(255)
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
+});
 
 const storage = getStorage(app);
 
-const EditUser = ({ user, userId }) => {
+const EditUser = ({ user }) => {
   const dispatch = useDispatch();
   const [draftUser, setDraftUser] = useState(user);
   const [image, setImage] = useState("");
@@ -65,8 +78,35 @@ const EditUser = ({ user, userId }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const editedUser = { ...draftUser, img: image };
-    editUser(dispatch, userId, editedUser);
+    const { username, email, fullname, phone, address, ...others } = draftUser;
+    const { error: joiError } = schema.validate({
+      username,
+      email,
+      fullname,
+      phone,
+      address,
+    });
+
+    if (joiError) {
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
+    } else {
+      const editedUser = {
+        username,
+        email,
+        fullname,
+        phone,
+        address,
+        img: image,
+        ...others,
+      };
+
+      editUser(dispatch, editedUser);
+    }
   };
 
   return (
@@ -79,33 +119,50 @@ const EditUser = ({ user, userId }) => {
             <input
               name="username"
               type="text"
-              placeholder={user.username}
+              value={draftUser.username}
               onChange={handleInput}
+              placeholder="username"
             />
           </div>
           <div className={style.Item}>
             <label>Full Name</label>
-            <input type="text" placeholder={user.fullName || user.username} />
+            <input
+              type="text"
+              value={draftUser.fullName}
+              name="fullname"
+              onChange={handleInput}
+              placeholder="fullname"
+            />
           </div>
           <div className={style.Item}>
             <label>Phone Number</label>
             <input
-              type="text"
-              placeholder={user.phoneNumber || "enter phone number"}
+              type="tel"
+              value={draftUser.phone}
+              name="phone"
+              onChange={handleInput}
+              placeholder="phone"
             />
           </div>
           <div className={style.Item}>
             <label>Email</label>
             <input
               name="email"
-              type="text"
-              placeholder={user.email}
+              type="email"
+              value={draftUser.email}
               onChange={handleInput}
+              placeholder="email"
             />
           </div>
           <div className={style.Item}>
             <label>Address</label>
-            <input type="text" placeholder={user.address || "enter address"} />
+            <input
+              type="text"
+              value={draftUser.address}
+              name="address"
+              onChange={handleInput}
+              placeholder="address"
+            />
           </div>
         </div>
         <div className={style.Right}>

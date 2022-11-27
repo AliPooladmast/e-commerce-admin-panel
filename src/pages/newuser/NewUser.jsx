@@ -26,7 +26,7 @@ const NewUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { success } = useSelector((state) => state.user);
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({ isAdmin: false });
 
   const handleInput = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -59,7 +59,9 @@ const NewUser = () => {
       <form>
         <div className={style.Body}>
           <div className={style.Item}>
-            <label>Username</label>
+            <label>
+              Username<span>*</span>
+            </label>
             <input
               name="username"
               type="text"
@@ -74,7 +76,9 @@ const NewUser = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Password</label>
+            <label>
+              Password<span>*</span>
+            </label>
             <input
               name="password"
               type="password"
@@ -84,7 +88,9 @@ const NewUser = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Confirm Password</label>
+            <label>
+              Confirm Password<span>*</span>
+            </label>
             <input
               name="confirmPassword"
               type="password"
@@ -94,7 +100,9 @@ const NewUser = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Email</label>
+            <label>
+              Email<span>*</span>
+            </label>
             <input
               name="email"
               type="email"
@@ -114,8 +122,15 @@ const NewUser = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Admin</label>
-            <select name="isAdmin" id="admin" onChange={handleInput}>
+            <label>
+              Admin<span>*</span>
+            </label>
+            <select
+              name="isAdmin"
+              id="admin"
+              onChange={handleInput}
+              value={input.isAdmin}
+            >
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
@@ -128,7 +143,13 @@ const NewUser = () => {
               <label forhtml="male">Male</label>
               <input name="gender" type="radio" id="female" value="female" />
               <label forhtml="female">Female</label>
-              <input name="gender" type="radio" id="other" value="other" />
+              <input
+                name="gender"
+                type="radio"
+                id="other"
+                value="other"
+                defaultChecked
+              />
               <label forhtml="other">Other</label>
             </fieldset>
           </div>
