@@ -138,6 +138,9 @@ export const getProducts = async (dispatch) => {
     dispatch(getProductSuccess(res?.data));
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -148,6 +151,9 @@ export const deleteProduct = async (dispatch, id) => {
     res && dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -158,6 +164,9 @@ export const addProduct = async (dispatch, product) => {
     dispatch(addProductSuccess(res?.data));
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -168,5 +177,8 @@ export const editProduct = async (dispatch, productId, product) => {
     dispatch(editProductSuccess(res?.data));
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
