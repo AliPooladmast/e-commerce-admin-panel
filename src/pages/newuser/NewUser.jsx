@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import useUpdate from "../../hook/useUpdate";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { addUser } from "../../redux/apiCalls";
 import style from "./newUser.module.scss";
@@ -21,7 +23,9 @@ const schema = Joi.object({
 });
 
 const NewUser = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { success } = useSelector((state) => state.user);
   const [input, setInput] = useState({});
 
   const handleInput = (e) => {
@@ -43,6 +47,10 @@ const NewUser = () => {
       addUser(dispatch, others);
     }
   };
+
+  useUpdate(() => {
+    success && navigate("/users");
+  }, [success]); //eslint-disable-line
 
   return (
     <div className={style.NewUserComponent}>
