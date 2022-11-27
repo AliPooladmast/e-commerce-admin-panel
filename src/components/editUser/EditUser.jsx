@@ -17,9 +17,9 @@ const Joi = require("joi");
 
 const schema = Joi.object({
   username: Joi.string().min(2).max(50),
-  fullname: Joi.string().min(2).max(50),
-  phone: Joi.string().min(5).max(20),
-  address: Joi.string().min(5).max(511),
+  fullname: Joi.string().min(0).max(50),
+  phone: Joi.string().min(0).max(20),
+  address: Joi.string().min(0).max(511),
   email: Joi.string()
     .min(5)
     .max(255)
