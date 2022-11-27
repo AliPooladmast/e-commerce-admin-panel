@@ -3,25 +3,45 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
+import { setMessage } from "../../redux/uxSlice";
 import style from "./login.module.scss";
+const Joi = require("joi");
+
+const schema = Joi.object({
+  username: Joi.string().min(2).max(50).required(),
+  password: Joi.string().min(5).max(1024).required(),
+});
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentUser, error, isFetching } = useSelector((state) => state.user);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const { currentUser, isFetching } = useSelector((state) => state.user);
+  const [input, setInput] = useState({});
+
+  const handleInput = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    const { error: joiError } = schema.validate(input);
+    if (joiError) {
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
+    } else {
+      login(dispatch, input);
+    }
   };
 
   useEffect(() => {
-    if (currentUser?.isAdmin && !error) {
+    if (currentUser?.isAdmin) {
       navigate("/");
     }
-  }, [currentUser, error, navigate]);
+  }, [currentUser]); //eslint-disable-line
 
   return (
     <div className={style.Container}>
@@ -30,14 +50,16 @@ const Login = () => {
         <form action="">
           <div className={style.InputContainer}>
             <input
+              name="username"
               type="text"
               placeholder="username"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleInput}
             />
             <input
+              name="password"
               type="password"
               placeholder="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleInput}
             />
           </div>
           <div className={style.LoginButton}>
@@ -45,7 +67,6 @@ const Login = () => {
               LOGIN
             </button>
           </div>
-          {error && <div className={style.Error}>Somthing went wrong...</div>}
         </form>
       </div>
 

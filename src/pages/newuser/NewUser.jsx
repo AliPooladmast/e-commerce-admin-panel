@@ -1,16 +1,32 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import useUpdate from "../../hook/useUpdate";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { addUser } from "../../redux/apiCalls";
 import style from "./newUser.module.scss";
+import { setMessage } from "../../redux/uxSlice";
+const Joi = require("joi");
+
+const schema = Joi.object({
+  username: Joi.string().min(2).max(50).required(),
+  fullname: Joi.string().min(2).max(50),
+  phone: Joi.string().min(5).max(20),
+  address: Joi.string().min(5).max(511),
+  email: Joi.string()
+    .min(5)
+    .max(255)
+    .required()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
+  password: Joi.string().min(5).max(1024).required(),
+  confirmPassword: Joi.ref("password"),
+});
 
 const NewUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
-
-  const [input, setInput] = useState();
+  const { success } = useSelector((state) => state.user);
+  const [input, setInput] = useState({});
 
   const handleInput = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -18,14 +34,23 @@ const NewUser = () => {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    if (input && input.password === input.confirmPassword) {
+    const { error: joiError } = schema.validate(input);
+    if (joiError) {
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
+    } else {
       const { confirmPassword, ...others } = input;
       addUser(dispatch, others);
-      navigate("/users");
-    } else {
-      setError("Password and confirm do not match");
     }
   };
+
+  useUpdate(() => {
+    success && navigate("/users");
+  }, [success]); //eslint-disable-line
 
   return (
     <div className={style.NewUserComponent}>
@@ -90,7 +115,7 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Admin</label>
-            <select name="admin" id="admin" onChange={handleInput}>
+            <select name="isAdmin" id="admin" onChange={handleInput}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
@@ -110,7 +135,6 @@ const NewUser = () => {
         </div>
 
         <button onClick={handleCreate}>Create</button>
-        {error && <div className={style.Error}>{error}</div>}
       </form>
     </div>
   );

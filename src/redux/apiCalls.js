@@ -16,15 +16,29 @@ import {
   deleteUserSuccess,
   addUserSuccess,
 } from "./userSlice";
+import { setMessage } from "./uxSlice";
 
 //User API Calls
 export const addUser = async (dispatch, user) => {
   dispatch(userStart());
   try {
     const res = await userRequest.post("/auth/register", user);
-    dispatch(addUserSuccess(res?.data));
+    if (res?.data) {
+      dispatch(addUserSuccess(res.data));
+      dispatch(
+        setMessage({
+          type: "success",
+          text:
+            res.data.username?.toString() +
+            " account has been created successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -32,10 +46,30 @@ export const login = async (dispatch, user) => {
   dispatch(userStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
-    dispatch(loginSuccess(res?.data));
-    userRequest.defaults.headers.token = "Bearer " + res?.data?.token;
+    if (res?.data) {
+      dispatch(loginSuccess(res.data));
+      userRequest.defaults.headers.token = "Bearer " + res.data.token;
+      if (res.data.isAdmin) {
+        dispatch(
+          setMessage({
+            type: "success",
+            text: "welcome! " + res.data.username?.toString(),
+          })
+        );
+      } else {
+        dispatch(
+          setMessage({
+            type: "error",
+            text: "only admin users can enter admin panel",
+          })
+        );
+      }
+    }
   } catch (err) {
     dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -46,6 +80,9 @@ export const getUsers = async (dispatch) => {
     dispatch(getUserSuccess(res?.data));
   } catch (err) {
     dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -53,9 +90,22 @@ export const editUser = async (dispatch, userId, user) => {
   dispatch(userStart());
   try {
     const res = await userRequest.put("/users/" + userId, user);
-    dispatch(editUserSuccess(res?.data));
+    if (res?.data) {
+      dispatch(editUserSuccess(res.data));
+      dispatch(
+        setMessage({
+          type: "success",
+          text:
+            res.data.username?.toString() +
+            " account has been edited successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -63,9 +113,20 @@ export const deleteUser = async (dispatch, userId) => {
   dispatch(userStart());
   try {
     const res = await userRequest.delete("/users/" + userId);
-    res && dispatch(deleteUserSuccess(userId));
+    if (res) {
+      dispatch(deleteUserSuccess(userId));
+      dispatch(
+        setMessage({
+          type: "success",
+          text: "user has been deleted successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 

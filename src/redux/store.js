@@ -12,19 +12,19 @@ import {
 import storage from "redux-persist/lib/storage";
 import userReducer from "./userSlice";
 import productSlice from "./productSlice";
-import styleSlice from "./styleSlice";
+import uxSlice from "./uxSlice";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  blacklist: ["style", "product"],
+  blacklist: ["ux", "product"],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
   product: productSlice,
-  style: styleSlice,
+  ux: uxSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

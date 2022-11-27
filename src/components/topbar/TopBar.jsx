@@ -9,11 +9,11 @@ import style from "./ToBar.module.scss";
 import { Link } from "react-router-dom";
 import Dropdown from "../dropdown/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { sideMenuToggle } from "../../redux/styleSlice";
+import { sideMenuToggle } from "../../redux/uxSlice";
 
 const TopBar = () => {
   const dispatch = useDispatch();
-  const { displaySideMenu } = useSelector((state) => state.style);
+  const { displaySideMenu } = useSelector((state) => state.ux);
 
   return (
     <div className={style.TopBar}>
