@@ -12,10 +12,23 @@ import { LinearProgressWithLabel } from "../linearProgress/LinearProgress";
 import noAvatar from "../../assets/icons/no-avatar.svg";
 import { Publish } from "@mui/icons-material";
 import style from "./editUser.module.scss";
+import { setMessage } from "../../redux/uxSlice";
+const Joi = require("joi");
+
+const schema = Joi.object({
+  username: Joi.string().min(2).max(50),
+  fullname: Joi.string().min(2).max(50),
+  phone: Joi.string().min(5).max(20),
+  address: Joi.string().min(5).max(511),
+  email: Joi.string()
+    .min(5)
+    .max(255)
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
+});
 
 const storage = getStorage(app);
 
-const EditUser = ({ user, userId }) => {
+const EditUser = ({ user }) => {
   const dispatch = useDispatch();
   const [draftUser, setDraftUser] = useState(user);
   const [image, setImage] = useState("");
@@ -65,8 +78,35 @@ const EditUser = ({ user, userId }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const editedUser = { ...draftUser, img: image };
-    editUser(dispatch, userId, editedUser);
+    const { username, email, fullname, phone, address, ...others } = draftUser;
+    const { error: joiError } = schema.validate({
+      username,
+      email,
+      fullname,
+      phone,
+      address,
+    });
+
+    if (joiError) {
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
+    } else {
+      const editedUser = {
+        username,
+        email,
+        fullname,
+        phone,
+        address,
+        img: image,
+        ...others,
+      };
+
+      editUser(dispatch, editedUser);
+    }
   };
 
   return (
