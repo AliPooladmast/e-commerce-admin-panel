@@ -85,13 +85,20 @@ const EditUser = ({ user, userId }) => {
           </div>
           <div className={style.Item}>
             <label>Full Name</label>
-            <input type="text" placeholder={user.fullName || user.username} />
+            <input
+              type="text"
+              placeholder={user.fullName || user.username}
+              name="fullname"
+              onChange={handleInput}
+            />
           </div>
           <div className={style.Item}>
             <label>Phone Number</label>
             <input
               type="text"
               placeholder={user.phoneNumber || "enter phone number"}
+              name="phone"
+              onChange={handleInput}
             />
           </div>
           <div className={style.Item}>
@@ -105,7 +112,12 @@ const EditUser = ({ user, userId }) => {
           </div>
           <div className={style.Item}>
             <label>Address</label>
-            <input type="text" placeholder={user.address || "enter address"} />
+            <input
+              type="text"
+              placeholder={user.address || "enter address"}
+              name="address"
+              onChange={handleInput}
+            />
           </div>
         </div>
         <div className={style.Right}>
