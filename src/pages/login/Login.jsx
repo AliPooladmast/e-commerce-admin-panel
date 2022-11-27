@@ -1,4 +1,4 @@
-import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
+import { Backdrop, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,14 +14,8 @@ const schema = Joi.object({
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    currentUser,
-    error: serverError,
-    isFetching,
-  } = useSelector((state) => state.user);
+  const { currentUser, isFetching } = useSelector((state) => state.user);
   const [input, setInput] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleInput = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,42 +25,20 @@ const Login = () => {
     e.preventDefault();
     const { error: joiError } = schema.validate(input);
     if (joiError) {
-      setErrorMessage(joiError.details?.[0]?.message);
-      setShowSnackbar(true);
+      // setErrorMessage(joiError.details?.[0]?.message);
     } else {
       login(dispatch, input);
     }
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setShowSnackbar(false);
-  };
-
   useEffect(() => {
-    if (serverError) {
-      setErrorMessage(serverError);
-      setShowSnackbar(true);
-    } else if (currentUser?.isAdmin) {
+    if (currentUser?.isAdmin) {
       navigate("/");
     }
-  }, [currentUser, serverError]); //eslint-disable-line
+  }, [currentUser]); //eslint-disable-line
 
   return (
     <div className={style.Container}>
-      <Snackbar
-        open={showSnackbar}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
-
       <div className={style.Wrapper}>
         <h1>SIGN IN</h1>
         <form action="">
