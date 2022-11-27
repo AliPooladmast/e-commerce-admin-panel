@@ -26,7 +26,7 @@ const NewUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { success } = useSelector((state) => state.user);
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({ isAdmin: false });
 
   const handleInput = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -115,7 +115,12 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Admin</label>
-            <select name="isAdmin" id="admin" onChange={handleInput}>
+            <select
+              name="isAdmin"
+              id="admin"
+              onChange={handleInput}
+              value={input.isAdmin}
+            >
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
