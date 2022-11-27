@@ -16,6 +16,7 @@ import {
   deleteUserSuccess,
   addUserSuccess,
 } from "./userSlice";
+import { setMessage } from "./uxSlice";
 
 //User API Calls
 export const addUser = async (dispatch, user) => {
@@ -32,10 +33,30 @@ export const login = async (dispatch, user) => {
   dispatch(userStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
-    dispatch(loginSuccess(res?.data));
-    userRequest.defaults.headers.token = "Bearer " + res?.data?.token;
+    if (res?.data) {
+      dispatch(loginSuccess(res.data));
+      userRequest.defaults.headers.token = "Bearer " + res.data.token;
+      if (res.data.isAdmin) {
+        dispatch(
+          setMessage({
+            type: "success",
+            text: "welcome! " + res.data.username?.toString(),
+          })
+        );
+      } else {
+        dispatch(
+          setMessage({
+            type: "error",
+            text: "only admin users can enter admin panel",
+          })
+        );
+      }
+    }
   } catch (err) {
-    dispatch(userFailure(err?.response?.data));
+    dispatch(userFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
