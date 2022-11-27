@@ -6,7 +6,7 @@ const useUpdate = (event, dependencies) => {
   useEffect(() => {
     if (didUpdate.current) event();
     else didUpdate.current = true;
-  }, dependencies);
+  }, dependencies); //eslint-disable-line
 };
 
 export default useUpdate;
