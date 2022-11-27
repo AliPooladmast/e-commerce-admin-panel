@@ -78,7 +78,15 @@ const EditUser = ({ user }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const { username, email, fullname, phone, address, ...others } = draftUser;
+    const {
+      username,
+      email,
+      fullname,
+      phone,
+      address,
+      _id: userId,
+    } = draftUser;
+
     const { error: joiError } = schema.validate({
       username,
       email,
@@ -102,10 +110,9 @@ const EditUser = ({ user }) => {
         phone,
         address,
         img: image,
-        ...others,
       };
 
-      editUser(dispatch, editedUser);
+      editUser(dispatch, userId, editedUser);
     }
   };
 
