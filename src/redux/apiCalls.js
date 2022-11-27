@@ -23,7 +23,17 @@ export const addUser = async (dispatch, user) => {
   dispatch(userStart());
   try {
     const res = await userRequest.post("/auth/register", user);
-    dispatch(addUserSuccess(res?.data));
+    if (res?.data) {
+      dispatch(addUserSuccess(res.data));
+      dispatch(
+        setMessage({
+          type: "success",
+          text:
+            res.data.username?.toString() +
+            " account has been created successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(userFailure());
     dispatch(
@@ -80,7 +90,17 @@ export const editUser = async (dispatch, userId, user) => {
   dispatch(userStart());
   try {
     const res = await userRequest.put("/users/" + userId, user);
-    dispatch(editUserSuccess(res?.data));
+    if (res?.data) {
+      dispatch(editUserSuccess(res.data));
+      dispatch(
+        setMessage({
+          type: "success",
+          text:
+            res.data.username?.toString() +
+            " account has been edited successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(userFailure());
     dispatch(
@@ -93,7 +113,15 @@ export const deleteUser = async (dispatch, userId) => {
   dispatch(userStart());
   try {
     const res = await userRequest.delete("/users/" + userId);
-    res && dispatch(deleteUserSuccess(userId));
+    if (res) {
+      dispatch(deleteUserSuccess(userId));
+      dispatch(
+        setMessage({
+          type: "success",
+          text: "user has been deleted successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(userFailure());
     dispatch(
