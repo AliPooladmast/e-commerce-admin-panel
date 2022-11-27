@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
+import { setMessage } from "../../redux/uxSlice";
 import style from "./login.module.scss";
 const Joi = require("joi");
 
@@ -25,7 +26,12 @@ const Login = () => {
     e.preventDefault();
     const { error: joiError } = schema.validate(input);
     if (joiError) {
-      // setErrorMessage(joiError.details?.[0]?.message);
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
     } else {
       login(dispatch, input);
     }
