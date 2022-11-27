@@ -8,6 +8,7 @@ import { userRequest } from "../../requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../redux/apiCalls";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
+import { setMessage } from "../../redux/uxSlice";
 
 const Home = () => {
   const [stats, setStats] = useState([]);
@@ -54,11 +55,13 @@ const Home = () => {
           setStatesLoading(false);
         }
       } catch (err) {
-        console.log(err);
+        dispatch(
+          setMessage({ type: "error", text: err?.response?.data?.toString() })
+        );
       }
     };
     getStats();
-  }, [MONTH]);
+  }, [MONTH]); //eslint-disable-line
 
   return (
     <>

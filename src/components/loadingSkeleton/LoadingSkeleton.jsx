@@ -14,11 +14,12 @@ const LoadingSkeleton = () =>
       >
         <Skeleton
           variant="circular"
-          height={40}
-          width={40}
-          style={{ margin: "0 55px" }}
+          style={{ margin: "0 55px", minWidth: "40px", minHeight: "40px" }}
         />
-        <Skeleton width={820} height={15} animation="wave" />
+        <Skeleton
+          animation="wave"
+          style={{ flex: 1, marginRight: "50px", minHeight: "15px" }}
+        />
       </div>
     ));
 

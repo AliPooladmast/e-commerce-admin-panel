@@ -4,10 +4,13 @@ import style from "./widgetLarge.module.scss";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { Skeleton } from "@mui/material";
+import { setMessage } from "../../redux/uxSlice";
+import { useDispatch } from "react-redux";
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo("en-US");
 
 const WidgetLarge = ({ users }) => {
+  const dispatch = useDispatch();
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
 
@@ -21,11 +24,13 @@ const WidgetLarge = ({ users }) => {
           setOrdersLoading(false);
         }
       } catch (err) {
-        console.log(err);
+        dispatch(
+          setMessage({ type: "error", text: err?.response?.data?.toString() })
+        );
       }
     };
     getOrders();
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <div className={style.WidgetLarge}>

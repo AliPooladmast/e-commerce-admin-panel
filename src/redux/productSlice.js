@@ -4,6 +4,7 @@ const initialState = {
   products: [],
   isFetching: false,
   error: false,
+  success: false,
 };
 
 const productSlice = createSlice({
@@ -12,6 +13,8 @@ const productSlice = createSlice({
   reducers: {
     productStart: (state) => {
       state.isFetching = true;
+      state.error = false;
+      state.success = false;
     },
     productFailure: (state) => {
       state.isFetching = false;
@@ -19,10 +22,12 @@ const productSlice = createSlice({
     },
     getProductSuccess: (state, action) => {
       state.isFetching = false;
+      state.success = true;
       state.products = action.payload;
     },
     deleteProductSuccess: (state, action) => {
       state.isFetching = false;
+      state.success = true;
       state.products.splice(
         state.products.findIndex((item) => item._id === action.payload),
         1
@@ -30,10 +35,12 @@ const productSlice = createSlice({
     },
     addProductSuccess: (state, action) => {
       state.isFetching = false;
+      state.success = true;
       state.products.push(action.payload);
     },
     editProductSuccess: (state, action) => {
       state.isFetching = false;
+      state.success = true;
       state.products[
         state.products.findIndex((item) => item._id === action.payload._id)
       ] = action.payload;

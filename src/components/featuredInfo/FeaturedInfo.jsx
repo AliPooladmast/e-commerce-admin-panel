@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../redux/uxSlice";
 import { userRequest } from "../../requestMethods";
 import FeatureCard from "../featureCard/FeatureCard";
 import style from "./featuredInfo.module.scss";
 
 const FeaturedInfo = () => {
+  const dispatch = useDispatch();
   const [income, setIncome] = useState([]);
   const [incomeLoading, setIncomeLoading] = useState(false);
   const [monthChange, setMonthChange] = useState(0);
@@ -25,11 +28,13 @@ const FeaturedInfo = () => {
           setIncomeLoading(false);
         }
       } catch (err) {
-        console.log(err);
+        dispatch(
+          setMessage({ type: "error", text: err?.response?.data?.toString() })
+        );
       }
     };
     getIncome();
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <div className={style.FeaturedInfo}>

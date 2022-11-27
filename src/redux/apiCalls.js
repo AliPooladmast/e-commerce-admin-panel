@@ -135,9 +135,12 @@ export const getProducts = async (dispatch) => {
   dispatch(productStart());
   try {
     const res = await publicRequest.get("/products");
-    dispatch(getProductSuccess(res?.data));
+    dispatch(getProductSuccess(res?.data?.products));
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -145,9 +148,21 @@ export const deleteProduct = async (dispatch, id) => {
   dispatch(productStart());
   try {
     const res = await userRequest.delete(`/products/${id}`);
-    res && dispatch(deleteProductSuccess(id));
+
+    if (res) {
+      dispatch(deleteProductSuccess(id));
+      dispatch(
+        setMessage({
+          type: "success",
+          text: "product has been deleted successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -155,9 +170,23 @@ export const addProduct = async (dispatch, product) => {
   dispatch(productStart());
   try {
     const res = await userRequest.post("/products", product);
-    dispatch(addProductSuccess(res?.data));
+
+    if (res?.data) {
+      dispatch(addProductSuccess(res.data));
+      dispatch(
+        setMessage({
+          type: "success",
+          text:
+            res.data.title?.toString() +
+            " product has been created successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
 
@@ -165,8 +194,22 @@ export const editProduct = async (dispatch, productId, product) => {
   dispatch(productStart());
   try {
     const res = await userRequest.put("/products/" + productId, product);
-    dispatch(editProductSuccess(res?.data));
+
+    if (res?.data) {
+      dispatch(editProductSuccess(res.data));
+      dispatch(
+        setMessage({
+          type: "success",
+          text:
+            res.data.title?.toString() +
+            " product has been edited successfully",
+        })
+      );
+    }
   } catch (err) {
     dispatch(productFailure());
+    dispatch(
+      setMessage({ type: "error", text: err?.response?.data?.toString() })
+    );
   }
 };
