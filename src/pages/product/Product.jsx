@@ -15,6 +15,7 @@ import app from "../../firebase";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import { editProduct } from "../../redux/apiCalls";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
+import { setMessage } from "../../redux/uxSlice";
 const storage = getStorage(app);
 
 const Product = () => {
@@ -122,11 +123,13 @@ const Product = () => {
           setProductStatsLoading(false);
         }
       } catch (err) {
-        console.log(err);
+        dispatch(
+          setMessage({ type: "error", text: err?.response?.data?.toString() })
+        );
       }
     };
     getProductStats();
-  }, [MONTH, productId]);
+  }, [MONTH, productId]); //eslint-disable-line
 
   return (
     <>
