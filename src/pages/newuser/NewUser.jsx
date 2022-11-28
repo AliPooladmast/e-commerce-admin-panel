@@ -31,7 +31,14 @@ const NewUser = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleInput = (e) => {
-    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setInput((prev) => {
+      if (e.target.value) {
+        return { ...prev, [e.target.name]: e.target.value };
+      } else {
+        delete prev[e.target.name];
+        return prev;
+      }
+    });
   };
 
   const handleCreate = (e) => {
