@@ -31,7 +31,7 @@ const storage = getStorage(app);
 const EditUser = ({ user }) => {
   const dispatch = useDispatch();
   const [draftUser, setDraftUser] = useState(user);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(user?.img);
   const [progress, setProgress] = useState(0);
 
   const handleInput = (e) => {
@@ -175,10 +175,7 @@ const EditUser = ({ user }) => {
         <div className={style.Right}>
           <div className={style.Upload}>
             <div className={style.ImageContainer}>
-              <img
-                src={image || draftUser.img || noAvatar}
-                alt="edit profile"
-              />
+              <img src={image || noAvatar} alt="edit profile" />
               {Boolean(progress) && progress !== 100 ? (
                 <LinearProgressWithLabel value={progress} />
               ) : Boolean(progress) && progress === 100 ? (
