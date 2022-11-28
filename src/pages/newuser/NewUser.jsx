@@ -73,7 +73,12 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Full Name</label>
-            <input type="text" placeholder="enter full name" />
+            <input
+              type="text"
+              placeholder="enter full name"
+              name="fullname"
+              onChange={handleInput}
+            />
           </div>
 
           <div className={style.Item}>
@@ -114,12 +119,22 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Phone</label>
-            <input type="text" placeholder="enter phone number" />
+            <input
+              type="text"
+              placeholder="enter phone number"
+              name="phone"
+              onChange={handleInput}
+            />
           </div>
 
           <div className={style.Item}>
             <label>Address</label>
-            <input type="text" placeholder="enter address" />
+            <input
+              type="text"
+              placeholder="enter address"
+              name="address"
+              onChange={handleInput}
+            />
           </div>
 
           <div className={style.Item}>
