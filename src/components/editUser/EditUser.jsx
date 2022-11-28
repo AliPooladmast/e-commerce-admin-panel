@@ -135,7 +135,7 @@ const EditUser = ({ user }) => {
             <label>Full Name</label>
             <input
               type="text"
-              value={draftUser?.fullName}
+              value={draftUser?.fullname}
               name="fullname"
               onChange={handleInput}
               placeholder="fullname"
