@@ -10,7 +10,7 @@ const Joi = require("joi");
 
 const schema = Joi.object({
   username: Joi.string().min(2).max(50).required(),
-  fullname: Joi.string().min(2).max(50),
+  fullname: Joi.string().min(5).max(50),
   phone: Joi.string().min(5).max(20),
   address: Joi.string().min(5).max(511),
   email: Joi.string()
@@ -21,7 +21,7 @@ const schema = Joi.object({
   password: Joi.string().min(5).max(1024).required(),
   confirmPassword: Joi.ref("password"),
   isAdmin: Joi.boolean(),
-});
+}).with("password", "confirmPassword");
 
 const NewUser = () => {
   const navigate = useNavigate();
