@@ -69,9 +69,10 @@
     }
 
     img {
-      height: 100px;
-      width: 100px;
+      height: 120px;
+      width: 120px;
       object-fit: cover;
+      border: 1px solid lightgrey;
       border-radius: 10px;
       margin-right: 10px;
 
