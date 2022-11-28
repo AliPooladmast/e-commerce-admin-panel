@@ -17,13 +17,15 @@ const Modal = (props) => {
             top: `calc((100% - ${props.height})/2)`,
           }}
         >
-          <div className={style.Header}>
-            <h1>{props.title}</h1>
-            <div className={style.IconContainer} onClick={props.onClose}>
-              <Close className={style.CloseIcon} />
+          <div className={style.Wrapper}>
+            <div className={style.Header}>
+              <h1>{props.title}</h1>
+              <div className={style.IconContainer} onClick={props.onClose}>
+                <Close className={style.CloseIcon} />
+              </div>
             </div>
+            <div className={style.Children}>{props.children}</div>
           </div>
-          <div className={style.Children}>{props.children}</div>
         </div>,
         portalElement
       )}

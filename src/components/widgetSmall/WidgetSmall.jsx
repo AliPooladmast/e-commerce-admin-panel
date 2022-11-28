@@ -21,7 +21,7 @@ const WidgetSmall = ({ users, isFetching }) => {
         <Modal
           onClose={() => setShowModal(false)}
           title="User Info"
-          height="450px"
+          height="480px"
         >
           <UserInfo user={selectedUser} />
         </Modal>
