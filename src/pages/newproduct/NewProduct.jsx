@@ -19,7 +19,7 @@ const storage = getStorage(app);
 const NewProduct = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState({});
-  const [categories, setCategories] = useState([]);
+  const [multipleInput, setMultipleInput] = useState([]);
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState(0);
   const [colors, setColors] = useState(["#000000"]);
@@ -31,8 +31,11 @@ const NewProduct = () => {
     });
   };
 
-  const handleCategory = (e) => {
-    setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
+  const handleMultipleInput = (e) => {
+    setMultipleInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value?.split(",")?.map((item) => item.trim()),
+    }));
   };
 
   const handleImage = (e) => {
@@ -68,7 +71,7 @@ const NewProduct = () => {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    const product = { ...input, categories, img: image };
+    const product = { ...input, ...multipleInput, img: image };
     addProduct(dispatch, product);
     navigate("/products");
   };
@@ -115,9 +118,10 @@ const NewProduct = () => {
           <div className={style.Item}>
             <label>Categories</label>
             <input
+              name="categories"
               type="text"
               placeholder="jeans, t-shirts, ..."
-              onChange={handleCategory}
+              onChange={handleMultipleInput}
               className={style.Input}
             />
           </div>
@@ -125,8 +129,10 @@ const NewProduct = () => {
           <div className={style.Item}>
             <label>Sizes</label>
             <input
+              name="size"
               type="text"
               placeholder="L, XL, ..."
+              onChange={handleMultipleInput}
               className={style.Input}
             />
           </div>
