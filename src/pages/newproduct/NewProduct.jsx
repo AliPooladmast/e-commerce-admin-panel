@@ -142,7 +142,10 @@ const NewProduct = () => {
           <div className={style.Item}>
             <label className={style.ColorTitle}>
               <span>Colors</span>
-              <AddCircle className={style.AddIcon} />
+              <AddCircle
+                className={style.AddIcon}
+                onClick={() => setColors((prev) => [...prev, "#000000"])}
+              />
             </label>
             <div className={style.ColorContainer}>
               {colors.map((color, index) => (
