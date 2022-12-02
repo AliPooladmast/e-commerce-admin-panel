@@ -26,8 +26,7 @@
 
     .Left {
       display: flex;
-      flex-direction: column;
-      width: 25vw;
+      flex-wrap: wrap;
 
       @media only screen and (max-width: 660px) {
         width: 40vw;
@@ -64,6 +63,7 @@
 }
 
 .Item {
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
