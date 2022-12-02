@@ -27,6 +27,7 @@
     .Left {
       display: flex;
       flex-wrap: wrap;
+      height: fit-content;
 
       @media only screen and (max-width: 660px) {
         width: 40vw;
