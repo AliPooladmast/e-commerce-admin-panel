@@ -39,7 +39,12 @@ const NewProduct = () => {
 
   const handleInput = (e) => {
     setInput((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      if (e.target.value) {
+        return { ...prev, [e.target.name]: e.target.value };
+      } else {
+        delete prev[e.target.name];
+        return prev;
+      }
     });
   };
 
