@@ -81,7 +81,7 @@
     color: grey;
   }
 
-  > input {
+  .Input {
     height: 30px;
     padding: 10px;
     border: 1px solid grey;
@@ -99,6 +99,27 @@
     @media only screen and (max-width: 550px) {
       width: 100%;
     }
+  }
+}
+
+.ColorTitle {
+  display: flex;
+  align-items: center;
+
+  .AddIcon {
+    margin-left: 3px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+
+.ColorContainer {
+  .ColorInput {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0 2px;
+    border: 1px solid grey;
+    border-radius: 2px;
   }
 }
 
