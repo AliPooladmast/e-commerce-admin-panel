@@ -71,7 +71,7 @@ const NewProduct = () => {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    const product = { ...input, ...multipleInput, img: image };
+    const product = { ...input, ...multipleInput, color: colors, img: image };
     addProduct(dispatch, product);
     navigate("/products");
   };
