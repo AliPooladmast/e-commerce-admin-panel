@@ -154,6 +154,12 @@ const NewProduct = () => {
                   value={color}
                   className={style.ColorInput}
                   key={index}
+                  onChange={(e) =>
+                    setColors((prev) => {
+                      prev[index] = e.target.value;
+                      return [...prev];
+                    })
+                  }
                 />
               ))}
             </div>
