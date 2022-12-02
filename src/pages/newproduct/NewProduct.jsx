@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { setMessage } from "../../redux/uxSlice";
+import { AddCircle } from "@mui/icons-material";
 const storage = getStorage(app);
 
 const NewProduct = () => {
@@ -21,6 +22,7 @@ const NewProduct = () => {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState(0);
+  const [colors, setColors] = useState(["#000000"]);
   const dispatch = useDispatch();
 
   const handleInput = (e) => {
@@ -135,6 +137,23 @@ const NewProduct = () => {
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
+          </div>
+
+          <div className={style.Item}>
+            <label className={style.ColorTitle}>
+              <span>Colors</span>
+              <AddCircle className={style.AddIcon} />
+            </label>
+            <div className={style.ColorContainer}>
+              {colors.map((color, index) => (
+                <input
+                  type="color"
+                  value={color}
+                  className={style.ColorInput}
+                  key={index}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
