@@ -8,12 +8,13 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { setMessage } from "../../redux/uxSlice";
 import { AddCircle } from "@mui/icons-material";
+import useUpdate from "../../hook/useUpdate";
 const storage = getStorage(app);
 const Joi = require("joi");
 
@@ -30,12 +31,13 @@ const schema = Joi.object({
 
 const NewProduct = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { success } = useSelector((state) => state.product);
   const [input, setInput] = useState({});
   const [multipleInput, setMultipleInput] = useState([]);
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState(0);
   const [colors, setColors] = useState(["#000000"]);
-  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     setInput((prev) => {
@@ -111,6 +113,10 @@ const NewProduct = () => {
       addProduct(dispatch, product);
     }
   };
+
+  useUpdate(() => {
+    success && navigate("/products");
+  }, [success]); //eslint-disable-line
 
   return (
     <div className={style.NewProductComponent}>
@@ -189,6 +195,7 @@ const NewProduct = () => {
               placeholder="1"
               onChange={handleInput}
               className={style.Input}
+              min={1}
             />
           </div>
 
