@@ -97,9 +97,20 @@ const NewProduct = () => {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    const product = { ...input, ...multipleInput, color: colors, img: image };
-    addProduct(dispatch, product);
-    navigate("/products");
+    const inputs = { ...input, ...multipleInput, color: colors };
+    const { error: joiError } = schema.validate(inputs);
+
+    if (joiError) {
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
+    } else {
+      const product = { ...inputs, img: image };
+      addProduct(dispatch, product);
+    }
   };
 
   return (
