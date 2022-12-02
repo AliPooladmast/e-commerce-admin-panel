@@ -126,12 +126,20 @@
 }
 
 .Image {
-  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin-top: 20px;
   margin-right: 20px;
+
+  img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+  }
 
   @media only screen and (max-width: 380px) {
     width: 150px;
