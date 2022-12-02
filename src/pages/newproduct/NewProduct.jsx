@@ -109,7 +109,9 @@ const NewProduct = () => {
       <form>
         <div className={style.Left}>
           <div className={style.Item}>
-            <label>Title</label>
+            <label>
+              Title<span>*</span>
+            </label>
             <input
               name="title"
               type="text"
@@ -131,7 +133,9 @@ const NewProduct = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Price</label>
+            <label>
+              Price<span>*</span>
+            </label>
             <input
               name="price"
               type="number"
@@ -153,7 +157,9 @@ const NewProduct = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Sizes</label>
+            <label>
+              Sizes<span>*</span>
+            </label>
             <input
               name="size"
               type="text"
@@ -164,7 +170,9 @@ const NewProduct = () => {
           </div>
 
           <div className={style.Item}>
-            <label>Stock</label>
+            <label>
+              Stock<span>*</span>
+            </label>
             <input
               name="inStock"
               type="number"
@@ -176,7 +184,9 @@ const NewProduct = () => {
 
           <div className={style.Item}>
             <label className={style.ColorTitle}>
-              <span>Colors</span>
+              <div>
+                Colors<span>*</span>
+              </div>
               <AddCircle
                 className={style.AddIcon}
                 onClick={() => setColors((prev) => [...prev, "#000000"])}
