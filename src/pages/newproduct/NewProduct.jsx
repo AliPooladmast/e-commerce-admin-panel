@@ -84,6 +84,7 @@ const NewProduct = () => {
               type="text"
               placeholder="product title"
               onChange={handleInput}
+              className={style.Input}
             />
           </div>
 
@@ -94,6 +95,7 @@ const NewProduct = () => {
               type="text"
               placeholder="description..."
               onChange={handleInput}
+              className={style.Input}
             />
           </div>
 
@@ -104,6 +106,7 @@ const NewProduct = () => {
               type="number"
               placeholder="100"
               onChange={handleInput}
+              className={style.Input}
             />
           </div>
 
@@ -113,6 +116,16 @@ const NewProduct = () => {
               type="text"
               placeholder="jeans, t-shirts, ..."
               onChange={handleCategory}
+              className={style.Input}
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Sizes</label>
+            <input
+              type="text"
+              placeholder="L, XL, ..."
+              className={style.Input}
             />
           </div>
 
