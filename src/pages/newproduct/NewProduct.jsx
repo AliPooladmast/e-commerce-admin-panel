@@ -139,10 +139,13 @@ const NewProduct = () => {
 
           <div className={style.Item}>
             <label>Stock</label>
-            <select name="inStock" id="inStock" onChange={handleInput}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
+            <input
+              name="inStock"
+              type="number"
+              placeholder="1"
+              onChange={handleInput}
+              className={style.Input}
+            />
           </div>
 
           <div className={style.Item}>
