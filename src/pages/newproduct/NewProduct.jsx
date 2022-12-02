@@ -49,10 +49,19 @@ const NewProduct = () => {
   };
 
   const handleMultipleInput = (e) => {
-    setMultipleInput((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value?.split(",")?.map((item) => item.trim()),
-    }));
+    setMultipleInput((prev) => {
+      if (e.target.value) {
+        return {
+          ...prev,
+          [e.target.name]: e.target.value
+            ?.split(",")
+            ?.map((item) => item.trim()),
+        };
+      } else {
+        delete prev[e.target.name];
+        return prev;
+      }
+    });
   };
 
   const handleImage = (e) => {
