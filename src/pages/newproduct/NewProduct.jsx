@@ -19,11 +19,11 @@ const Joi = require("joi");
 
 const schema = Joi.object({
   title: Joi.string().min(3).max(50).required().trim(),
-  desc: Joi.string().min(3).max(1024).required(),
-  img: Joi.string().required(),
-  categories: Joi.array().required().max(10).items(Joi.string().min(1).max(20)),
-  size: Joi.array().max(10).items(Joi.string().min(1).max(5)),
-  color: Joi.array().max(10).items(Joi.string().min(1).max(20)),
+  desc: Joi.string().min(3).max(1024),
+  img: Joi.string(),
+  categories: Joi.array().max(10).items(Joi.string().min(1).max(20)),
+  size: Joi.array().required().max(10).items(Joi.string().min(1).max(5)),
+  color: Joi.array().required().max(10).items(Joi.string().min(1).max(20)),
   price: Joi.number().min(1).required(),
   inStock: Joi.number().min(1).required(),
 });
