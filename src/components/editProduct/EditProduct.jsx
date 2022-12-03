@@ -17,7 +17,9 @@ const storage = getStorage(app);
 const EditProduct = ({ product, productId }) => {
   const dispatch = useDispatch();
   const [draftProduct, setDraftProduct] = useState(product);
-  const [categories, setCategories] = useState(product?.categories);
+  const [multipleInput, setMultipleInput] = useState({
+    categories: product?.categories,
+  });
   const [progress, setProgress] = useState(0);
   const [image, setImage] = useState(product?.img);
 
@@ -32,8 +34,20 @@ const EditProduct = ({ product, productId }) => {
     });
   };
 
-  const handleCategory = (e) => {
-    setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
+  const handleMultipleInput = (e) => {
+    setMultipleInput((prev) => {
+      if (e.target.value) {
+        return {
+          ...prev,
+          [e.target.name]: e.target.value
+            ?.split(",")
+            ?.map((item) => item.trim()),
+        };
+      } else {
+        delete prev[e.target.name];
+        return prev;
+      }
+    });
   };
 
   const handleImage = (e) => {
@@ -76,7 +90,7 @@ const EditProduct = ({ product, productId }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const editedProduct = { ...draftProduct, categories, img: image };
+    const editedProduct = { ...draftProduct, img: image };
     editProduct(dispatch, productId, editedProduct);
   };
 
@@ -110,9 +124,10 @@ const EditProduct = ({ product, productId }) => {
 
           <label>Categories</label>
           <input
+            name="categories"
             type="text"
-            value={draftProduct?.categories}
-            onChange={handleCategory}
+            value={multipleInput?.categories}
+            onChange={handleMultipleInput}
           />
 
           <label>Stock</label>
