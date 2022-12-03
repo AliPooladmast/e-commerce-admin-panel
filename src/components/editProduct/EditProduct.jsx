@@ -104,7 +104,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="title"
             type="text"
-            value={draftProduct?.title}
+            value={draftProduct?.title || ""}
             onChange={handleInput}
           />
 
@@ -112,7 +112,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="desc"
             type="text"
-            value={draftProduct?.desc}
+            value={draftProduct?.desc || ""}
             onChange={handleInput}
           />
 
@@ -120,7 +120,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="price"
             type="text"
-            value={draftProduct?.price}
+            value={draftProduct?.price || ""}
             onChange={handleInput}
           />
 
@@ -128,7 +128,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="categories"
             type="text"
-            value={multipleInput?.categories}
+            value={multipleInput?.categories || ""}
             onChange={handleMultipleInput}
           />
 
@@ -136,7 +136,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="size"
             type="text"
-            value={multipleInput?.size}
+            value={multipleInput?.size || ""}
             onChange={handleMultipleInput}
           />
 
@@ -144,7 +144,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="inStock"
             type="number"
-            value={draftProduct?.inStock}
+            value={draftProduct?.inStock || ""}
             onChange={handleInput}
             min={1}
           />
