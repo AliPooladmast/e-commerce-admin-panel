@@ -26,30 +26,14 @@ const EditProduct = ({ product, productId }) => {
   const [colors, setColors] = useState(product?.color);
 
   const handleInput = (e) => {
-    setDraftProduct((prev) => {
-      if (e.target.value) {
-        return { ...prev, [e.target.name]: e.target.value };
-      } else {
-        delete prev[e.target.name];
-        return prev;
-      }
-    });
+    setDraftProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleMultipleInput = (e) => {
-    setMultipleInput((prev) => {
-      if (e.target.value) {
-        return {
-          ...prev,
-          [e.target.name]: e.target.value
-            ?.split(",")
-            ?.map((item) => item.trim()),
-        };
-      } else {
-        delete prev[e.target.name];
-        return prev;
-      }
-    });
+    setMultipleInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value?.split(",")?.map((item) => item.trim()),
+    }));
   };
 
   const handleImage = (e) => {
