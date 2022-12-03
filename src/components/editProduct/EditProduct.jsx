@@ -19,6 +19,7 @@ const EditProduct = ({ product, productId }) => {
   const [draftProduct, setDraftProduct] = useState(product);
   const [multipleInput, setMultipleInput] = useState({
     categories: product?.categories,
+    size: product?.size,
   });
   const [progress, setProgress] = useState(0);
   const [image, setImage] = useState(product?.img);
@@ -33,6 +34,8 @@ const EditProduct = ({ product, productId }) => {
       }
     });
   };
+
+  console.log(multipleInput);
 
   const handleMultipleInput = (e) => {
     setMultipleInput((prev) => {
@@ -127,6 +130,14 @@ const EditProduct = ({ product, productId }) => {
             name="categories"
             type="text"
             value={multipleInput?.categories}
+            onChange={handleMultipleInput}
+          />
+
+          <label>Sizes</label>
+          <input
+            name="size"
+            type="text"
+            value={multipleInput?.size}
             onChange={handleMultipleInput}
           />
 
