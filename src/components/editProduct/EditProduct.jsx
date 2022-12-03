@@ -17,7 +17,7 @@ const storage = getStorage(app);
 const EditProduct = ({ product, productId }) => {
   const dispatch = useDispatch();
   const [draftProduct, setDraftProduct] = useState(product);
-  const [categories, setCategories] = useState(product.categories);
+  const [categories, setCategories] = useState(product?.categories);
   const [progress, setProgress] = useState(0);
   const [image, setImage] = useState(null);
 
@@ -84,7 +84,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="title"
             type="text"
-            placeholder={product.title}
+            placeholder={product?.title}
             onChange={handleInput}
           />
 
@@ -92,7 +92,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="desc"
             type="text"
-            placeholder={product.desc}
+            placeholder={product?.desc}
             onChange={handleInput}
           />
 
@@ -100,14 +100,14 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="price"
             type="text"
-            placeholder={product.price}
+            placeholder={product?.price}
             onChange={handleInput}
           />
 
           <label>Categories</label>
           <input
             type="text"
-            placeholder={product.categories}
+            placeholder={product?.categories}
             onChange={handleCategory}
           />
 
@@ -121,7 +121,7 @@ const EditProduct = ({ product, productId }) => {
         <div className={style.Upload}>
           <div className={style.FileUpload}>
             <div className={style.ImageContainer}>
-              <img src={image || product.img} alt="upload product" />
+              <img src={image || product?.img} alt="upload product" />
               <label htmlFor="file">
                 <Publish />
               </label>
