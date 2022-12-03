@@ -22,10 +22,14 @@ const EditProduct = ({ product, productId }) => {
   const [image, setImage] = useState(product?.img);
 
   const handleInput = (e) => {
-    setDraftProduct((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setDraftProduct((prev) => {
+      if (e.target.value) {
+        return { ...prev, [e.target.name]: e.target.value };
+      } else {
+        delete prev[e.target.name];
+        return prev;
+      }
+    });
   };
 
   const handleCategory = (e) => {
