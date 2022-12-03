@@ -29,7 +29,9 @@
   }
 
   label {
-    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
   }
 
   select {
@@ -38,11 +40,20 @@
   }
 
   input {
-    margin-bottom: 20px;
     border: none;
-    padding: 5px;
-    border-bottom: 1px solid lightgray;
-    width: 150px;
+    border-bottom: 1px solid grey;
+    width: 15vw;
+    min-width: 150px;
+    height: 30px;
+    padding: 0 2px;
+    color: darkblue;
+    margin-bottom: 20px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid lightgrey;
+      border-bottom: 1px solid grey;
+    }
 
     @media only screen and (max-width: 500px) {
       width: 100%;
