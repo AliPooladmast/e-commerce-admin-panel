@@ -9,7 +9,7 @@ import app from "../../firebase";
 import { editProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import style from "./editProduct.module.scss";
-import { Publish } from "@mui/icons-material";
+import { AddCircle, Publish } from "@mui/icons-material";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 
 const storage = getStorage(app);
@@ -23,6 +23,7 @@ const EditProduct = ({ product, productId }) => {
   });
   const [progress, setProgress] = useState(0);
   const [image, setImage] = useState(product?.img);
+  const [colors, setColors] = useState(product?.color);
 
   const handleInput = (e) => {
     setDraftProduct((prev) => {
@@ -34,8 +35,6 @@ const EditProduct = ({ product, productId }) => {
       }
     });
   };
-
-  console.log(multipleInput);
 
   const handleMultipleInput = (e) => {
     setMultipleInput((prev) => {
@@ -146,6 +145,30 @@ const EditProduct = ({ product, productId }) => {
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
+
+          <label className={style.ColorTitle}>
+            <div>Colors</div>
+            <AddCircle
+              className={style.AddIcon}
+              onClick={() => setColors((prev) => [...prev, "#000000"])}
+            />
+          </label>
+          <div className={style.ColorContainer}>
+            {colors.map((color, index) => (
+              <input
+                type="color"
+                value={color}
+                className={style.ColorInput}
+                key={index}
+                onChange={(e) =>
+                  setColors((prev) => {
+                    prev[index] = e.target.value;
+                    return [...prev];
+                  })
+                }
+              />
+            ))}
+          </div>
         </div>
 
         <div className={style.Upload}>
