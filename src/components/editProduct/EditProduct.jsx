@@ -19,7 +19,7 @@ const EditProduct = ({ product, productId }) => {
   const [draftProduct, setDraftProduct] = useState(product);
   const [categories, setCategories] = useState(product?.categories);
   const [progress, setProgress] = useState(0);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(product?.img);
 
   const handleInput = (e) => {
     setDraftProduct((prev) => ({
@@ -84,7 +84,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="title"
             type="text"
-            placeholder={product?.title}
+            value={draftProduct?.title}
             onChange={handleInput}
           />
 
@@ -92,7 +92,7 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="desc"
             type="text"
-            placeholder={product?.desc}
+            value={draftProduct?.desc}
             onChange={handleInput}
           />
 
@@ -100,14 +100,14 @@ const EditProduct = ({ product, productId }) => {
           <input
             name="price"
             type="text"
-            placeholder={product?.price}
+            value={draftProduct?.price}
             onChange={handleInput}
           />
 
           <label>Categories</label>
           <input
             type="text"
-            placeholder={product?.categories}
+            value={draftProduct?.categories}
             onChange={handleCategory}
           />
 
@@ -121,7 +121,7 @@ const EditProduct = ({ product, productId }) => {
         <div className={style.Upload}>
           <div className={style.FileUpload}>
             <div className={style.ImageContainer}>
-              <img src={image || product?.img} alt="upload product" />
+              <img src={image} alt="upload product" />
               <label htmlFor="file">
                 <Publish />
               </label>
