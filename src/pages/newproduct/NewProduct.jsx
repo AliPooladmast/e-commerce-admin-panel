@@ -34,7 +34,7 @@ const NewProduct = () => {
   const dispatch = useDispatch();
   const { success } = useSelector((state) => state.product);
   const [input, setInput] = useState({});
-  const [multipleInput, setMultipleInput] = useState([]);
+  const [multipleInput, setMultipleInput] = useState({});
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState(0);
   const [colors, setColors] = useState(["#000000"]);
