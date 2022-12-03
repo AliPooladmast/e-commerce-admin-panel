@@ -1,0 +1,62 @@
+@use "src/styles";
+
+.InfoContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
+  margin-right: 20px;
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
+
+  .Details {
+    .Item {
+      margin-bottom: 15px;
+      border-bottom: 1px solid lightgrey;
+    }
+  }
+
+  .ImageContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    span {
+      font-weight: 600;
+    }
+
+    img {
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+  }
+}
+
+.Details {
+  margin-top: 10px;
+  width: 100%;
+
+  .Item {
+    min-width: 200px;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-size: 14px;
+    }
+
+    .Value {
+      font-weight: 300;
+    }
+  }
+}
