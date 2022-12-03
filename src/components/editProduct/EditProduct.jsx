@@ -11,8 +11,21 @@ import { useDispatch } from "react-redux";
 import style from "./editProduct.module.scss";
 import { AddCircle, Publish } from "@mui/icons-material";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
+import { setMessage } from "../../redux/uxSlice";
 
 const storage = getStorage(app);
+
+const Joi = require("joi");
+const schema = Joi.object({
+  title: Joi.string().min(3).max(50).required().trim(),
+  desc: Joi.string().min(3).max(1024),
+  img: Joi.string().min(0),
+  categories: Joi.array().max(10).items(Joi.string().min(1).max(20)),
+  size: Joi.array().required().max(10).items(Joi.string().min(1).max(5)),
+  color: Joi.array().required().max(10).items(Joi.string().min(1).max(20)),
+  price: Joi.number().min(1).required(),
+  inStock: Joi.number().min(1).required(),
+});
 
 const EditProduct = ({ product, productId }) => {
   const dispatch = useDispatch();
@@ -76,8 +89,31 @@ const EditProduct = ({ product, productId }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const editedProduct = { ...draftProduct, img: image };
-    editProduct(dispatch, productId, editedProduct);
+
+    const { title, desc, price, inStock } = draftProduct;
+
+    const editedProduct = {
+      title,
+      desc,
+      price,
+      inStock,
+      ...multipleInput,
+      color: colors,
+      img: image,
+    };
+
+    const { error: joiError } = schema.validate(editedProduct);
+
+    if (joiError) {
+      dispatch(
+        setMessage({
+          type: "error",
+          text: joiError.details?.[0]?.message?.toString(),
+        })
+      );
+    } else {
+      editProduct(dispatch, productId, editedProduct);
+    }
   };
 
   return (
