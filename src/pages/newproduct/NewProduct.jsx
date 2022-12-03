@@ -218,8 +218,9 @@ const NewProduct = () => {
                   key={index}
                   onChange={(e) =>
                     setColors((prev) => {
-                      prev[index] = e.target.value;
-                      return [...prev];
+                      const mColors = [...prev];
+                      mColors[index] = e.target.value;
+                      return mColors;
                     })
                   }
                 />
