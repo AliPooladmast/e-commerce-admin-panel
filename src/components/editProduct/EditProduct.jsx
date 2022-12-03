@@ -141,10 +141,13 @@ const EditProduct = ({ product, productId }) => {
           />
 
           <label>Stock</label>
-          <select name="inStock" id="inStock" onChange={handleInput}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
+          <input
+            name="inStock"
+            type="number"
+            value={draftProduct?.inStock}
+            onChange={handleInput}
+            min={1}
+          />
 
           <label className={style.ColorTitle}>
             <div>Colors</div>
