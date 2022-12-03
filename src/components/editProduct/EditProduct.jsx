@@ -126,6 +126,7 @@ const EditProduct = ({ product, productId }) => {
             type="text"
             value={draftProduct?.title || ""}
             onChange={handleInput}
+            placeholder="title"
           />
 
           <label>Description</label>
@@ -134,6 +135,7 @@ const EditProduct = ({ product, productId }) => {
             type="text"
             value={draftProduct?.desc || ""}
             onChange={handleInput}
+            placeholder="description"
           />
 
           <label>Price</label>
@@ -142,6 +144,7 @@ const EditProduct = ({ product, productId }) => {
             type="text"
             value={draftProduct?.price || ""}
             onChange={handleInput}
+            placeholder="price"
           />
 
           <label>Categories</label>
@@ -150,6 +153,7 @@ const EditProduct = ({ product, productId }) => {
             type="text"
             value={multipleInput?.categories || ""}
             onChange={handleMultipleInput}
+            placeholder="categories"
           />
 
           <label>Sizes</label>
@@ -158,6 +162,7 @@ const EditProduct = ({ product, productId }) => {
             type="text"
             value={multipleInput?.size || ""}
             onChange={handleMultipleInput}
+            placeholder="sizes"
           />
 
           <label>Stock</label>
@@ -167,6 +172,7 @@ const EditProduct = ({ product, productId }) => {
             value={draftProduct?.inStock || ""}
             onChange={handleInput}
             min={1}
+            placeholder="stock number"
           />
 
           <label className={style.ColorTitle}>
