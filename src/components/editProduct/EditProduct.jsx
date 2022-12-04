@@ -120,84 +120,98 @@ const EditProduct = ({ product, productId }) => {
     <div className={style.EditProduct}>
       <form>
         <div className={style.EditDetails}>
-          <label>Title</label>
-          <input
-            name="title"
-            type="text"
-            value={draftProduct?.title || ""}
-            onChange={handleInput}
-            placeholder="title"
-          />
-
-          <label>Description</label>
-          <input
-            name="desc"
-            type="text"
-            value={draftProduct?.desc || ""}
-            onChange={handleInput}
-            placeholder="description"
-          />
-
-          <label>Price</label>
-          <input
-            name="price"
-            type="text"
-            value={draftProduct?.price || ""}
-            onChange={handleInput}
-            placeholder="price"
-          />
-
-          <label>Categories</label>
-          <input
-            name="categories"
-            type="text"
-            value={multipleInput?.categories || ""}
-            onChange={handleMultipleInput}
-            placeholder="categories"
-          />
-
-          <label>Sizes</label>
-          <input
-            name="size"
-            type="text"
-            value={multipleInput?.size || ""}
-            onChange={handleMultipleInput}
-            placeholder="sizes"
-          />
-
-          <label>Stock</label>
-          <input
-            name="inStock"
-            type="number"
-            value={draftProduct?.inStock || ""}
-            onChange={handleInput}
-            min={1}
-            placeholder="stock number"
-          />
-
-          <label className={style.ColorTitle}>
-            <div>Colors</div>
-            <AddCircle
-              className={style.AddIcon}
-              onClick={() => setColors((prev) => [...prev, "#000000"])}
+          <div className={style.Item}>
+            <label>Title</label>
+            <input
+              name="title"
+              type="text"
+              value={draftProduct?.title || ""}
+              onChange={handleInput}
+              placeholder="title"
             />
-          </label>
-          <div className={style.ColorContainer}>
-            {colors.map((color, index) => (
-              <input
-                type="color"
-                value={color}
-                className={style.ColorInput}
-                key={index}
-                onChange={(e) =>
-                  setColors((prev) => {
-                    const mColors = [...prev];
-                    mColors[index] = e.target.value;
-                    return mColors;
-                  })
-                }
+          </div>
+
+          <div className={style.Item}>
+            <label>Description</label>
+            <input
+              name="desc"
+              type="text"
+              value={draftProduct?.desc || ""}
+              onChange={handleInput}
+              placeholder="description"
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Price</label>
+            <input
+              name="price"
+              type="text"
+              value={draftProduct?.price || ""}
+              onChange={handleInput}
+              placeholder="price"
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Categories</label>
+            <input
+              name="categories"
+              type="text"
+              value={multipleInput?.categories || ""}
+              onChange={handleMultipleInput}
+              placeholder="categories"
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Sizes</label>
+            <input
+              name="size"
+              type="text"
+              value={multipleInput?.size || ""}
+              onChange={handleMultipleInput}
+              placeholder="sizes"
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label>Stock</label>
+            <input
+              name="inStock"
+              type="number"
+              value={draftProduct?.inStock || ""}
+              onChange={handleInput}
+              min={1}
+              placeholder="stock number"
+            />
+          </div>
+
+          <div className={style.Item}>
+            <label className={style.ColorTitle}>
+              <div>Colors</div>
+              <AddCircle
+                className={style.AddIcon}
+                onClick={() => setColors((prev) => [...prev, "#000000"])}
               />
-            ))}
+            </label>
+            <div className={style.ColorContainer}>
+              {colors.map((color, index) => (
+                <input
+                  type="color"
+                  value={color}
+                  className={style.ColorInput}
+                  key={index}
+                  onChange={(e) =>
+                    setColors((prev) => {
+                      const mColors = [...prev];
+                      mColors[index] = e.target.value;
+                      return mColors;
+                    })
+                  }
+                />
+              ))}
+            </div>
           </div>
         </div>
 
