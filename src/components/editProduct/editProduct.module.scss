@@ -20,12 +20,21 @@
 }
 
 .EditDetails {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 10px;
+  grid-auto-rows: minmax(30px, auto);
+  margin-right: 20px;
 
   @media only screen and (max-width: 500px) {
+    gap: 10px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 380px) {
+    grid-template-columns: repeat(1, 1fr);
     width: 100%;
-    margin-bottom: 10px;
   }
 
   label {
