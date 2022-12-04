@@ -43,11 +43,19 @@ const WidgetSmall = ({ users, isFetching }) => {
                   >
                     <Skeleton
                       variant="circular"
-                      height={40}
-                      width={40}
-                      style={{ marginRight: "20px" }}
+                      style={{
+                        marginRight: "20px",
+                        minWidth: "40px",
+                        minHeight: "40px",
+                      }}
                     />
-                    <Skeleton width={200} height={20} animation="wave" />
+                    <Skeleton
+                      animation="wave"
+                      style={{
+                        flex: 1,
+                        minHeight: "20px",
+                      }}
+                    />
                   </div>
                 ))
             : users?.map((user) => (
