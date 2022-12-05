@@ -92,17 +92,17 @@ export default function AccountMenu() {
             {user?.img ? (
               <img
                 style={{
-                  height: "35px",
-                  width: "35px",
+                  height: "30px",
+                  width: "30px",
                   borderRadius: "50%",
                 }}
                 src={user?.img}
                 alt="profile"
               />
             ) : (
-              <Avatar />
+              <Avatar style={{ height: "30px", width: "30px" }} />
             )}
-            Edit Profile
+            <span style={{ fontSize: "14px" }}>Edit Profile</span>
           </MenuItem>
         </Link>
 
@@ -114,17 +114,17 @@ export default function AccountMenu() {
         >
           <MenuItem>
             <ListItemIcon>
-              <PersonAdd fontSize="medium" />
+              <PersonAdd fontSize="small" />
             </ListItemIcon>
-            Add New User
+            <span style={{ fontSize: "14px" }}>New User</span>
           </MenuItem>
         </Link>
 
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
-            <Logout fontSize="medium" />
+            <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          <span style={{ fontSize: "14px" }}>Logout</span>
         </MenuItem>
       </Menu>
     </>

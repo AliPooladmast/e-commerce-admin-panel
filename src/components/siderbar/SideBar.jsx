@@ -2,15 +2,15 @@ import {
   AssessmentOutlined,
   AttachMoney,
   Category,
-  DynamicFeedOutlined,
   LineStyle,
-  MailOutline,
-  MessageOutlined,
   Person,
-  ReportOutlined,
   Timeline,
   TrendingUp,
-  WorkOutline,
+  // DynamicFeedOutlined,
+  // MailOutline,
+  // MessageOutlined,
+  // ReportOutlined,
+  // WorkOutline,
 } from "@mui/icons-material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,7 +91,7 @@ const SideBar = () => {
               </li>
             </ul>
           </div>
-          <div className={style.Menu}>
+          {/* <div className={style.Menu}>
             <h1>Notifications</h1>
             <ul>
               <li className={style.Disable}>
@@ -124,7 +124,7 @@ const SideBar = () => {
                 Reports
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

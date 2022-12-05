@@ -31,7 +31,7 @@ const storage = getStorage(app);
 const EditUser = ({ user }) => {
   const dispatch = useDispatch();
   const [draftUser, setDraftUser] = useState(user);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(user?.img);
   const [progress, setProgress] = useState(0);
 
   const handleInput = (e) => {
@@ -78,7 +78,15 @@ const EditUser = ({ user }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const { username, email, fullname, phone, address, ...others } = draftUser;
+    const {
+      username,
+      email,
+      fullname,
+      phone,
+      address,
+      _id: userId,
+    } = draftUser;
+
     const { error: joiError } = schema.validate({
       username,
       email,
@@ -102,10 +110,9 @@ const EditUser = ({ user }) => {
         phone,
         address,
         img: image,
-        ...others,
       };
 
-      editUser(dispatch, editedUser);
+      editUser(dispatch, userId, editedUser);
     }
   };
 
@@ -119,7 +126,7 @@ const EditUser = ({ user }) => {
             <input
               name="username"
               type="text"
-              value={draftUser.username}
+              value={draftUser?.username || ""}
               onChange={handleInput}
               placeholder="username"
             />
@@ -128,7 +135,7 @@ const EditUser = ({ user }) => {
             <label>Full Name</label>
             <input
               type="text"
-              value={draftUser.fullName}
+              value={draftUser?.fullname || ""}
               name="fullname"
               onChange={handleInput}
               placeholder="fullname"
@@ -138,7 +145,7 @@ const EditUser = ({ user }) => {
             <label>Phone Number</label>
             <input
               type="tel"
-              value={draftUser.phone}
+              value={draftUser?.phone || ""}
               name="phone"
               onChange={handleInput}
               placeholder="phone"
@@ -149,7 +156,7 @@ const EditUser = ({ user }) => {
             <input
               name="email"
               type="email"
-              value={draftUser.email}
+              value={draftUser?.email || ""}
               onChange={handleInput}
               placeholder="email"
             />
@@ -158,7 +165,7 @@ const EditUser = ({ user }) => {
             <label>Address</label>
             <input
               type="text"
-              value={draftUser.address}
+              value={draftUser?.address || ""}
               name="address"
               onChange={handleInput}
               placeholder="address"
@@ -168,7 +175,7 @@ const EditUser = ({ user }) => {
         <div className={style.Right}>
           <div className={style.Upload}>
             <div className={style.ImageContainer}>
-              <img src={image || user.img || noAvatar} alt="edit profile" />
+              <img src={image || noAvatar} alt="edit profile" />
               {Boolean(progress) && progress !== 100 ? (
                 <LinearProgressWithLabel value={progress} />
               ) : Boolean(progress) && progress === 100 ? (

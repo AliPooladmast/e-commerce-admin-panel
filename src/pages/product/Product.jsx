@@ -1,22 +1,13 @@
 import style from "./product.module.scss";
 import Chart from "../../components/chart/Chart";
-import { Publish } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import app from "../../firebase";
-import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
-import { editProduct } from "../../redux/apiCalls";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { setMessage } from "../../redux/uxSlice";
-const storage = getStorage(app);
+import ProductInfo from "../../components/productInfo/ProductInfo";
+import EditProduct from "../../components/editProduct/EditProduct";
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -27,65 +18,6 @@ const Product = () => {
   const product = useSelector((state) =>
     state.product.products.find((item) => item._id === productId)
   );
-  const [draftProduct, setDraftProduct] = useState(product);
-  const [categories, setCategories] = useState(product.categories);
-  const [progress, setProgress] = useState(0);
-  const [image, setImage] = useState(null);
-
-  const handleInput = (e) => {
-    setDraftProduct((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleCategory = (e) => {
-    setCategories(e.target.value?.split(",")?.map((item) => item.trim()));
-  };
-
-  const handleImage = (e) => {
-    const file = e.target.files?.[0];
-    const fileName = new Date().getTime() + file?.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        switch (snapshot.state) {
-          case "paused":
-            break;
-          case "running":
-            break;
-          default:
-        }
-      },
-      (error) => {
-        switch (error.code) {
-          case "storage/unauthorized":
-            break;
-          case "storage/canceled":
-            break;
-
-          case "storage/unknown":
-            break;
-          default:
-        }
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImage(downloadURL);
-        });
-      }
-    );
-  };
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-    const editedProduct = { ...draftProduct, categories, img: image };
-    editProduct(dispatch, productId, editedProduct);
-  };
 
   const MONTH = useMemo(
     () => [
@@ -146,104 +78,8 @@ const Product = () => {
       />
 
       <div className={style.Product}>
-        <div className={style.InfoContainer}>
-          <div className={style.ImageContainer}>
-            <img src={product.img} alt="product view" />
-            <span>{product.title}</span>
-          </div>
-
-          <div className={style.Details}>
-            <div className={style.Item}>
-              <span className={style.Key}>Description:</span>
-              <span className={style.Value}>{product.desc}</span>
-            </div>
-
-            <div className={style.Item}>
-              <span className={style.Key}>Sales:</span>
-              <span className={style.Value}>{product.price}</span>
-            </div>
-
-            <div className={style.Item}>
-              <span className={style.Key}>Categories:</span>
-              <span className={style.Value}>
-                {product.categories?.join(", ")}
-              </span>
-            </div>
-
-            <div className={style.Item}>
-              <span className={style.Key}>In stock:</span>
-              <span className={style.Value}>
-                {product.inStock ? "Yes" : "No"}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className={style.EditProduct}>
-          <form>
-            <div className={style.EditDetails}>
-              <label>Title</label>
-              <input
-                name="title"
-                type="text"
-                placeholder={product.title}
-                onChange={handleInput}
-              />
-
-              <label>Description</label>
-              <input
-                name="desc"
-                type="text"
-                placeholder={product.desc}
-                onChange={handleInput}
-              />
-
-              <label>Price</label>
-              <input
-                name="price"
-                type="text"
-                placeholder={product.price}
-                onChange={handleInput}
-              />
-
-              <label>Categories</label>
-              <input
-                type="text"
-                placeholder={product.categories}
-                onChange={handleCategory}
-              />
-
-              <label>Stock</label>
-              <select name="inStock" id="inStock" onChange={handleInput}>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-
-            <div className={style.Upload}>
-              <div className={style.FileUpload}>
-                <div className={style.ImageContainer}>
-                  <img src={image || product.img} alt="upload product" />
-                  <label htmlFor="file">
-                    <Publish />
-                  </label>
-                </div>
-
-                <div>
-                  {Boolean(progress) && progress !== 100 ? (
-                    <LinearProgressWithLabel value={progress} />
-                  ) : Boolean(progress) && progress === 100 ? (
-                    <div className={style.Uploaded}>File Uploaded</div>
-                  ) : null}
-                </div>
-
-                <input type="file" id="file" onChange={handleImage} />
-              </div>
-
-              <button onClick={handleEdit}>Update</button>
-            </div>
-          </form>
-        </div>
+        <ProductInfo product={product} />
+        <EditProduct product={product} productId={productId} />
       </div>
     </>
   );

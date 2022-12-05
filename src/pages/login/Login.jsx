@@ -1,4 +1,3 @@
-import { Backdrop, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -69,13 +68,6 @@ const Login = () => {
           </div>
         </form>
       </div>
-
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={isFetching}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
     </div>
   );
 };

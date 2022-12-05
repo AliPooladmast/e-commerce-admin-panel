@@ -9,10 +9,10 @@ $modal-width: 80%;
   -webkit-box-shadow: styles.$shadow;
   -moz-box-shadow: styles.$shadow;
   box-shadow: styles.$shadow;
-  padding: 30px;
   animation: slide-down 300ms ease-out forwards;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   width: $modal-width;
   left: calc((100% - $modal-width) / 2);
@@ -25,6 +25,12 @@ $modal-width: 80%;
   @media only screen and (max-width: 660px) {
     padding: 20px;
   }
+}
+
+.Wrapper {
+  overflow: auto;
+  height: inherit;
+  padding: 30px;
 }
 
 .Header {
@@ -80,6 +86,4 @@ $modal-width: 80%;
 
 .Children {
   flex-grow: 1;
-  overflow-x: auto;
-  overflow-y: hidden;
 }

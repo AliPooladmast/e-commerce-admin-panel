@@ -1,0 +1,147 @@
+@use "src/styles";
+
+.EditProduct {
+  flex: 3;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: styles.$shadow;
+  -moz-box-shadow: styles.$shadow;
+  box-shadow: styles.$shadow;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+
+    @media only screen and (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+.EditDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 10px;
+  grid-auto-rows: minmax(30px, auto);
+  margin-right: 20px;
+
+  @media only screen and (max-width: 500px) {
+    gap: 10px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 380px) {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+
+  .Item {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    > input {
+      border: 1px solid grey;
+      border-radius: 5px;
+      max-width: 250px;
+      width: 100%;
+      height: 30px;
+      padding: 0 5px;
+      color: darkblue;
+
+      &:focus {
+        outline: none;
+        border: 1px solid black;
+      }
+
+      @media only screen and (max-width: 500px) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.Upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  button {
+    border: none;
+    padding: 10px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+}
+
+.FileUpload {
+  display: flex;
+  flex-direction: column;
+
+  .ImageContainer {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid lightgrey;
+    }
+
+    label {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.Uploaded {
+  text-align: center;
+  background-color: orange;
+  border: 1px solid orange;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
+  width: fit-content;
+}
+
+.ColorTitle {
+  display: flex;
+  align-items: center;
+
+  .AddIcon {
+    margin-left: 3px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}
+
+.ColorContainer {
+  margin-top: 5px;
+
+  .ColorInput {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0 2px;
+    border: 1px solid grey;
+    border-radius: 2px;
+  }
+}

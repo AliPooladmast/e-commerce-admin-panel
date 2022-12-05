@@ -1,5 +1,4 @@
 import { useState } from "react";
-import style from "./newProduct.module.scss";
 import {
   getStorage,
   ref,
@@ -7,17 +6,16 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import app from "../../firebase";
-import { addProduct } from "../../redux/apiCalls";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { editProduct } from "../../redux/apiCalls";
+import { useDispatch } from "react-redux";
+import style from "./editProduct.module.scss";
+import { AddCircle, Publish } from "@mui/icons-material";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
-import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { setMessage } from "../../redux/uxSlice";
-import { AddCircle } from "@mui/icons-material";
-import useUpdate from "../../hook/useUpdate";
-const storage = getStorage(app);
-const Joi = require("joi");
 
+const storage = getStorage(app);
+
+const Joi = require("joi");
 const schema = Joi.object({
   title: Joi.string().min(3).max(50).required().trim(),
   desc: Joi.string().min(3).max(1024),
@@ -29,41 +27,26 @@ const schema = Joi.object({
   inStock: Joi.number().min(1).required(),
 });
 
-const NewProduct = () => {
-  const navigate = useNavigate();
+const EditProduct = ({ product, productId }) => {
   const dispatch = useDispatch();
-  const { success } = useSelector((state) => state.product);
-  const [input, setInput] = useState({});
-  const [multipleInput, setMultipleInput] = useState({});
-  const [image, setImage] = useState("");
+  const [draftProduct, setDraftProduct] = useState(product);
+  const [multipleInput, setMultipleInput] = useState({
+    categories: product?.categories,
+    size: product?.size,
+  });
   const [progress, setProgress] = useState(0);
-  const [colors, setColors] = useState(["#000000"]);
+  const [image, setImage] = useState(product?.img);
+  const [colors, setColors] = useState(product?.color);
 
   const handleInput = (e) => {
-    setInput((prev) => {
-      if (e.target.value) {
-        return { ...prev, [e.target.name]: e.target.value };
-      } else {
-        delete prev[e.target.name];
-        return prev;
-      }
-    });
+    setDraftProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleMultipleInput = (e) => {
-    setMultipleInput((prev) => {
-      if (e.target.value) {
-        return {
-          ...prev,
-          [e.target.name]: e.target.value
-            ?.split(",")
-            ?.map((item) => item.trim()),
-        };
-      } else {
-        delete prev[e.target.name];
-        return prev;
-      }
-    });
+    setMultipleInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value?.split(",")?.map((item) => item.trim()),
+    }));
   };
 
   const handleImage = (e) => {
@@ -76,14 +59,21 @@ const NewProduct = () => {
       "state_changed",
       (snapshot) => {
         setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        switch (snapshot.state) {
+          case "paused":
+            break;
+          case "running":
+            break;
+          default:
+        }
       },
       (error) => {
-        dispatch(setMessage({ type: "error", text: error.code?.toString() }));
         switch (error.code) {
           case "storage/unauthorized":
             break;
           case "storage/canceled":
             break;
+
           case "storage/unknown":
             break;
           default:
@@ -97,10 +87,22 @@ const NewProduct = () => {
     );
   };
 
-  const handleCreate = (e) => {
+  const handleEdit = (e) => {
     e.preventDefault();
-    const product = { ...input, ...multipleInput, color: colors, img: image };
-    const { error: joiError } = schema.validate(product);
+
+    const { title, desc, price, inStock } = draftProduct;
+
+    const editedProduct = {
+      title,
+      desc,
+      price,
+      inStock,
+      ...multipleInput,
+      color: colors,
+      img: image,
+    };
+
+    const { error: joiError } = schema.validate(editedProduct);
 
     if (joiError) {
       dispatch(
@@ -110,30 +112,22 @@ const NewProduct = () => {
         })
       );
     } else {
-      addProduct(dispatch, product);
+      editProduct(dispatch, productId, editedProduct);
     }
   };
 
-  useUpdate(() => {
-    success && navigate("/products");
-  }, [success]); //eslint-disable-line
-
   return (
-    <div className={style.NewProductComponent}>
-      <h1>New Product</h1>
-
+    <div className={style.EditProduct}>
       <form>
-        <div className={style.Left}>
+        <div className={style.EditDetails}>
           <div className={style.Item}>
-            <label>
-              Title<span>*</span>
-            </label>
+            <label>Title</label>
             <input
               name="title"
               type="text"
-              placeholder="product title"
+              value={draftProduct?.title || ""}
               onChange={handleInput}
-              className={style.Input}
+              placeholder="title"
             />
           </div>
 
@@ -142,22 +136,20 @@ const NewProduct = () => {
             <input
               name="desc"
               type="text"
-              placeholder="description..."
+              value={draftProduct?.desc || ""}
               onChange={handleInput}
-              className={style.Input}
+              placeholder="description"
             />
           </div>
 
           <div className={style.Item}>
-            <label>
-              Price<span>*</span>
-            </label>
+            <label>Price</label>
             <input
               name="price"
-              type="number"
-              placeholder="100"
+              type="text"
+              value={draftProduct?.price || ""}
               onChange={handleInput}
-              className={style.Input}
+              placeholder="price"
             />
           </div>
 
@@ -166,44 +158,38 @@ const NewProduct = () => {
             <input
               name="categories"
               type="text"
-              placeholder="jeans, t-shirts, ..."
+              value={multipleInput?.categories || ""}
               onChange={handleMultipleInput}
-              className={style.Input}
+              placeholder="categories"
             />
           </div>
 
           <div className={style.Item}>
-            <label>
-              Sizes<span>*</span>
-            </label>
+            <label>Sizes</label>
             <input
               name="size"
               type="text"
-              placeholder="L, XL, ..."
+              value={multipleInput?.size || ""}
               onChange={handleMultipleInput}
-              className={style.Input}
+              placeholder="sizes"
             />
           </div>
 
           <div className={style.Item}>
-            <label>
-              Stock<span>*</span>
-            </label>
+            <label>Stock</label>
             <input
               name="inStock"
               type="number"
-              placeholder="1"
+              value={draftProduct?.inStock || ""}
               onChange={handleInput}
-              className={style.Input}
               min={1}
+              placeholder="stock number"
             />
           </div>
 
           <div className={style.Item}>
             <label className={style.ColorTitle}>
-              <div>
-                Colors<span>*</span>
-              </div>
+              <div>Colors</div>
               <AddCircle
                 className={style.AddIcon}
                 onClick={() => setColors((prev) => [...prev, "#000000"])}
@@ -229,24 +215,31 @@ const NewProduct = () => {
           </div>
         </div>
 
-        <div className={style.Right}>
-          <div className={style.Image}>
-            {image && <img src={image} alt="upload product" />}
+        <div className={style.Upload}>
+          <div className={style.FileUpload}>
+            <div className={style.ImageContainer}>
+              <img src={image} alt="upload product" />
+              <label htmlFor="file">
+                <Publish />
+              </label>
+            </div>
+
+            <div>
+              {Boolean(progress) && progress !== 100 ? (
+                <LinearProgressWithLabel value={progress} />
+              ) : Boolean(progress) && progress === 100 ? (
+                <div className={style.Uploaded}>File Uploaded</div>
+              ) : null}
+            </div>
 
             <input type="file" id="file" onChange={handleImage} />
-
-            {Boolean(progress) && progress !== 100 ? (
-              <LinearProgressWithLabel value={progress} />
-            ) : Boolean(progress) && progress === 100 ? (
-              <div className={style.Uploaded}>File Uploaded</div>
-            ) : null}
-
-            <button onClick={handleCreate}>Create</button>
           </div>
+
+          <button onClick={handleEdit}>Update</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default AddMarginToPage(NewProduct);
+export default EditProduct;

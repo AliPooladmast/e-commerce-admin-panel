@@ -10,7 +10,7 @@ import NewUser from "./pages/newuser/NewUser";
 import { useDispatch, useSelector } from "react-redux";
 import { forwardRef, useEffect } from "react";
 import MuiAlert from "@mui/material/Alert";
-import { Snackbar } from "@mui/material";
+import { Backdrop, CircularProgress, Snackbar } from "@mui/material";
 import { setMessage } from "./redux/uxSlice";
 
 const Alert = forwardRef(function Alert(props, ref) {
@@ -20,7 +20,10 @@ const Alert = forwardRef(function Alert(props, ref) {
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, isFetching: userLoading } = useSelector(
+    (state) => state.user
+  );
+  const { isFetching: productLoading } = useSelector((state) => state.product);
   const { message } = useSelector((state) => state.ux);
 
   const handleClose = (event, reason) => {
@@ -55,6 +58,13 @@ function App() {
           </Alert>
         </Snackbar>
       )}
+
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={userLoading || productLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
 
       <Routes>
         <Route path="/login" element={<Login />} />

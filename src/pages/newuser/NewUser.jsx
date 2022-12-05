@@ -10,7 +10,7 @@ const Joi = require("joi");
 
 const schema = Joi.object({
   username: Joi.string().min(2).max(50).required(),
-  fullname: Joi.string().min(2).max(50),
+  fullname: Joi.string().min(5).max(50),
   phone: Joi.string().min(5).max(20),
   address: Joi.string().min(5).max(511),
   email: Joi.string()
@@ -20,21 +20,31 @@ const schema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
   password: Joi.string().min(5).max(1024).required(),
   confirmPassword: Joi.ref("password"),
-});
+  isAdmin: Joi.boolean(),
+}).with("password", "confirmPassword");
 
 const NewUser = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { success } = useSelector((state) => state.user);
-  const [input, setInput] = useState({ isAdmin: false });
+  const [input, setInput] = useState({});
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleInput = (e) => {
-    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setInput((prev) => {
+      if (e.target.value) {
+        return { ...prev, [e.target.name]: e.target.value };
+      } else {
+        delete prev[e.target.name];
+        return prev;
+      }
+    });
   };
 
   const handleCreate = (e) => {
     e.preventDefault();
-    const { error: joiError } = schema.validate(input);
+    const userInput = { ...input, isAdmin: isAdmin };
+    const { error: joiError } = schema.validate(userInput);
     if (joiError) {
       dispatch(
         setMessage({
@@ -43,7 +53,7 @@ const NewUser = () => {
         })
       );
     } else {
-      const { confirmPassword, ...others } = input;
+      const { confirmPassword, ...others } = userInput;
       addUser(dispatch, others);
     }
   };
@@ -72,7 +82,12 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Full Name</label>
-            <input type="text" placeholder="enter full name" />
+            <input
+              type="text"
+              placeholder="enter full name"
+              name="fullname"
+              onChange={handleInput}
+            />
           </div>
 
           <div className={style.Item}>
@@ -113,12 +128,22 @@ const NewUser = () => {
 
           <div className={style.Item}>
             <label>Phone</label>
-            <input type="text" placeholder="enter phone number" />
+            <input
+              type="text"
+              placeholder="enter phone number"
+              name="phone"
+              onChange={handleInput}
+            />
           </div>
 
           <div className={style.Item}>
             <label>Address</label>
-            <input type="text" placeholder="enter address" />
+            <input
+              type="text"
+              placeholder="enter address"
+              name="address"
+              onChange={handleInput}
+            />
           </div>
 
           <div className={style.Item}>
@@ -128,8 +153,12 @@ const NewUser = () => {
             <select
               name="isAdmin"
               id="admin"
-              onChange={handleInput}
-              value={input.isAdmin}
+              onChange={(e) =>
+                e.target.value === "false"
+                  ? setIsAdmin(false)
+                  : setIsAdmin(true)
+              }
+              value={isAdmin}
             >
               <option value="true">Yes</option>
               <option value="false">No</option>
