@@ -73,12 +73,15 @@
 .User {
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 100px;
   margin: 0 10px;
 }
 
 .UserName {
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   @media only screen and (max-width: 1000px) and (min-width: 380px) {
     white-space: nowrap;
