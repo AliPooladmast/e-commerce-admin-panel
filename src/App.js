@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Users from "./pages/users/Users";
 import User from "./pages/user/User";
@@ -20,6 +20,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const { currentUser, isFetching: userLoading } = useSelector(
     (state) => state.user
   );
@@ -39,6 +40,10 @@ function App() {
       navigate("/login");
     }
   }, [currentUser, navigate]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>
