@@ -9,9 +9,10 @@ import app from "../../firebase";
 import { editProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import style from "./editProduct.module.scss";
-import { AddCircle, Publish } from "@mui/icons-material";
+import { Publish } from "@mui/icons-material";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import { setMessage } from "../../redux/uxSlice";
+import MultipleSelectChip from "../multipleSelect/MultipleSelect";
 
 const storage = getStorage(app);
 
@@ -190,28 +191,9 @@ const EditProduct = ({ product, productId }) => {
           <div className={style.Item}>
             <label className={style.ColorTitle}>
               <div>Colors</div>
-              <AddCircle
-                className={style.AddIcon}
-                onClick={() => setColors((prev) => [...prev, "#000000"])}
-              />
             </label>
-            <div className={style.ColorContainer}>
-              {colors.map((color, index) => (
-                <input
-                  type="color"
-                  value={color}
-                  className={style.ColorInput}
-                  key={index}
-                  onChange={(e) =>
-                    setColors((prev) => {
-                      const mColors = [...prev];
-                      mColors[index] = e.target.value;
-                      return mColors;
-                    })
-                  }
-                />
-              ))}
-            </div>
+
+            <MultipleSelectChip colors={colors} setColors={setColors} />
           </div>
         </div>
 

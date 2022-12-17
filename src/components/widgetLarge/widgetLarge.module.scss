@@ -68,7 +68,7 @@
     border: none;
   }
 
-  &--active {
+  &--paid {
     @extend .Status;
     button {
       background-color: #e5faf2;
@@ -83,7 +83,7 @@
       color: #2a7ade;
     }
   }
-  &--declined {
+  &--unpaid {
     @extend .Status;
     button {
       background-color: #fff0f1;

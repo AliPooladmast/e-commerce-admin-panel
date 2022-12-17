@@ -13,8 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { LinearProgressWithLabel } from "../../components/linearProgress/LinearProgress";
 import AddMarginToPage from "../../hoc/AddMarginToPage";
 import { setMessage } from "../../redux/uxSlice";
-import { AddCircle } from "@mui/icons-material";
 import useUpdate from "../../hook/useUpdate";
+import MultipleSelectChip from "../../components/multipleSelect/MultipleSelect";
 const storage = getStorage(app);
 const Joi = require("joi");
 
@@ -37,7 +37,7 @@ const NewProduct = () => {
   const [multipleInput, setMultipleInput] = useState({});
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState(0);
-  const [colors, setColors] = useState(["#000000"]);
+  const [colors, setColors] = useState([]);
 
   const handleInput = (e) => {
     setInput((prev) => {
@@ -204,28 +204,9 @@ const NewProduct = () => {
               <div>
                 Colors<span>*</span>
               </div>
-              <AddCircle
-                className={style.AddIcon}
-                onClick={() => setColors((prev) => [...prev, "#000000"])}
-              />
             </label>
-            <div className={style.ColorContainer}>
-              {colors.map((color, index) => (
-                <input
-                  type="color"
-                  value={color}
-                  className={style.ColorInput}
-                  key={index}
-                  onChange={(e) =>
-                    setColors((prev) => {
-                      const mColors = [...prev];
-                      mColors[index] = e.target.value;
-                      return mColors;
-                    })
-                  }
-                />
-              ))}
-            </div>
+
+            <MultipleSelectChip colors={colors} setColors={setColors} />
           </div>
         </div>
 
