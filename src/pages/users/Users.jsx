@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { deleteUser, getUsers } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import noAvatar from "../../assets/icons/no-avatar.svg";
 import Modal from "../../components/modal/Modal";
 import Delete from "../../components/delete/Delete";
 import LoadingSkeleton from "../../components/loadingSkeleton/LoadingSkeleton";
@@ -40,7 +39,10 @@ const Users = () => {
       renderCell: (params) => {
         return (
           <div className={style.User}>
-            <img src={params.row.img || noAvatar} alt="avatar" />
+            <img
+              src={params.row.img || "assets/icons/no-avatar.svg"}
+              alt="avatar"
+            />
             {params.row.username}
           </div>
         );

@@ -7,13 +7,15 @@ import {
   PermIdentity,
   PhoneAndroid,
 } from "@mui/icons-material";
-import noAvatar from "../../assets/icons/no-avatar.svg";
 
 const UserInfo = ({ user }) => {
   return (
     <div className={style.UserInfo}>
       <div className={style.Top}>
-        <img src={user.img || noAvatar} alt="user profile" />
+        <img
+          src={user.img || "assets/icons/no-avatar.svg"}
+          alt="user profile"
+        />
         <div className={style.TitleContainer}>
           <span className={style.Name}>{user.username}</span>
           <span className={style.Title}>{user.title}</span>

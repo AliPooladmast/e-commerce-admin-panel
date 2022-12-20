@@ -9,7 +9,6 @@ import {
 } from "firebase/storage";
 import app from "../../firebase";
 import { LinearProgressWithLabel } from "../linearProgress/LinearProgress";
-import noAvatar from "../../assets/icons/no-avatar.svg";
 import { Publish } from "@mui/icons-material";
 import style from "./editUser.module.scss";
 import { setMessage } from "../../redux/uxSlice";
@@ -175,7 +174,10 @@ const EditUser = ({ user }) => {
         <div className={style.Right}>
           <div className={style.Upload}>
             <div className={style.ImageContainer}>
-              <img src={image || noAvatar} alt="edit profile" />
+              <img
+                src={image || "assets/icons/no-avatar.svg"}
+                alt="edit profile"
+              />
               {Boolean(progress) && progress !== 100 ? (
                 <LinearProgressWithLabel value={progress} />
               ) : Boolean(progress) && progress === 100 ? (

@@ -1,7 +1,6 @@
 import { Visibility } from "@mui/icons-material";
 import { useState } from "react";
 import style from "./widgetSmall.module.scss";
-import noAvatar from "../../assets/icons/no-avatar.svg";
 import Modal from "../../components/modal/Modal";
 import UserInfo from "../userInfo/UserInfo";
 import { Skeleton } from "@mui/material";
@@ -61,7 +60,10 @@ const WidgetSmall = ({ users, isFetching }) => {
             : users?.map((user) => (
                 <li className={style.ListItem} key={user._id}>
                   <div className={style.UserContainer}>
-                    <img src={user.img || noAvatar} alt="profile" />
+                    <img
+                      src={user.img || "assets/icons/no-avatar.svg"}
+                      alt="profile"
+                    />
                     <div className={style.User}>
                       <span className={style.UserName}>{user.username}</span>
                       <span className={style.UserTitle}>
