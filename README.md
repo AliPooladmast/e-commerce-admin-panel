@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Shopinity Admin Panel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Technologies
 
-## Available Scripts
+-  Core: `react`, `react-dom`, `react-router`, `redux`,`redux-toolkit`, `axios`
+-  Dev: `npm`, `react-scripts`, `react-css-modules`, `sass`, `prettier`
+-  UI: `material-ui`, `recharts`
 
-In the project directory, you can run:
+## Scripts
 
-### `npm start`
+### `npm ... [packages]`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-  **`install`** Add dependencies
+-  **`uninstall`** Remove dependencies
+-  **`upgrade`** Upgrade dependencies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm ...`
 
-### `npm test`
+-  **`dev`** Starts app in development mode.
+-  **`build`** Creates an optimized production build.
+-  **`serve`** Serves `/build`.
+-  **`analyze`** Analyzes app's bundle size.
+-  **`format`** Formats staged files.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Naming Conventions
 
-### `npm run build`
+> Files with different types named this way: [fle_name].[type].[extension], e.g. `foo.test.js`, `foo.container.js`, `foo.reducer.js`, `foo.ac.js` (action creators), `foo.module.scss`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-  Folders, css files, JS files and variables that are not component are **camelCase**.
+-  class names and Components are **PascalCase**.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Imports
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Order of imports:
 
-### `npm run eject`
+```js
+// node_modules
+import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+// other: components, utils, actions, ...
+import { fetchHumanResources } from 'redux/actions';
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+import Calendar from './calendar';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+// assets
+import { ReactComponent as Icon } from 'assets/icons/icon.svg';
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+// css
+import './styles.scss';
+```
 
-## Learn More
+## CSS
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+With help of babel-plugin for react-css-modules we can use stylesheets and classes in a better way.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+import css from 'app.module.scss';
 
-### Code Splitting
+const App = () => {
+   return (
+      <>
+         <div className={css.container}></div>
+         <div className={css['some-thing']}></div>
+      </>
+   );
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Functional Components Structure
 
-### Analyzing the Bundle Size
+> Any variable that is not depend on component state or props should be outside of on it!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Following is the order of logics inside component:
 
-### Making a Progressive Web App
+1. Expressions and Computations
+2. useRefs, useContexts and useDispatch
+3. Local State: useState and useReducer
+4. Global State: useSelector
+5. Side Effects: useEffect
+6. Functions and Handlers
+7. return (`<Element />`)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### `Component.js`
 
-### Advanced Configuration
+```js
+const obj = {
+    title: 'foo'
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+const Component = (props) => {
+    const foo = props.foo;
+    const arr = props.array.map(el => el);
+    const x = func();
+    const y = useMemo(() => /* computations */, [])
 
-### Deployment
+    const ref = useRef(null);
+    const { value } = useContext(context);
+    const dispatch = useDispatch();
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    const [state, state] = useState(false);
+    const [state2, dispatchLocal] = useReducer(reducer, initialState);
 
-### `npm run build` fails to minify
+    const { ... } = useSelector(selector);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    useEffect(() => /* side effects */, []);
+
+    const clickHandler = e => {}
+
+    return (
+        <div onClick={clickHandler} foo={foo}>
+            Hello World!
+        </div>
+    )
+}
+
+export default Component;
+```
