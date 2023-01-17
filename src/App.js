@@ -1,17 +1,18 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Users from "./pages/users/Users";
-import User from "./pages/user/User";
-import Products from "./pages/products/Products";
-import Product from "./pages/product/Product";
-import NewProduct from "./pages/newproduct/NewProduct";
-import Login from "./pages/login/Login";
-import NewUser from "./pages/newuser/NewUser";
 import { useDispatch, useSelector } from "react-redux";
-import { forwardRef, useEffect } from "react";
+import { forwardRef, lazy, Suspense, useEffect } from "react";
 import MuiAlert from "@mui/material/Alert";
 import { Backdrop, CircularProgress, Snackbar } from "@mui/material";
 import { setMessage } from "./redux/uxSlice";
+
+const Home = lazy(() => import("./pages/home/Home"));
+const Users = lazy(() => import("./pages/users/Users"));
+const User = lazy(() => import("./pages/user/User"));
+const Products = lazy(() => import("./pages/products/Products"));
+const Product = lazy(() => import("./pages/product/Product"));
+const NewProduct = lazy(() => import("./pages/newproduct/NewProduct"));
+const Login = lazy(() => import("./pages/login/Login"));
+const NewUser = lazy(() => import("./pages/newuser/NewUser"));
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -71,23 +72,32 @@ function App() {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <Routes>
-        <Route path="/login" element={<Login />} />
+      <Suspense
+        fallback={
+          <Backdrop sx={{ color: "#fff", zIndex: 10 }} open>
+            <span style={{ marginRight: "20px" }}>Please Wait...</span>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        }
+      >
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
 
-        <Route path="/users" element={<Users />} />
-        <Route path="/newuser" element={<NewUser />} />
-        <Route path="/user" element={<User />}>
-          <Route path=":id" element={<User />} />
-        </Route>
+          <Route path="/users" element={<Users />} />
+          <Route path="/newuser" element={<NewUser />} />
+          <Route path="/user" element={<User />}>
+            <Route path=":id" element={<User />} />
+          </Route>
 
-        <Route path="/products" element={<Products />} />
-        <Route path="/newproduct" element={<NewProduct />} />
-        <Route path="/product" element={<Product />}>
-          <Route path=":id" element={<Product />} />
-        </Route>
-      </Routes>
+          <Route path="/products" element={<Products />} />
+          <Route path="/newproduct" element={<NewProduct />} />
+          <Route path="/product" element={<Product />}>
+            <Route path=":id" element={<Product />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   );
 }
