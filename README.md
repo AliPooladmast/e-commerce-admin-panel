@@ -1,4 +1,4 @@
-# Shopinity Admin Panel
+# ForgeShopex Admin Panel
 
 ## Technologies
 
