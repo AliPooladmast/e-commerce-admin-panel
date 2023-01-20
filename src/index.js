@@ -5,6 +5,7 @@ import App from "./App";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,3 +17,5 @@ root.render(
     </PersistGate>
   </Provider>
 );
+
+serviceWorkerRegistration.register();
